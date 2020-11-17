@@ -1,0 +1,19 @@
+<Project>
+	<PropertyGroup>
+		<CodeAnalysisRuleset>../../build/RuleSet.ruleset</CodeAnalysisRuleset>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>IDE0002</NoWarn>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<DefineConstants></DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="../../build/stylecop.json"/>
+	</ItemGroup>
+</Project>

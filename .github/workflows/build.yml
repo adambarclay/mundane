@@ -1,0 +1,41 @@
+name: Build
+on: 
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*.*'
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+    tags-ignore:
+      - '*.*'
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Latest Code
+      uses: actions/checkout@v2
+    - name: Setup .NET 5.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+    - name: Install Dependencies
+      run: dotnet restore
+      env:
+        DOTNET_NOLOGO: true
+    - name: Build
+      run: dotnet build --nologo --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --nologo --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory artifacts/code-coverage
+    - name: Upload Code Coverage
+      uses: codecov/codecov-action@v1
+      with:
+        file: artifacts/code-coverage/**/coverage.cobertura.xml
+        flags: unittests

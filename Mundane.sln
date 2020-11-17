@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mundane", "src\Mundane\Mundane.csproj", "{977D08C8-24B2-4ABB-8FD0-693A59FD82CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mundane.Tests", "tests\Mundane.Tests\Mundane.Tests.csproj", "{6AD0098C-67F8-4940-96DE-96DB5FC6031F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{977D08C8-24B2-4ABB-8FD0-693A59FD82CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977D08C8-24B2-4ABB-8FD0-693A59FD82CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977D08C8-24B2-4ABB-8FD0-693A59FD82CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977D08C8-24B2-4ABB-8FD0-693A59FD82CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AD0098C-67F8-4940-96DE-96DB5FC6031F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD0098C-67F8-4940-96DE-96DB5FC6031F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD0098C-67F8-4940-96DE-96DB5FC6031F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD0098C-67F8-4940-96DE-96DB5FC6031F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C0B6C54-3FF0-415F-83F7-3A9DD3F9791A}
+	EndGlobalSection
+EndGlobal

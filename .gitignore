@@ -1,0 +1,11 @@
+.vs/
+[Bb]in/
+[Oo]bj/
+x86/
+x64/
+artifacts/
+
+*.user
+.DS_Store
+._*
+launchSettings.json

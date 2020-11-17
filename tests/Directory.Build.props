@@ -1,0 +1,19 @@
+<Project>
+	<PropertyGroup>
+		<CodeAnalysisRuleset>../../build/RuleSetTests.ruleset</CodeAnalysisRuleset>
+		<IsPackable>false</IsPackable>
+		<NoWarn>IDE0002</NoWarn>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DebugSymbols>false</DebugSymbols>
+		<DebugType>none</DebugType>
+		<DefineConstants></DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="../../build/stylecop.json"/>
+		<Content Include="../../build/xunit.runner.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+</Project>

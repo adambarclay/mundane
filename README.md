@@ -10,7 +10,7 @@ Mundane is a lightweight "no magic" web framework for .NET.
 
 ## Getting Started
 
-For ASP.NET, install the [Mundane.Hosting.AspNet](https://www.nuget.org/packages/Mundane.Hosting.AspNet/) nuget package then in your ASP.NET startup code call `app.UseMundane();` passing in the routing and dependencies configuration.
+For ASP.NET, install the [Mundane.Hosting.AspNet](https://www.nuget.org/packages/Mundane.Hosting.AspNet/) nuget package, then in your ASP.NET startup code call `app.UseMundane();`, passing in the routing and dependencies configuration.
 
 ### Example
 ```c#
@@ -26,7 +26,8 @@ For ASP.NET, install the [Mundane.Hosting.AspNet](https://www.nuget.org/packages
 
         var dependencies = new Dependencies(
             new Dependency<Configuration>(new Configuration(env)),
-            new Dependency<DataRepository>(request => new DataRepositorySqlServer(request.Dependency<Configuration>().ConnectionString)));
+            new Dependency<DataRepository>(request => new DataRepositorySqlServer(
+                request.Dependency<Configuration>().ConnectionString)));
 
         app.UseMundane(routing, dependencies);
     }
@@ -79,7 +80,7 @@ The `Request` object contains all of the parameters passed to the request, and t
     }
 ```
 
-All of the request parameter methods return empty string (or `FileUpload.Unknown` in the case of `request.File()`) if the parameter was not sent. It is possible to check if a parameter was sent with the `*Exists()` methods.
+All of the request parameter methods return empty string if the parameter was not sent (or `FileUpload.Unknown` in the case of `request.File()`). It is possible to check if a parameter was sent with the `*Exists()` methods.
 
 ```c#
     routeConfiguration.Get("/example", request =>
@@ -112,11 +113,12 @@ The `Response` can be constructed with a custom status code value
 or by using one of the static helper methods on the `Response` object.
 
 ```c#
-    return Response.Ok(o => o.Write("Eveything is OK!")); // Status code 200, content-type=text/html;charset=utf-8
+    // Status code 200, content-type=text/html;charset=utf-8
+    return Response.Ok(o => o.Write("Eveything is OK!"));
 ```
 
 ##### Response Headers
-Response headers can be added using the `AddHeader()` method and either a custom `HeaderValue` e.g. `new HeaderValue("MyHeader", "MyValue")` or by using the static helper methods of `HeaderValue`.
+Response headers can be added using the `AddHeader()` method and either a custom `HeaderValue` e.g. `new HeaderValue("MyHeader", "MyValue")`, or by using the static helper methods of `HeaderValue`.
 
 ```c#
     return Response.File(o => o.Write(imageData.DataStream)), "image/png")
@@ -141,7 +143,10 @@ Cookies are HTTP headers so they are also added with the `AddHeader()` method.
         }
 
         return Response.RedirectSeeOther("/my-account")
-            .AddHeader(HeaderValue.PersistentCookie("auth", userRepository.GenerateAuthToken(user), TimeSpan.FromHours(24)));
+            .AddHeader(HeaderValue.PersistentCookie(
+                "auth",
+                userRepository.GenerateAuthToken(user),
+                TimeSpan.FromHours(24)));
     }
 ```
 
@@ -158,7 +163,7 @@ Mundane has four endpoint signatures:
     Task<Response> Endpoint(Request request);
 ```
 
-Endpoints are added to the `Routing` configuration using `RouteConfiguration`. The HTTP methods `DELETE`, `GET`, `POST`, and `PUT` are supported along with any custom method using `Endpoint()`. A custom 404 handler can be specified with `NotFound()`.
+Endpoints are added to the `Routing` configuration using `RouteConfiguration`. The HTTP methods `DELETE`, `GET`, `POST`, and `PUT` are supported, along with any custom method using `Endpoint()`. A custom 404 handler can be specified with `NotFound()`.
 
 ```c#
     new Routing(
@@ -177,7 +182,8 @@ Endpoints are added to the `Routing` configuration using `RouteConfiguration`. T
 
 Routes must begin with a forward slash `"/"`.
 
-A route with a trailing slash will be treated differently to a route without a trailing slash, e.g. `"/my-route"` and `"/my-route/"` are two different routes.
+A route with a trailing slash will be treated differently to a route without a trailing slash,  
+e.g. `"/my-route"` and `"/my-route/"` are two different routes.
 
 #### Capture Parameters
 
@@ -196,7 +202,7 @@ When a request is made to `"/my-route/123/456"`, `request.Route("path") == "123/
 Greedy capture parameters can only appear once in a route and must be at the end.
 
 #### Multiple Capture Parameters
-A route may contain any number of capture parameters as long as there is no more than one greedy parameter.
+A route may contain any number of capture parameters, as long as there is no more than one greedy parameter.
 
 ```c#
     routeConfiguration.Get("/shop/{productType}/{id}", ProductController.ShowProduct);
@@ -244,7 +250,8 @@ The constructor for `Dependencies` takes zero or more `Dependency<T>` objects as
 ```c#
     var dependencies = new Dependencies(
         new Dependency<Configuration>(new Configuration(env)),
-        new Dependency<DataRepository>(request => new DataRepositorySqlServer(request.Dependency<Configuration>().ConnectionString)),
+        new Dependency<DataRepository>(request => new DataRepositorySqlServer(
+            request.Dependency<Configuration>().ConnectionString)),
         new Dependency<EmailSender>(() => new EmailSenderSmtp()));
 ```
 
@@ -254,7 +261,7 @@ The `Dependency<T>` constructor parameter is either an object instance (which wi
 
 The lambda expression optionally takes the current `Request` as a parameter.
 
-`Dependencies` does not automatically find dependencies of the object being created so chained dependencies must be requested explicitly by calling `request.Dependency()` during creation.
+`Dependencies` does not automatically find dependencies of the object being created, so chained dependencies must be requested explicitly by calling `request.Dependency()` during creation.
 
 ## Validation
 
@@ -267,11 +274,14 @@ In this example for updating a user profile, the controller makes use of the `Va
     {
         internal static async Task<Response> UpdateProfile(Request request)
         {
-            (var invalid, var updateProfileCommand) = Validator.Validate(validator => new UpdateProfileCommand(request, validator));
+            (var invalid, var updateProfileCommand) = Validator.Validate(
+                validator => new UpdateProfileCommand(request, validator));
 
             if (invalid)
             {
-                return Response.Ok(/* Show the input form prefilled with the values and the error messages in updateProfileCommand. */);
+                return Response.Ok(/*
+                    Show the input form prefilled with the values
+                    and the error messages in updateProfileCommand. */);
             }
 
             var profileRepository = request.Dependency<ProfileRepository>();
@@ -285,7 +295,7 @@ In this example for updating a user profile, the controller makes use of the `Va
 
 In this example, the validation takes place in the command object constructor by calling the `Validate()` method.
 
-The Validation&lt;T&gt; properties contain the validated value and the list of errors which occurred for that property during validation.
+The Validated&lt;T&gt; properties contain the validated value and the list of errors which occurred for that property during validation.
 
 
 
@@ -327,7 +337,9 @@ Use extension methods to create custom reusable validation methods.
         internal static Validated<string> ValidEmail(this Validated<string> validated)
         {
             return validated.Validate(
-                email => email.Length > 0 && email.Length <= 254 && email.Contains('@', StringComparison.Ordinal),
+                email => email.Length > 0 &&
+                    email.Length <= 254 &&
+                    email.Contains('@', StringComparison.Ordinal),
                 "You must supply a valid email address.");
         }
     }

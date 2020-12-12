@@ -153,7 +153,7 @@ namespace Mundane
 					true,
 					true);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -220,7 +220,7 @@ namespace Mundane
 			{
 				return HeaderValue.CreateCookieValue(true, name, value, maxAge, "/", string.Empty, true, true);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -270,7 +270,7 @@ namespace Mundane
 			{
 				return HeaderValue.CreateCookieValue(true, name, value, maxAge, path, domain, true, true);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -300,7 +300,7 @@ namespace Mundane
 			{
 				return HeaderValue.CreateCookieValue(true, name, value, maxAge, path, domain, httpOnly, secure);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -318,7 +318,7 @@ namespace Mundane
 			{
 				return HeaderValue.CreateCookieValue(false, name, value, TimeSpan.Zero, "/", string.Empty, true, true);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -340,7 +340,7 @@ namespace Mundane
 			{
 				return HeaderValue.CreateCookieValue(false, name, value, TimeSpan.Zero, path, string.Empty, true, true);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -364,7 +364,7 @@ namespace Mundane
 			{
 				return HeaderValue.CreateCookieValue(false, name, value, TimeSpan.Zero, path, domain, true, true);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -392,7 +392,7 @@ namespace Mundane
 			{
 				return HeaderValue.CreateCookieValue(false, name, value, TimeSpan.Zero, path, domain, httpOnly, secure);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}

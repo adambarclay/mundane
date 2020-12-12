@@ -37,7 +37,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -58,7 +58,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -79,7 +79,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -98,7 +98,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -121,7 +121,7 @@ namespace Mundane
 			{
 				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -144,7 +144,7 @@ namespace Mundane
 			{
 				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -167,7 +167,7 @@ namespace Mundane
 			{
 				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -190,7 +190,7 @@ namespace Mundane
 			{
 				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -211,7 +211,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -230,7 +230,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -251,7 +251,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -270,7 +270,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -288,7 +288,7 @@ namespace Mundane
 
 				return this;
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -306,7 +306,7 @@ namespace Mundane
 
 				return this;
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -324,7 +324,7 @@ namespace Mundane
 
 				return this;
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -342,7 +342,7 @@ namespace Mundane
 
 				return this;
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -363,7 +363,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -382,7 +382,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -403,7 +403,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -422,7 +422,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -443,7 +443,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -462,7 +462,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -483,7 +483,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}
@@ -502,7 +502,7 @@ namespace Mundane
 			{
 				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
 			}
-			catch (Exception exception)
+			catch (ArgumentException exception)
 			{
 				throw exception;
 			}

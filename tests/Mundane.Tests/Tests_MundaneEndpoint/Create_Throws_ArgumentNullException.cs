@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => MundaneEndpoint.Create((MundaneEndpointDelegate)null!));
 
-			Assert.Equal("endpoint", exception.ParamName);
+			Assert.Equal("endpoint", exception.ParamName!);
 		}
 
 		[Fact]
@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => MundaneEndpoint.Create((MundaneEndpointDelegateNoParameters)null!));
 
-			Assert.Equal("endpoint", exception.ParamName);
+			Assert.Equal("endpoint", exception.ParamName!);
 		}
 
 		[Fact]
@@ -31,7 +31,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => MundaneEndpoint.Create((MundaneEndpointDelegateNoParametersSync)null!));
 
-			Assert.Equal("endpoint", exception.ParamName);
+			Assert.Equal("endpoint", exception.ParamName!);
 		}
 
 		[Fact]
@@ -40,7 +40,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => MundaneEndpoint.Create((MundaneEndpointDelegateSync)null!));
 
-			Assert.Equal("endpoint", exception.ParamName);
+			Assert.Equal("endpoint", exception.ParamName!);
 		}
 	}
 }

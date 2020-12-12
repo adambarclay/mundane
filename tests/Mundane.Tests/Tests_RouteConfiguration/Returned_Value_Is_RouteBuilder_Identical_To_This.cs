@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_RouteBuilder
+namespace Mundane.Tests.Tests_RouteConfiguration
 {
 	[ExcludeFromCodeCoverage]
 	public static class Returned_Value_Is_RouteBuilder_Identical_To_This

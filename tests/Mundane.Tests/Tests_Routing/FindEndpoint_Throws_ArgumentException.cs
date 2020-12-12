@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => { }).FindEndpoint(HttpMethod.Get, "path"));
 
-			Assert.Equal("path", exception.ParamName);
+			Assert.Equal("path", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The path must start with a forward slash \"/\".",
@@ -27,7 +27,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => { }).FindEndpoint(HttpMethod.Get, string.Empty));
 
-			Assert.Equal("path", exception.ParamName);
+			Assert.Equal("path", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The path must start with a forward slash \"/\".",

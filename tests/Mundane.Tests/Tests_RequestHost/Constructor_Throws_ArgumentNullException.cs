@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_RequestHost
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new RequestHost("scheme", null!, "pathBase"));
 
-			Assert.Equal("hostName", exception.ParamName);
+			Assert.Equal("hostName", exception.ParamName!);
 		}
 
 		[Fact]
@@ -20,7 +20,7 @@ namespace Mundane.Tests.Tests_RequestHost
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new RequestHost("scheme", "hostName", null!));
 
-			Assert.Equal("pathBase", exception.ParamName);
+			Assert.Equal("pathBase", exception.ParamName!);
 		}
 
 		[Fact]
@@ -29,7 +29,7 @@ namespace Mundane.Tests.Tests_RequestHost
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new RequestHost(null!, "hostName", "pathBase"));
 
-			Assert.Equal("scheme", exception.ParamName);
+			Assert.Equal("scheme", exception.ParamName!);
 		}
 	}
 }

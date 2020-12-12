@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_DuplicateDependencyRegistered
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new DuplicateDependencyRegistered(null!));
 
-			Assert.Equal("dependencyType", exception.ParamName);
+			Assert.Equal("dependencyType", exception.ParamName!);
 		}
 	}
 }

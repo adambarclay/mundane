@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_EnumerableDictionary
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new EnumerableDictionary<string, string>(null!));
 
-			Assert.Equal("dictionary", exception.ParamName);
+			Assert.Equal("dictionary", exception.ParamName!);
 		}
 	}
 }

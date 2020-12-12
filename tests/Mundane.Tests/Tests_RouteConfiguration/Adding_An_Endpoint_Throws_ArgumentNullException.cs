@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_RouteBuilder
+namespace Mundane.Tests.Tests_RouteConfiguration
 {
 	[ExcludeFromCodeCoverage]
 	public static class Adding_An_Endpoint_Throws_ArgumentNullException
@@ -23,7 +23,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 			var endpoint =
 				Adding_An_Endpoint_Throws_ArgumentNullException.NullEndpointDelegate<MundaneEndpointDelegate>();
 
-			Action<ArgumentNullException> check = exception => Assert.Equal("endpoint", exception.ParamName);
+			Action<ArgumentNullException> check = exception => Assert.Equal("endpoint", exception.ParamName!);
 
 			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.Delete("/", noParamsSync))));
 			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.Delete("/", endpointSync))));
@@ -57,7 +57,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 
 			var endpoint = (MundaneEndpointDelegate)(r => Task.FromResult(Response.Ok()));
 
-			Action<ArgumentNullException> check = exception => Assert.Equal("method", exception.ParamName);
+			Action<ArgumentNullException> check = exception => Assert.Equal("method", exception.ParamName!);
 
 			check(
 				Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.Endpoint(null!, "/", noParamsSync))));
@@ -79,7 +79,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 			var noParameters = (MundaneEndpointDelegateNoParameters)(() => Task.FromResult(Response.Ok()));
 			var endpoint = (MundaneEndpointDelegate)(r => Task.FromResult(Response.Ok()));
 
-			Action<ArgumentNullException> check = exception => Assert.Equal("route", exception.ParamName);
+			Action<ArgumentNullException> check = exception => Assert.Equal("route", exception.ParamName!);
 
 			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.Delete(null!, noParamsSync))));
 			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.Delete(null!, endpointSync))));

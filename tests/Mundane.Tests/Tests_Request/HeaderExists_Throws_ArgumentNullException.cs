@@ -36,7 +36,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("headerName", exception.ParamName);
+			Assert.Equal("headerName", exception.ParamName!);
 		}
 	}
 }

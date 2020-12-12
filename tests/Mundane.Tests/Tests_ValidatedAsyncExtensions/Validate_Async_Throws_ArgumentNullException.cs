@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 				async () => await Task.FromResult((Validated<string>)string.Empty)
 					.Validate(value => Task.FromResult(true), null!));
 
-			Assert.Equal("errorMessage", exception.ParamName);
+			Assert.Equal("errorMessage", exception.ParamName!);
 		}
 
 		[Fact]
@@ -25,7 +25,7 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 				async () => await Task.FromResult((Validated<string>)string.Empty)
 					.Validate((ValidationPredicateDelegateAsync<string>)null!, "Error Message."));
 
-			Assert.Equal("predicate", exception.ParamName);
+			Assert.Equal("predicate", exception.ParamName!);
 		}
 
 		[Fact]
@@ -36,7 +36,7 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 					value => Task.FromResult(true),
 					"Error Message."));
 
-			Assert.Equal("task", exception.ParamName);
+			Assert.Equal("task", exception.ParamName!);
 		}
 	}
 }

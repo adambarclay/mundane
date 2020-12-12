@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_Routing
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new Routing(null!));
 
-			Assert.Equal("routeConfigurationBuilder", exception.ParamName);
+			Assert.Equal("routeConfigurationBuilder", exception.ParamName!);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		[Fact]
 		public static async Task When_Creating_From_A_MundaneEndpointDelegate()
 		{
-			var statusCode = new Random().Next();
+			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
@@ -32,7 +33,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		[Fact]
 		public static async Task When_Creating_From_A_MundaneEndpointDelegateNoParameters()
 		{
-			var statusCode = new Random().Next();
+			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
@@ -53,7 +54,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		[Fact]
 		public static async Task When_Creating_From_A_MundaneEndpointDelegateNoParametersSync()
 		{
-			var statusCode = new Random().Next();
+			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
@@ -74,7 +75,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		[Fact]
 		public static async Task When_Creating_From_A_MundaneEndpointDelegateSync()
 		{
-			var statusCode = new Random().Next();
+			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 

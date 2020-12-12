@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_Response
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => Response.MethodNotAllowed(null!));
 
-			Assert.Equal("allowedMethods", exception.ParamName);
+			Assert.Equal("allowedMethods", exception.ParamName!);
 		}
 	}
 }

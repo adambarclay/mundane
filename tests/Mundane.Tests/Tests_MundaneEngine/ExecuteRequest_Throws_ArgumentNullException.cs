@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
 				() => MundaneEngine.ExecuteRequest(null!, RequestHelper.Request()));
 
-			Assert.Equal("endpoint", exception.ParamName);
+			Assert.Equal("endpoint", exception.ParamName!);
 		}
 
 		[Fact]
@@ -23,7 +23,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
 				() => MundaneEngine.ExecuteRequest(MundaneEndpoint.Create(Response.Ok), null!));
 
-			Assert.Equal("request", exception.ParamName);
+			Assert.Equal("request", exception.ParamName!);
 		}
 	}
 }

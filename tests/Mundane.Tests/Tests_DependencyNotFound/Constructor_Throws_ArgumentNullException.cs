@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_DependencyNotFound
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new DependencyNotFound(null!));
 
-			Assert.Equal("dependencyType", exception.ParamName);
+			Assert.Equal("dependencyType", exception.ParamName!);
 		}
 	}
 }

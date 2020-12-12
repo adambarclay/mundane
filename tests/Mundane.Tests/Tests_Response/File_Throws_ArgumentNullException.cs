@@ -14,12 +14,12 @@ namespace Mundane.Tests.Tests_Response
 			var exception1 = Assert.ThrowsAny<ArgumentNullException>(
 				() => Response.File(null!, Guid.NewGuid().ToString()));
 
-			Assert.Equal("bodyWriter", exception1.ParamName);
+			Assert.Equal("bodyWriter", exception1.ParamName!);
 
 			var exception2 = Assert.ThrowsAny<ArgumentNullException>(
 				() => Response.File(null!, Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
 
-			Assert.Equal("bodyWriter", exception2.ParamName);
+			Assert.Equal("bodyWriter", exception2.ParamName!);
 		}
 
 		[Fact]
@@ -28,12 +28,12 @@ namespace Mundane.Tests.Tests_Response
 			var exception1 = Assert.ThrowsAny<ArgumentNullException>(
 				() => Response.File(o => Task.CompletedTask, null!));
 
-			Assert.Equal("contentType", exception1.ParamName);
+			Assert.Equal("contentType", exception1.ParamName!);
 
 			var exception2 = Assert.ThrowsAny<ArgumentNullException>(
 				() => Response.File(o => Task.CompletedTask, null!, Guid.NewGuid().ToString()));
 
-			Assert.Equal("contentType", exception2.ParamName);
+			Assert.Equal("contentType", exception2.ParamName!);
 		}
 
 		[Fact]
@@ -42,7 +42,7 @@ namespace Mundane.Tests.Tests_Response
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => Response.File(o => Task.CompletedTask, Guid.NewGuid().ToString(), null!));
 
-			Assert.Equal("fileName", exception.ParamName);
+			Assert.Equal("fileName", exception.ParamName!);
 		}
 	}
 }

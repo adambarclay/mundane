@@ -16,10 +16,10 @@ namespace Mundane.Tests.Tests_Request
 		{
 			var dependencyFinder = new Mock<DependencyFinder>(MockBehavior.Strict);
 
-			dependencyFinder.Setup(o => o.Find<TestDependencyBase>(It.IsAny<Request>()))
-				.Returns<Request>(r => new TestDependencyWithRequest(r));
+			dependencyFinder.Setup(o => o.Find<TestDependencyBase>(It.IsAny<Request>()!))!.Returns<Request>(
+				r => new TestDependencyWithRequest(r));
 
-			var request = RequestHelper.Request(dependencyFinder.Object);
+			var request = RequestHelper.Request(dependencyFinder.Object!);
 
 			var result = request.Dependency<TestDependencyBase>();
 

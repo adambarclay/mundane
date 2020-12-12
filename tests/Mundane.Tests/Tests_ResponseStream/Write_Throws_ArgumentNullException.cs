@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 					await ResponseHelper.Body(response);
 				});
 
-			Assert.Equal("value", exception.ParamName);
+			Assert.Equal("value", exception.ParamName!);
 		}
 
 		[Fact]
@@ -38,7 +38,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 					await ResponseHelper.Body(response);
 				});
 
-			Assert.Equal("value", exception.ParamName);
+			Assert.Equal("value", exception.ParamName!);
 		}
 
 		[Fact]
@@ -54,7 +54,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 					await ResponseHelper.Body(response);
 				});
 
-			Assert.Equal("value", exception.ParamName);
+			Assert.Equal("value", exception.ParamName!);
 		}
 	}
 }

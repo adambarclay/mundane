@@ -1,9 +1,9 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_RouteBuilder
+namespace Mundane.Tests.Tests_RouteConfiguration
 {
 	[ExcludeFromCodeCoverage]
 	public static class Adding_A_Not_Found_Handler_Succeeds
@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 		[Fact]
 		public static async Task When_The_Endpoint_Is_Valid()
 		{
-			var statusCode = new Random().Next();
+			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
 
 			var noParametersSync = (MundaneEndpointDelegateNoParametersSync)(() => new Response(statusCode));
 			var endpointSync = (MundaneEndpointDelegateSync)(r => new Response(statusCode));

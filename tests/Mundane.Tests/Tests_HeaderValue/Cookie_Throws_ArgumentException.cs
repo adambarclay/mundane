@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie(string.Empty, "value", "/"));
 
-				Assert.Equal("name", exception.ParamName);
+				Assert.Equal("name", exception.ParamName!);
 				Assert.StartsWith("The cookie name must not be empty.", exception.Message, StringComparison.Ordinal);
 			}
 
@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie(string.Empty, "value", "/", string.Empty));
 
-				Assert.Equal("name", exception.ParamName);
+				Assert.Equal("name", exception.ParamName!);
 				Assert.StartsWith("The cookie name must not be empty.", exception.Message, StringComparison.Ordinal);
 			}
 
@@ -30,7 +30,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie(string.Empty, "value", "/", string.Empty, true, true));
 
-				Assert.Equal("name", exception.ParamName);
+				Assert.Equal("name", exception.ParamName!);
 				Assert.StartsWith("The cookie name must not be empty.", exception.Message, StringComparison.Ordinal);
 			}
 
@@ -38,7 +38,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.PersistentCookie(string.Empty, "value", TimeSpan.MaxValue, "/"));
 
-				Assert.Equal("name", exception.ParamName);
+				Assert.Equal("name", exception.ParamName!);
 				Assert.StartsWith("The cookie name must not be empty.", exception.Message, StringComparison.Ordinal);
 			}
 
@@ -46,7 +46,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.PersistentCookie(string.Empty, "value", TimeSpan.MaxValue, "/", string.Empty));
 
-				Assert.Equal("name", exception.ParamName);
+				Assert.Equal("name", exception.ParamName!);
 				Assert.StartsWith("The cookie name must not be empty.", exception.Message, StringComparison.Ordinal);
 			}
 
@@ -61,7 +61,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 						true,
 						true));
 
-				Assert.Equal("name", exception.ParamName);
+				Assert.Equal("name", exception.ParamName!);
 				Assert.StartsWith("The cookie name must not be empty.", exception.Message, StringComparison.Ordinal);
 			}
 		}
@@ -73,7 +73,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie("name", "value", Guid.NewGuid().ToString()));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -85,7 +85,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie("name", "value", Guid.NewGuid().ToString(), string.Empty));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -103,7 +103,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 						true,
 						true));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -115,7 +115,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.PersistentCookie("name", "value", TimeSpan.MaxValue, Guid.NewGuid().ToString()));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -132,7 +132,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 						Guid.NewGuid().ToString(),
 						string.Empty));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -151,7 +151,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 						true,
 						true));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -167,7 +167,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie("name", "value", string.Empty));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -179,7 +179,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie("name", "value", string.Empty, string.Empty));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -191,7 +191,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.SessionCookie("name", "value", string.Empty, string.Empty, true, true));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -203,7 +203,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.PersistentCookie("name", "value", TimeSpan.MaxValue, string.Empty));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -215,7 +215,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 				var exception = Assert.ThrowsAny<ArgumentException>(
 					() => HeaderValue.PersistentCookie("name", "value", TimeSpan.MaxValue, string.Empty, string.Empty));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",
@@ -234,7 +234,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 						true,
 						true));
 
-				Assert.Equal("path", exception.ParamName);
+				Assert.Equal("path", exception.ParamName!);
 
 				Assert.StartsWith(
 					"The cookie path must begin with a \"/\".",

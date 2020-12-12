@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => HeaderValue.ContentType(null!));
 
-			Assert.Equal("contentType", exception.ParamName);
+			Assert.Equal("contentType", exception.ParamName!);
 		}
 	}
 }

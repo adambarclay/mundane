@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new Routing(o => { }).DefaultNotFoundResponse(null!));
 
-			Assert.Equal("request", exception.ParamName);
+			Assert.Equal("request", exception.ParamName!);
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 		[Fact]
 		public static void When_The_Other_Object_Is_Not_A_Validated_Object()
 		{
-			string value = Guid.NewGuid().ToString();
+			var value = Guid.NewGuid().ToString();
 
 			Validated<string> first = value;
 

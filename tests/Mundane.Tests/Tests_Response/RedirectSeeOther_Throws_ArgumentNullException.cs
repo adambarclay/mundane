@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_Response
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => Response.RedirectSeeOther(null!));
 
-			Assert.Equal("location", exception.ParamName);
+			Assert.Equal("location", exception.ParamName!);
 		}
 	}
 }

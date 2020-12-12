@@ -36,7 +36,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("cookieName", exception.ParamName);
+			Assert.Equal("cookieName", exception.ParamName!);
 		}
 	}
 }

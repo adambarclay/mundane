@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_RouteBuilder
+namespace Mundane.Tests.Tests_RouteConfiguration
 {
 	[ExcludeFromCodeCoverage]
 	public static class Adding_An_Endpoint_Throws_ArgumentException
@@ -18,7 +18,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 
 			Action<ArgumentException> check = exception =>
 			{
-				Assert.Equal("method", exception.ParamName);
+				Assert.Equal("method", exception.ParamName!);
 				Assert.StartsWith("Method must have a value.", exception.Message, StringComparison.Ordinal);
 			};
 
@@ -51,7 +51,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 
 			Action<ArgumentException> check = exception =>
 			{
-				Assert.Equal("route", exception.ParamName);
+				Assert.Equal("route", exception.ParamName!);
 
 				Assert.Equal("Route must start with a forward slash \"/\". (Parameter 'route')", exception.Message);
 			};

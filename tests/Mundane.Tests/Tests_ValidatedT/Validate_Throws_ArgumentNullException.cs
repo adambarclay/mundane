@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => value.Validate(x => true, null!));
 
-			Assert.Equal("errorMessage", exception.ParamName);
+			Assert.Equal("errorMessage", exception.ParamName!);
 		}
 
 		[Fact]
@@ -25,7 +25,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => value.Validate((null as ValidationPredicateDelegate<string>)!, "Error Message"));
 
-			Assert.Equal("predicate", exception.ParamName);
+			Assert.Equal("predicate", exception.ParamName!);
 		}
 	}
 }

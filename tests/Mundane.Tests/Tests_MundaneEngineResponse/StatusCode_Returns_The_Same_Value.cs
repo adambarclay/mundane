@@ -1,5 +1,5 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 		[Fact]
 		public static async Task As_Supplied_To_The_Response()
 		{
-			var statusCode = new Random().Next();
+			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
 
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(() => new Response(statusCode)),

@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
-namespace Mundane.Tests.Tests_RouteBuilder
+namespace Mundane.Tests.Tests_RouteConfiguration
 {
 	[ExcludeFromCodeCoverage]
 	public static class Adding_A_Not_Found_Handler_Throws_ArgumentNullException
@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 			var endpoint = Adding_A_Not_Found_Handler_Throws_ArgumentNullException
 				.NullEndpointDelegate<MundaneEndpointDelegate>();
 
-			Action<ArgumentNullException> check = exception => Assert.Equal("endpoint", exception.ParamName);
+			Action<ArgumentNullException> check = exception => Assert.Equal("endpoint", exception.ParamName!);
 
 			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.NotFound(noParametersSync))));
 			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.NotFound(endpointSync))));

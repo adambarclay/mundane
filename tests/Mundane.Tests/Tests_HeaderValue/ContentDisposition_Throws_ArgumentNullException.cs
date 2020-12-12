@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => HeaderValue.ContentDisposition(null!));
 
-			Assert.Equal("fileName", exception.ParamName);
+			Assert.Equal("fileName", exception.ParamName!);
 		}
 	}
 }

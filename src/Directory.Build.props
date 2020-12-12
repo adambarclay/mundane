@@ -1,8 +1,9 @@
 <Project>
 	<PropertyGroup>
-		<CodeAnalysisRuleset>../../build/RuleSet.ruleset</CodeAnalysisRuleset>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<NoWarn>IDE0002</NoWarn>
+		<NoWarn>CA1014</NoWarn>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">

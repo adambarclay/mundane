@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => HeaderValue.DeleteCookie(null!));
 
-			Assert.Equal("name", exception.ParamName);
+			Assert.Equal("name", exception.ParamName!);
 		}
 	}
 }

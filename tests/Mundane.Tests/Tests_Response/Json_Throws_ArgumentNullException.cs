@@ -12,11 +12,11 @@ namespace Mundane.Tests.Tests_Response
 		{
 			var exception1 = Assert.ThrowsAny<ArgumentNullException>(() => Response.Json(null!));
 
-			Assert.Equal("bodyWriter", exception1.ParamName);
+			Assert.Equal("bodyWriter", exception1.ParamName!);
 
 			var exception2 = Assert.ThrowsAny<ArgumentNullException>(() => Response.Json(200, null!));
 
-			Assert.Equal("bodyWriter", exception2.ParamName);
+			Assert.Equal("bodyWriter", exception2.ParamName!);
 		}
 	}
 }

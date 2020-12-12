@@ -16,7 +16,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
 				async () => await value.Validate(x => Task.FromResult(true), null!));
 
-			Assert.Equal("errorMessage", exception.ParamName);
+			Assert.Equal("errorMessage", exception.ParamName!);
 		}
 
 		[Fact]
@@ -27,7 +27,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
 				async () => await value.Validate((null as ValidationPredicateDelegateAsync<string>)!, "Error Message"));
 
-			Assert.Equal("predicate", exception.ParamName);
+			Assert.Equal("predicate", exception.ParamName!);
 		}
 	}
 }

@@ -28,7 +28,7 @@ namespace Mundane.Tests.Tests_Request
 					new RequestHost(string.Empty, string.Empty, string.Empty),
 					CancellationToken.None));
 
-			Assert.Equal("body", exception.ParamName);
+			Assert.Equal("body", exception.ParamName!);
 		}
 
 		[Fact]
@@ -55,7 +55,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("cookies", exception.ParamName);
+			Assert.Equal("cookies", exception.ParamName!);
 		}
 
 		[Fact]
@@ -82,7 +82,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("dependencyFinder", exception.ParamName);
+			Assert.Equal("dependencyFinder", exception.ParamName!);
 		}
 
 		[Fact]
@@ -109,7 +109,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("form", exception.ParamName);
+			Assert.Equal("form", exception.ParamName!);
 		}
 
 		[Fact]
@@ -136,7 +136,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("headers", exception.ParamName);
+			Assert.Equal("headers", exception.ParamName!);
 		}
 
 		[Fact]
@@ -163,7 +163,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("host", exception.ParamName);
+			Assert.Equal("host", exception.ParamName!);
 		}
 
 		[Fact]
@@ -190,7 +190,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("method", exception.ParamName);
+			Assert.Equal("method", exception.ParamName!);
 		}
 
 		[Fact]
@@ -217,7 +217,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("path", exception.ParamName);
+			Assert.Equal("path", exception.ParamName!);
 		}
 
 		[Fact]
@@ -244,7 +244,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("query", exception.ParamName);
+			Assert.Equal("query", exception.ParamName!);
 		}
 
 		[Fact]
@@ -271,7 +271,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 		}
 
 		[Fact]
@@ -298,7 +298,7 @@ namespace Mundane.Tests.Tests_Request
 					}
 				});
 
-			Assert.Equal("uploadedFiles", exception.ParamName);
+			Assert.Equal("uploadedFiles", exception.ParamName!);
 		}
 	}
 }

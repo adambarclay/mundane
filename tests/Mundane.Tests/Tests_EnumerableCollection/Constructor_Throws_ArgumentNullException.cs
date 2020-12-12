@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_EnumerableCollection
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new EnumerableCollection<string>(null!));
 
-			Assert.Equal("collection", exception.ParamName);
+			Assert.Equal("collection", exception.ParamName!);
 		}
 	}
 }

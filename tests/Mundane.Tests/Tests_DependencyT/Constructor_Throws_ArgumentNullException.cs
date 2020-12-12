@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_DependencyT
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new Dependency<object>((object)null!));
 
-			Assert.Equal("dependency", exception.ParamName);
+			Assert.Equal("dependency", exception.ParamName!);
 		}
 
 		[Fact]
@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_DependencyT
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new Dependency<object>((null as CreateDependencyDelegateNoParameters<object>)!));
 
-			Assert.Equal("createDependency", exception.ParamName);
+			Assert.Equal("createDependency", exception.ParamName!);
 		}
 
 		[Fact]
@@ -30,7 +30,7 @@ namespace Mundane.Tests.Tests_DependencyT
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new Dependency<object>((null as CreateDependencyDelegate<object>)!));
 
-			Assert.Equal("createDependency", exception.ParamName);
+			Assert.Equal("createDependency", exception.ParamName!);
 		}
 	}
 }

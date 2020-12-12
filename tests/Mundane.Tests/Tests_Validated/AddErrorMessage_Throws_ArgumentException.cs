@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_Validated
 						return value;
 					}));
 
-			Assert.Equal("errorMessage", exception.ParamName);
+			Assert.Equal("errorMessage", exception.ParamName!);
 		}
 
 		[Fact]
@@ -38,7 +38,7 @@ namespace Mundane.Tests.Tests_Validated
 						return value;
 					}));
 
-			Assert.Equal("errorMessage", exception.ParamName);
+			Assert.Equal("errorMessage", exception.ParamName!);
 		}
 	}
 }

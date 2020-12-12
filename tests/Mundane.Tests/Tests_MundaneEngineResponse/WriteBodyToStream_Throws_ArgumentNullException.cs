@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 					await response.WriteBodyToStream(null!);
 				});
 
-			Assert.Equal("stream", exception.ParamName);
+			Assert.Equal("stream", exception.ParamName!);
 		}
 	}
 }

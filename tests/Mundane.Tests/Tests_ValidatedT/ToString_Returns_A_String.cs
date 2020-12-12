@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 		{
 			Validated<T> validatedValue = value;
 
-			Assert.Equal(value.ToString(), validatedValue.ToString());
+			Assert.Equal(value.ToString()!, validatedValue.ToString()!);
 		}
 	}
 }

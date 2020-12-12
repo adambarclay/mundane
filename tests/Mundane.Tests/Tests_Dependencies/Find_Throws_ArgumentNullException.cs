@@ -18,7 +18,7 @@ namespace Mundane.Tests.Tests_Dependencies
 
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => dependencies.Find<TestDependencyBase>(null!));
 
-			Assert.Equal("request", exception.ParamName);
+			Assert.Equal("request", exception.ParamName!);
 		}
 
 		private sealed class TestDependency : TestDependencyBase

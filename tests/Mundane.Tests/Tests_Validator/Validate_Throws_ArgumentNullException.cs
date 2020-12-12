@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_Validator
 			var exception =
 				Assert.ThrowsAny<ArgumentNullException>(() => Validator.Validate((null as ValidatorDelegate<object>)!));
 
-			Assert.Equal("validate", exception.ParamName);
+			Assert.Equal("validate", exception.ParamName!);
 		}
 
 		[Fact]
@@ -23,7 +23,7 @@ namespace Mundane.Tests.Tests_Validator
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
 				async () => await Validator.Validate((null as ValidatorDelegate<Task<object>>)!));
 
-			Assert.Equal("validate", exception.ParamName);
+			Assert.Equal("validate", exception.ParamName!);
 		}
 	}
 }

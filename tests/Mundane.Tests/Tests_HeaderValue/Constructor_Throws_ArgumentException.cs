@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new HeaderValue(string.Empty, Guid.NewGuid().ToString()));
 
-			Assert.Equal("name", exception.ParamName);
+			Assert.Equal("name", exception.ParamName!);
 			Assert.StartsWith("Header name must have a value.", exception.Message, StringComparison.Ordinal);
 		}
 
@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var exception = Assert.ThrowsAny<ArgumentException>(() => new HeaderValue("  ", Guid.NewGuid().ToString()));
 
-			Assert.Equal("name", exception.ParamName);
+			Assert.Equal("name", exception.ParamName!);
 			Assert.StartsWith("Header name must have a value.", exception.Message, StringComparison.Ordinal);
 		}
 	}

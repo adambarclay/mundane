@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_Response
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => Response.BadRequest(null!));
 
-			Assert.Equal("bodyWriter", exception.ParamName);
+			Assert.Equal("bodyWriter", exception.ParamName!);
 		}
 	}
 }

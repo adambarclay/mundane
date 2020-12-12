@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new HeaderValue(null!, Guid.NewGuid().ToString()));
 
-			Assert.Equal("name", exception.ParamName);
+			Assert.Equal("name", exception.ParamName!);
 		}
 
 		[Fact]
@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new HeaderValue(Guid.NewGuid().ToString(), null!));
 
-			Assert.Equal("value", exception.ParamName);
+			Assert.Equal("value", exception.ParamName!);
 		}
 	}
 }

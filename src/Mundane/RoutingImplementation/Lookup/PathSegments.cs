@@ -23,12 +23,12 @@ namespace Mundane.RoutingImplementation.Lookup
 
 		internal readonly ReadOnlySpan<char> AllRemaining(bool captureTrailingSlash)
 		{
-			return captureTrailingSlash ? this.route.Slice(this.startIndex + 1) : this.route[(this.startIndex + 1)..^1];
+			return captureTrailingSlash ? this.route[(this.startIndex + 1)..] : this.route[(this.startIndex + 1)..^1];
 		}
 
 		internal ReadOnlySpan<char> Next()
 		{
-			var routeSegment = this.route.Slice(this.startIndex + 1);
+			var routeSegment = this.route[(this.startIndex + 1)..];
 
 			var endIndex = routeSegment.IndexOf('/');
 

@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Validator
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => Validator.Validate(validator => validator.Value((object)null!)));
 
-			Assert.Equal("value", exception.ParamName);
+			Assert.Equal("value", exception.ParamName!);
 		}
 	}
 }

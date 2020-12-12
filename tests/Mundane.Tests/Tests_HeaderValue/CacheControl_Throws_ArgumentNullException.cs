@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => HeaderValue.CacheControl(null!));
 
-			Assert.Equal("directives", exception.ParamName);
+			Assert.Equal("directives", exception.ParamName!);
 		}
 	}
 }

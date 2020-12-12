@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var exception = Assert.ThrowsAny<ArgumentException>(() => HeaderValue.DeleteCookie(string.Empty));
 
-			Assert.Equal("name", exception.ParamName);
+			Assert.Equal("name", exception.ParamName!);
 			Assert.StartsWith("The cookie name must not be empty.", exception.Message, StringComparison.Ordinal);
 		}
 	}

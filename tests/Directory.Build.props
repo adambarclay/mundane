@@ -1,9 +1,13 @@
 <Project>
 	<PropertyGroup>
-		<CodeAnalysisRuleset>../../build/RuleSetTests.ruleset</CodeAnalysisRuleset>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<IsPackable>false</IsPackable>
-		<NoWarn>IDE0002</NoWarn>
+		<NoWarn>CA1014</NoWarn>
 		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<DebugSymbols>false</DebugSymbols>

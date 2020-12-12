@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_Routing
 						o.Get(routeTwo, Response.Ok);
 					}));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				$"The endpoint for route \"{routeTwo}\" will never be reached because a similar route \"{routeOne}\" was already defined.",
@@ -34,7 +34,7 @@ namespace Mundane.Tests.Tests_Routing
 		{
 			var exception = Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Get("/{}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{}\" is not valid. Capture segments require a name.",
@@ -48,7 +48,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/{capture}/{capture*}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{capture*}\" is not valid. Capture and greedy segments must have unique names, and \"capture\" has already been used.",
@@ -62,7 +62,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/inva}lid", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"inva}lid\" is not valid. The \"}\" character can only appear at the end of a capture segment e.g. {capture} or {greedy*}.",
@@ -75,7 +75,7 @@ namespace Mundane.Tests.Tests_Routing
 		{
 			var exception = Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Get("/{*}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{*}\" is not valid. Capture segments require a name.",
@@ -89,7 +89,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/{greedy*}/{capture}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{capture}\" is not valid. A greedy segment has previously been used. Greedy segments may only appear once, at the end of the route.",
@@ -102,7 +102,7 @@ namespace Mundane.Tests.Tests_Routing
 		{
 			var exception = Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Get("//", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"\" is not valid. Capture segments require a name.",
@@ -116,7 +116,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/inva*lid", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"inva*lid\" is not valid. The \"*\" character can only appear at the end of a greedy capture segment e.g. {greedy*}.",
@@ -130,7 +130,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/inva{lid", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"inva{lid\" is not valid. The \"{\" character can only appear at the start of a capture segment e.g. {capture} or {greedy*}.",
@@ -144,7 +144,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/{captureOne", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{captureOne\" is not valid. A capture segment has been opened (with \"{\") but not closed (with \"}\").",
@@ -158,7 +158,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/{captureOne*", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{captureOne*\" is not valid. A capture segment has been opened (with \"{\") but not closed (with \"}\").",
@@ -172,7 +172,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/captureOne}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"captureOne}\" is not valid. The \"}\" character can only appear at the end of a capture segment e.g. {capture} or {greedy*}.",
@@ -186,7 +186,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/captureOne*}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"captureOne*}\" is not valid. The \"}\" character can only appear at the end of a capture segment e.g. {capture} or {greedy*}.",
@@ -200,7 +200,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/{greedyOne*}/{greedyTwo*}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{greedyTwo*}\" is not valid. A greedy segment has previously been used. Greedy segments may only appear once, at the end of the route.",
@@ -214,7 +214,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentException>(
 				() => new Routing(o => o.Get("/{blah}/{blah}", Response.Ok)));
 
-			Assert.Equal("route", exception.ParamName);
+			Assert.Equal("route", exception.ParamName!);
 
 			Assert.StartsWith(
 				"The route segment \"{blah}\" is not valid. Capture and greedy segments must have unique names, and \"blah\" has already been used.",

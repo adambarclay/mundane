@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new Routing(o => { }).FindEndpoint(null!, "/"));
 
-			Assert.Equal("method", exception.ParamName);
+			Assert.Equal("method", exception.ParamName!);
 		}
 
 		[Fact]
@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_Routing
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
 				() => new Routing(o => { }).FindEndpoint(HttpMethod.Get, null!));
 
-			Assert.Equal("path", exception.ParamName);
+			Assert.Equal("path", exception.ParamName!);
 		}
 	}
 }

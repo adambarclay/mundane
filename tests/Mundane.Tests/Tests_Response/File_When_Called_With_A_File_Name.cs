@@ -16,7 +16,7 @@ namespace Mundane.Tests.Tests_Response
 
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					() => Response.File(o => Task.CompletedTask, Guid.NewGuid().ToString(), fileName)),
+					() => Response.File(o => ValueTask.CompletedTask, Guid.NewGuid().ToString(), fileName)),
 				RequestHelper.Request());
 
 			Assert.Equal(2, response.Headers.Count());
@@ -33,7 +33,7 @@ namespace Mundane.Tests.Tests_Response
 
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					() => Response.File(o => Task.CompletedTask, contentType, Guid.NewGuid().ToString())),
+					() => Response.File(o => ValueTask.CompletedTask, contentType, Guid.NewGuid().ToString())),
 				RequestHelper.Request());
 
 			Assert.Equal(2, response.Headers.Count());
@@ -58,7 +58,10 @@ namespace Mundane.Tests.Tests_Response
 		{
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					() => Response.File(o => Task.CompletedTask, Guid.NewGuid().ToString(), Guid.NewGuid().ToString())),
+					() => Response.File(
+						o => ValueTask.CompletedTask,
+						Guid.NewGuid().ToString(),
+						Guid.NewGuid().ToString())),
 				RequestHelper.Request());
 
 			Assert.Equal(200, response.StatusCode);

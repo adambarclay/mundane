@@ -29,8 +29,8 @@ namespace Mundane.Tests.Tests_ValidatedT
 
 			var validatedValueAsync = await Validator.Validate(
 				validator => validator.Value(Guid.NewGuid().ToString())
-					.Validate(x => Task.FromResult(false), errorMessages[0])
-					.Validate(x => Task.FromResult(true), "Dummy Error Message")
+					.Validate(x => ValueTask.FromResult(false), errorMessages[0])
+					.Validate(x => ValueTask.FromResult(true), "Dummy Error Message")
 					.Validate(x => false, errorMessages[1]));
 
 			Assert.Equal(errorMessages, validatedValueAsync.Model.ErrorMessages);

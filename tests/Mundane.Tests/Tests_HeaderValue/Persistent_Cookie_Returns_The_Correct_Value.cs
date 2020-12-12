@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var name = Guid.NewGuid().ToString();
 			var value = Guid.NewGuid().ToString();
-			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(int.MaxValue));
+			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(0, int.MaxValue));
 			var domain = Guid.NewGuid().ToString();
 
 			var cookie = HeaderValue.PersistentCookie(name, value, maxAge, "/", domain);
@@ -36,7 +36,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var name = Guid.NewGuid().ToString();
 			var value = Guid.NewGuid().ToString();
-			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(int.MaxValue));
+			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(0, int.MaxValue));
 
 			var cookie = HeaderValue.PersistentCookie(name, value, maxAge, "/", string.Empty, false, true);
 
@@ -51,7 +51,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var name = Guid.NewGuid().ToString();
 			var value = Guid.NewGuid().ToString();
-			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(int.MaxValue));
+			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(0, int.MaxValue));
 
 			var cookie = HeaderValue.PersistentCookie(name, value, maxAge);
 
@@ -66,7 +66,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var name = Guid.NewGuid().ToString();
 			var value = Guid.NewGuid().ToString();
-			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(int.MaxValue));
+			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(0, int.MaxValue));
 			var path = "/" + Guid.NewGuid();
 
 			var cookie = HeaderValue.PersistentCookie(name, value, maxAge, path);
@@ -89,7 +89,7 @@ namespace Mundane.Tests.Tests_HeaderValue
 		{
 			var name = Guid.NewGuid().ToString();
 			var value = Guid.NewGuid().ToString();
-			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(int.MaxValue));
+			var maxAge = TimeSpan.FromSeconds(RandomNumberGenerator.GetInt32(0, int.MaxValue));
 
 			var cookie = HeaderValue.PersistentCookie(name, value, maxAge, "/", string.Empty, true, false);
 

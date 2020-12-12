@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_Response
 		{
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					() => Response.Json(RandomNumberGenerator.GetInt32(int.MaxValue), o => Task.CompletedTask)),
+					() => Response.Json(RandomNumberGenerator.GetInt32(0, int.MaxValue), o => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);
@@ -30,7 +30,7 @@ namespace Mundane.Tests.Tests_Response
 
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					() => Response.Json(RandomNumberGenerator.GetInt32(int.MaxValue), o => o.Write(output))),
+					() => Response.Json(RandomNumberGenerator.GetInt32(0, int.MaxValue), o => o.Write(output))),
 				RequestHelper.Request());
 
 			Assert.Equal(output, await ResponseHelper.Body(response));
@@ -39,10 +39,10 @@ namespace Mundane.Tests.Tests_Response
 		[Fact]
 		public static async Task Sets_The_Status_Code_To_The_Value_Passed_To_It()
 		{
-			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
+			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Json(statusCode, o => Task.CompletedTask)),
+				MundaneEndpoint.Create(() => Response.Json(statusCode, o => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Equal(statusCode, response.StatusCode);

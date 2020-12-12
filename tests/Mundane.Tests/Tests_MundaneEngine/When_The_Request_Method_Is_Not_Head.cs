@@ -20,7 +20,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 						{
 							bodyGenerationHasRun = true;
 
-							return Task.CompletedTask;
+							return ValueTask.CompletedTask;
 						})),
 				RequestHelper.Request(HttpMethod.Get, "/"));
 

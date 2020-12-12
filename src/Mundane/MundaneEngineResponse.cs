@@ -10,14 +10,14 @@ namespace Mundane
 	/// <summary>The response produced by the Mundane engine.</summary>
 	public readonly struct MundaneEngineResponse : IEquatable<MundaneEngineResponse>
 	{
-		private readonly Func<ResponseStream, Task> bodyWriter;
+		private readonly BodyWriter bodyWriter;
 		private readonly Request request;
 
 		internal MundaneEngineResponse(
 			Request request,
 			int statusCode,
 			List<HeaderValue> headers,
-			Func<ResponseStream, Task> bodyWriter)
+			BodyWriter bodyWriter)
 		{
 			this.request = request;
 			this.StatusCode = statusCode;
@@ -85,23 +85,14 @@ namespace Mundane
 		/// <param name="stream">The response stream.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="stream"/> is <see langword="null"/>.</exception>
-		/// <exception cref="EndpointReturnedNull">The body writer delegate returns a <see langword="null"/> <see cref="Task"/>.</exception>
-		[return: NotNull]
-		public async Task WriteBodyToStream([DisallowNull] Stream stream)
+		public async ValueTask WriteBodyToStream([DisallowNull] Stream stream)
 		{
 			if (stream == null)
 			{
 				throw new ArgumentNullException(nameof(stream));
 			}
 
-			var task = this.bodyWriter(new ResponseStream(this.request, stream));
-
-			if (task == null)
-			{
-				throw new EndpointReturnedNull("The response body writer returned a null Task.");
-			}
-
-			await task;
+			await this.bodyWriter.Invoke(new ResponseStream(this.request, stream));
 		}
 	}
 }

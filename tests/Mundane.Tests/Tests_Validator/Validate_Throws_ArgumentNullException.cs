@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_Validator
 		public static async Task When_The_Async_Action_Parameter_Is_Null()
 		{
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await Validator.Validate((null as ValidatorDelegate<Task<object>>)!));
+				async () => await Validator.Validate((null as ValidatorDelegate<ValueTask<object>>)!));
 
 			Assert.Equal("validate", exception.ParamName!);
 		}

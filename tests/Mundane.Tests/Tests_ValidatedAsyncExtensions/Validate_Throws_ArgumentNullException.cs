@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 		public static async Task When_The_ErrorMessage_Parameter_Is_Null()
 		{
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await Task.FromResult((Validated<string>)string.Empty).Validate(value => true, null!));
+				async () => await ValueTask.FromResult((Validated<string>)string.Empty).Validate(value => true, null!));
 
 			Assert.Equal("errorMessage", exception.ParamName!);
 		}
@@ -21,19 +21,10 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 		public static async Task When_The_Predicate_Parameter_Is_Null()
 		{
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await Task.FromResult((Validated<string>)string.Empty)
+				async () => await ValueTask.FromResult((Validated<string>)string.Empty)
 					.Validate((ValidationPredicateDelegate<string>)null!, "Error Message."));
 
 			Assert.Equal("predicate", exception.ParamName!);
-		}
-
-		[Fact]
-		public static async Task When_The_Task_Parameter_Is_Null()
-		{
-			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await ((Task<Validated<string>>)null!).Validate(value => true, "Error Message."));
-
-			Assert.Equal("task", exception.ParamName!);
 		}
 	}
 }

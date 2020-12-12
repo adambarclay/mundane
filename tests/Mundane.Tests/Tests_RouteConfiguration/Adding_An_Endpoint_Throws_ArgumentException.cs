@@ -11,30 +11,23 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		[Fact]
 		public static void When_The_Method_Parameter_Is_Empty()
 		{
-			var noParametersSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
+			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
 			var endpointSync = (MundaneEndpointDelegateSync)(r => Response.Ok());
-			var noParameters = (MundaneEndpointDelegateNoParameters)(() => Task.FromResult(Response.Ok()));
-			var endpoint = (MundaneEndpointDelegate)(r => Task.FromResult(Response.Ok()));
+			var noParams = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
 
-			Action<ArgumentException> check = exception =>
+			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{
+				var exception = Assert.ThrowsAny<ArgumentException>(() => new Routing(routeConfigurationBuilder));
+
 				Assert.Equal("method", exception.ParamName!);
 				Assert.StartsWith("Method must have a value.", exception.Message, StringComparison.Ordinal);
-			};
+			}
 
-			check(
-				Assert.ThrowsAny<ArgumentException>(
-					() => new Routing(o => o.Endpoint(string.Empty, "/", noParametersSync))));
-
-			check(
-				Assert.ThrowsAny<ArgumentException>(
-					() => new Routing(o => o.Endpoint(string.Empty, "/", endpointSync))));
-
-			check(
-				Assert.ThrowsAny<ArgumentException>(
-					() => new Routing(o => o.Endpoint(string.Empty, "/", noParameters))));
-
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Endpoint(string.Empty, "/", endpoint))));
+			Test(o => o.Endpoint(string.Empty, "/", noParamsSync));
+			Test(o => o.Endpoint(string.Empty, "/", endpointSync));
+			Test(o => o.Endpoint(string.Empty, "/", noParams));
+			Test(o => o.Endpoint(string.Empty, "/", endpoint));
 		}
 
 		[Theory]
@@ -46,36 +39,37 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		{
 			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
 			var endpointSync = (MundaneEndpointDelegateSync)(r => Response.Ok());
-			var noParameters = (MundaneEndpointDelegateNoParameters)(() => Task.FromResult(Response.Ok()));
-			var endpoint = (MundaneEndpointDelegate)(r => Task.FromResult(Response.Ok()));
+			var noParameters = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
 
-			Action<ArgumentException> check = exception =>
+			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{
+				var exception = Assert.ThrowsAny<ArgumentException>(() => new Routing(routeConfigurationBuilder));
+
 				Assert.Equal("route", exception.ParamName!);
-
 				Assert.Equal("Route must start with a forward slash \"/\". (Parameter 'route')", exception.Message);
-			};
+			}
 
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Delete(route, noParamsSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Delete(route, endpointSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Delete(route, noParameters))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Delete(route, endpoint))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Endpoint("m", route, noParamsSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Endpoint("m", route, endpointSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Endpoint("m", route, noParameters))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Endpoint("m", route, endpoint))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Get(route, noParamsSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Get(route, endpointSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Get(route, noParameters))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Get(route, endpoint))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Post(route, noParamsSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Post(route, endpointSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Post(route, noParameters))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Post(route, endpoint))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Put(route, noParamsSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Put(route, endpointSync))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Put(route, noParameters))));
-			check(Assert.ThrowsAny<ArgumentException>(() => new Routing(o => o.Put(route, endpoint))));
+			Test(o => o.Delete(route, noParamsSync));
+			Test(o => o.Delete(route, endpointSync));
+			Test(o => o.Delete(route, noParameters));
+			Test(o => o.Delete(route, endpoint));
+			Test(o => o.Endpoint("m", route, noParamsSync));
+			Test(o => o.Endpoint("m", route, endpointSync));
+			Test(o => o.Endpoint("m", route, noParameters));
+			Test(o => o.Endpoint("m", route, endpoint));
+			Test(o => o.Get(route, noParamsSync));
+			Test(o => o.Get(route, endpointSync));
+			Test(o => o.Get(route, noParameters));
+			Test(o => o.Get(route, endpoint));
+			Test(o => o.Post(route, noParamsSync));
+			Test(o => o.Post(route, endpointSync));
+			Test(o => o.Post(route, noParameters));
+			Test(o => o.Post(route, endpoint));
+			Test(o => o.Put(route, noParamsSync));
+			Test(o => o.Put(route, endpointSync));
+			Test(o => o.Put(route, noParameters));
+			Test(o => o.Put(route, endpoint));
 		}
 	}
 }

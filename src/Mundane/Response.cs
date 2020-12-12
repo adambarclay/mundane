@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace Mundane
 {
+	/// <summary>Writes the response body to the output stream.</summary>
+	/// <param name="responseStream">The response output stream.</param>
+	public delegate ValueTask BodyWriter(ResponseStream responseStream);
+
 	/// <summary>The HTTP response.</summary>
 	public sealed class Response
 	{
-		private static readonly Func<ResponseStream, Task> EmptyBody = stream => Task.CompletedTask;
+		private static readonly BodyWriter EmptyBody = stream => ValueTask.CompletedTask;
 
-		private readonly Func<ResponseStream, Task> bodyWriter;
+		private readonly BodyWriter bodyWriter;
 		private readonly List<HeaderValue> headers;
 		private readonly int statusCode;
 
@@ -26,7 +30,7 @@ namespace Mundane
 		/// <param name="statusCode">The HTTP response status code.</param>
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		public Response(int statusCode, [DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public Response(int statusCode, [DisallowNull] BodyWriter bodyWriter)
 		{
 			if (bodyWriter == null)
 			{
@@ -51,7 +55,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response BadRequest([DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response BadRequest([DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(400, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -62,9 +66,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> or <paramref name="contentType"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response File(
-			[DisallowNull] Func<ResponseStream, Task> bodyWriter,
-			[DisallowNull] string contentType)
+		public static Response File([DisallowNull] BodyWriter bodyWriter, [DisallowNull] string contentType)
 		{
 			return new Response(200, bodyWriter).AddHeader(HeaderValue.ContentType(contentType));
 		}
@@ -77,7 +79,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/>, <paramref name="contentType"/> or <paramref name="fileName"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
 		public static Response File(
-			[DisallowNull] Func<ResponseStream, Task> bodyWriter,
+			[DisallowNull] BodyWriter bodyWriter,
 			[DisallowNull] string contentType,
 			[DisallowNull] string fileName)
 		{
@@ -98,7 +100,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response Forbidden([DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response Forbidden([DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(403, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -116,7 +118,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response InternalServerError([DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response InternalServerError([DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(500, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -126,7 +128,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response Json([DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response Json([DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(200, bodyWriter).AddHeader(HeaderValue.ContentTypeJson());
 		}
@@ -137,7 +139,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response Json(int statusCode, [DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response Json(int statusCode, [DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(statusCode, bodyWriter).AddHeader(HeaderValue.ContentTypeJson());
 		}
@@ -165,7 +167,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response NotFound([DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response NotFound([DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(404, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -183,7 +185,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response Ok([DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response Ok([DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(200, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -221,7 +223,7 @@ namespace Mundane
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
-		public static Response Unauthorized([DisallowNull] Func<ResponseStream, Task> bodyWriter)
+		public static Response Unauthorized([DisallowNull] BodyWriter bodyWriter)
 		{
 			return new Response(401, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}

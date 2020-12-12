@@ -29,8 +29,7 @@ namespace Mundane
 
 		/// <summary>Flushes the response stream.</summary>
 		/// <returns>A task that represents the asynchronous operation.</returns>
-		[return: NotNull]
-		public async Task Flush()
+		public async ValueTask Flush()
 		{
 			await this.Stream.FlushAsync(this.Request.RequestAborted);
 		}
@@ -39,8 +38,7 @@ namespace Mundane
 		/// <param name="value">The string to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public async Task Write([DisallowNull] string value)
+		public async ValueTask Write([DisallowNull] string value)
 		{
 			if (value == null)
 			{
@@ -54,8 +52,7 @@ namespace Mundane
 		/// <param name="value">The byte array to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public async Task Write([DisallowNull] byte[] value)
+		public async ValueTask Write([DisallowNull] byte[] value)
 		{
 			if (value == null)
 			{
@@ -69,8 +66,7 @@ namespace Mundane
 		/// <param name="value">The stream to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public async Task Write([DisallowNull] Stream value)
+		public async ValueTask Write([DisallowNull] Stream value)
 		{
 			if (value == null)
 			{

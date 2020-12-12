@@ -13,8 +13,8 @@ namespace Mundane.Tests.Tests_RequestEndpoint
 			var routing = new Routing(
 				o =>
 				{
-					o.Get("/one/{param}", r => Task.FromResult(Response.Ok()));
-					o.Get("/two/{param}", r => Task.FromResult(Response.NotFound()));
+					o.Get("/one/{param}", r => ValueTask.FromResult(Response.Ok()));
+					o.Get("/two/{param}", r => ValueTask.FromResult(Response.NotFound()));
 				});
 
 			var first = routing.FindEndpoint(HttpMethod.Get, "/one/three");
@@ -26,7 +26,7 @@ namespace Mundane.Tests.Tests_RequestEndpoint
 		[Fact]
 		public static void When_The_Objects_Have_The_Same_Endpoint_But_Different_Parameters()
 		{
-			var endpoint = (MundaneEndpointDelegate)(r => Task.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
 
 			var routing = new Routing(
 				o =>
@@ -47,8 +47,8 @@ namespace Mundane.Tests.Tests_RequestEndpoint
 			var routing = new Routing(
 				o =>
 				{
-					o.Get("/one/{param}", r => Task.FromResult(Response.Ok()));
-					o.Get("/two/{param}", r => Task.FromResult(Response.NotFound()));
+					o.Get("/one/{param}", r => ValueTask.FromResult(Response.Ok()));
+					o.Get("/two/{param}", r => ValueTask.FromResult(Response.NotFound()));
 				});
 
 			var first = routing.FindEndpoint(HttpMethod.Get, "/one/hello");

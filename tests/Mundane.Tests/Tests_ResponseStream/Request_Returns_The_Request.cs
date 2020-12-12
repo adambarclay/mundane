@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 						{
 							actual = o.Request;
 
-							return Task.CompletedTask;
+							return ValueTask.CompletedTask;
 						})),
 				expected);
 

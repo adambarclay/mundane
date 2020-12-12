@@ -7,13 +7,14 @@ namespace Mundane
 	/// <summary>The predicate to evaluate.</summary>
 	/// <param name="value">The value to evaluate.</param>
 	/// <typeparam name="T">The type of the value to evaluate.</typeparam>
-	public delegate bool ValidationPredicateDelegate<in T>([DisallowNull] T value);
+	public delegate bool ValidationPredicateDelegate<in T>([DisallowNull] T value)
+		where T : notnull;
 
 	/// <summary>Async version of the predicate to evaluate.</summary>
 	/// <param name="value">The value to evaluate.</param>
 	/// <typeparam name="T">The type of the value to evaluate.</typeparam>
-	[return: NotNull]
-	public delegate Task<bool> ValidationPredicateDelegateAsync<in T>([DisallowNull] T value);
+	public delegate ValueTask<bool> ValidationPredicateDelegateAsync<in T>([DisallowNull] T value)
+		where T : notnull;
 
 	/// <summary>Represents a validated value.</summary>
 	/// <typeparam name="T">The type of the validated value.</typeparam>
@@ -82,12 +83,7 @@ namespace Mundane
 		/// <inheritdoc/>
 		public bool Equals([AllowNull] Validated<T>? other)
 		{
-			if (other is null)
-			{
-				return false;
-			}
-
-			return this.value.Equals(other.value);
+			return other is not null && this.value.Equals(other.value);
 		}
 
 		/// <inheritdoc/>
@@ -135,9 +131,7 @@ namespace Mundane
 		/// <param name="errorMessage">The error message to add when the predicate returns false.</param>
 		/// <returns>The validated value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
-		/// <exception cref="ValidationReturnedNull">The validation returns a <see langword="null"/> <see cref="Task"/>.</exception>
-		[return: NotNull]
-		public async Task<Validated<T>> Validate(
+		public async ValueTask<Validated<T>> Validate(
 			[DisallowNull] ValidationPredicateDelegateAsync<T> predicate,
 			[DisallowNull] string errorMessage)
 		{
@@ -151,14 +145,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(errorMessage));
 			}
 
-			var task = predicate.Invoke(this.value);
-
-			if (task == null)
-			{
-				throw new ValidationReturnedNull("The validation returned a null Task<bool>.");
-			}
-
-			if (!await task)
+			if (!await predicate.Invoke(this.value))
 			{
 				this.AddErrorMessage(errorMessage);
 			}

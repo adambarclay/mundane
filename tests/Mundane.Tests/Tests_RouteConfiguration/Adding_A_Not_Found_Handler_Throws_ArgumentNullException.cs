@@ -10,30 +10,26 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		[Fact]
 		public static void When_The_Endpoint_Is_Null()
 		{
-			var noParametersSync = Adding_A_Not_Found_Handler_Throws_ArgumentNullException
-				.NullEndpointDelegate<MundaneEndpointDelegateNoParametersSync>();
+			static T NullEndpointDelegate<T>()
+				where T : class =>
+				null!;
 
-			var endpointSync = Adding_A_Not_Found_Handler_Throws_ArgumentNullException
-				.NullEndpointDelegate<MundaneEndpointDelegateSync>();
+			var noParametersSync = NullEndpointDelegate<MundaneEndpointDelegateNoParametersSync>();
+			var endpointSync = NullEndpointDelegate<MundaneEndpointDelegateSync>();
+			var noParameters = NullEndpointDelegate<MundaneEndpointDelegateNoParameters>();
+			var endpoint = NullEndpointDelegate<MundaneEndpointDelegate>();
 
-			var noParameters = Adding_A_Not_Found_Handler_Throws_ArgumentNullException
-				.NullEndpointDelegate<MundaneEndpointDelegateNoParameters>();
+			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
+			{
+				var exception = Assert.ThrowsAny<ArgumentNullException>(() => new Routing(routeConfigurationBuilder));
 
-			var endpoint = Adding_A_Not_Found_Handler_Throws_ArgumentNullException
-				.NullEndpointDelegate<MundaneEndpointDelegate>();
+				Assert.Equal("endpoint", exception.ParamName!);
+			}
 
-			Action<ArgumentNullException> check = exception => Assert.Equal("endpoint", exception.ParamName!);
-
-			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.NotFound(noParametersSync))));
-			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.NotFound(endpointSync))));
-			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.NotFound(noParameters))));
-			check(Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => o.NotFound(endpoint))));
-		}
-
-		private static T NullEndpointDelegate<T>()
-			where T : class
-		{
-			return null!;
+			Test(o => o.NotFound(noParametersSync));
+			Test(o => o.NotFound(endpointSync));
+			Test(o => o.NotFound(noParameters));
+			Test(o => o.NotFound(endpoint));
 		}
 	}
 }

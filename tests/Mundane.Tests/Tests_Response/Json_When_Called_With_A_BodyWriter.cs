@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Adds_The_Content_Type_Header_For_Json()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Json(o => Task.CompletedTask)),
+				MundaneEndpoint.Create(() => Response.Json(o => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);
@@ -37,7 +37,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_Status_Code_To_200()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Json(o => Task.CompletedTask)),
+				MundaneEndpoint.Create(() => Response.Json(o => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Equal(200, response.StatusCode);

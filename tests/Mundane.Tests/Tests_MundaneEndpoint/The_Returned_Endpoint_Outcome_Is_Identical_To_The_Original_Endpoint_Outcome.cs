@@ -10,9 +10,9 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 	public static class The_Returned_Endpoint_Outcome_Is_Identical_To_The_Original_Endpoint_Outcome
 	{
 		[Fact]
-		public static async Task When_Creating_From_A_MundaneEndpointDelegate()
+		public static async ValueTask When_Creating_From_A_MundaneEndpointDelegate()
 		{
-			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
+			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 					{
 						output = input;
 
-						return Task.FromResult(new Response(statusCode));
+						return ValueTask.FromResult(new Response(statusCode));
 					}),
 				RequestHelper.Request());
 
@@ -33,7 +33,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		[Fact]
 		public static async Task When_Creating_From_A_MundaneEndpointDelegateNoParameters()
 		{
-			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
+			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
@@ -43,7 +43,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 					{
 						output = input;
 
-						return Task.FromResult(new Response(statusCode));
+						return ValueTask.FromResult(new Response(statusCode));
 					}),
 				RequestHelper.Request());
 
@@ -54,7 +54,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		[Fact]
 		public static async Task When_Creating_From_A_MundaneEndpointDelegateNoParametersSync()
 		{
-			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
+			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
@@ -75,7 +75,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		[Fact]
 		public static async Task When_Creating_From_A_MundaneEndpointDelegateSync()
 		{
-			var statusCode = RandomNumberGenerator.GetInt32(int.MaxValue);
+			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 

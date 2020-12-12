@@ -15,18 +15,12 @@ namespace Mundane
 		/// <returns>The validated value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ValidationReturnedNull">The validation returns a <see langword="null"/> <typeparamref name="T"/>.</exception>
-		[return: NotNull]
-		public static async Task<Validated<T>> Validate<T>(
-			[DisallowNull] this Task<Validated<T>> task,
+		public static async ValueTask<Validated<T>> Validate<T>(
+			this ValueTask<Validated<T>> task,
 			[DisallowNull] ValidationPredicateDelegateAsync<T> predicate,
 			[DisallowNull] string errorMessage)
 			where T : notnull
 		{
-			if (task == null)
-			{
-				throw new ArgumentNullException(nameof(task));
-			}
-
 			if (predicate == null)
 			{
 				throw new ArgumentNullException(nameof(predicate));
@@ -55,18 +49,12 @@ namespace Mundane
 		/// <returns>The validated value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ValidationReturnedNull">The validation returns a <see langword="null"/> <typeparamref name="T"/>.</exception>
-		[return: NotNull]
-		public static async Task<Validated<T>> Validate<T>(
-			[DisallowNull] this Task<Validated<T>> task,
+		public static async ValueTask<Validated<T>> Validate<T>(
+			this ValueTask<Validated<T>> task,
 			[DisallowNull] ValidationPredicateDelegate<T> predicate,
 			[DisallowNull] string errorMessage)
 			where T : notnull
 		{
-			if (task == null)
-			{
-				throw new ArgumentNullException(nameof(task));
-			}
-
 			if (predicate == null)
 			{
 				throw new ArgumentNullException(nameof(predicate));
@@ -84,7 +72,7 @@ namespace Mundane
 				throw new ValidationReturnedNull("The validation returned null.");
 			}
 
-			return await model.Validate(value => Task.FromResult(predicate(value)), errorMessage);
+			return model.Validate(predicate, errorMessage);
 		}
 	}
 }

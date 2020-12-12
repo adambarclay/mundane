@@ -17,7 +17,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Delete("/", r => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Delete("/", r => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -33,7 +33,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Delete("/", () => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Delete("/", () => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -81,7 +81,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Endpoint("method", "/", r => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Endpoint("method", "/", r => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -97,7 +97,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Endpoint("method", "/", () => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Endpoint("method", "/", () => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -145,7 +145,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Get("/", r => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Get("/", r => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -161,7 +161,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Get("/", () => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Get("/", () => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -209,7 +209,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.NotFound(r => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.NotFound(r => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -225,7 +225,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.NotFound(() => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.NotFound(() => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -273,7 +273,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Post("/", r => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Post("/", r => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -289,7 +289,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Post("/", () => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Post("/", () => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -337,7 +337,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Put("/", r => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Put("/", r => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);
@@ -353,7 +353,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 				routeConfiguration =>
 				{
 					expected = routeConfiguration;
-					actual = routeConfiguration.Put("/", () => Task.FromResult(Response.Ok()));
+					actual = routeConfiguration.Put("/", () => ValueTask.FromResult(Response.Ok()));
 				});
 
 			Assert.Same(expected, actual);

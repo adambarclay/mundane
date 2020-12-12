@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 			var value = Validator.Validate(validator => validator.Value(Guid.NewGuid().ToString())).Model;
 
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await value.Validate(x => Task.FromResult(true), null!));
+				async () => await value.Validate(x => ValueTask.FromResult(true), null!));
 
 			Assert.Equal("errorMessage", exception.ParamName!);
 		}

@@ -8,7 +8,7 @@ namespace Mundane.Tests
 	[ExcludeFromCodeCoverage]
 	internal static class ResponseHelper
 	{
-		internal static async Task<string> Body(MundaneEngineResponse response)
+		internal static async ValueTask<string> Body(MundaneEngineResponse response)
 		{
 			await using (var memoryStream = new MemoryStream())
 			{

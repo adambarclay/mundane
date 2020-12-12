@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -7,14 +8,10 @@ namespace Mundane.Tests.Tests_Validator
 	[ExcludeFromCodeCoverage]
 	public static class When_The_Async_Validation_Succeeds
 	{
-		private const string ErrorMessage = "Value must be greater than zero.";
-		private const int Expected = 42;
-
 		[Fact]
 		public static async Task Invalid_Returns_False()
 		{
-			var result = await Validator.Validate(
-				validator => Task.FromResult(new TestModel(validator, When_The_Async_Validation_Succeeds.Expected)));
+			var result = await Validator.Validate(validator => ValueTask.FromResult(new TestModel(validator, 42)));
 
 			Assert.False(result.Invalid);
 		}
@@ -23,7 +20,7 @@ namespace Mundane.Tests.Tests_Validator
 		public static async Task The_Validated_Value_Has_No_Error_Messages()
 		{
 			(var _, var model) = await Validator.Validate(
-				validator => Task.FromResult(new TestModel(validator, When_The_Async_Validation_Succeeds.Expected)));
+				validator => ValueTask.FromResult(new TestModel(validator, 42)));
 
 			Assert.Empty(model.Number.ErrorMessages);
 		}
@@ -31,18 +28,18 @@ namespace Mundane.Tests.Tests_Validator
 		[Fact]
 		public static async Task The_Validated_Value_Is_Set()
 		{
-			var result = await Validator.Validate(
-				validator => Task.FromResult(new TestModel(validator, When_The_Async_Validation_Succeeds.Expected)));
+			var number = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 
-			Assert.Equal(When_The_Async_Validation_Succeeds.Expected, (int)result.Model.Number);
+			var result = await Validator.Validate(validator => ValueTask.FromResult(new TestModel(validator, number)));
+
+			Assert.Equal(number, (int)result.Model.Number);
 		}
 
 		private sealed class TestModel
 		{
 			internal TestModel(Validator validator, int number)
 			{
-				this.Number = validator.Value(number)
-					.Validate(o => o > 0, When_The_Async_Validation_Succeeds.ErrorMessage);
+				this.Number = validator.Value(number).Validate(o => o > 0, "Value must be greater than zero.");
 			}
 
 			internal Validated<int> Number { get; }

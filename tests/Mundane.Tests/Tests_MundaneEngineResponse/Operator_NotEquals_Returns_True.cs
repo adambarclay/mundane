@@ -40,7 +40,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 		{
 			var request = RequestHelper.Request();
 			const int statusCode = 200;
-			Func<ResponseStream, Task> bodyWriter = o => o.Write("Hello World!");
+			BodyWriter bodyWriter = o => o.Write("Hello World!");
 
 			var first = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
@@ -61,7 +61,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 		public static async Task When_The_Objects_Have_Different_Requests()
 		{
 			const int statusCode = 200;
-			Func<ResponseStream, Task> bodyWriter = o => o.Write("Hello World!");
+			BodyWriter bodyWriter = o => o.Write("Hello World!");
 
 			var headers = new[]
 			{
@@ -87,7 +87,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 		public static async Task When_The_Objects_Have_Different_Status_Codes()
 		{
 			var request = RequestHelper.Request();
-			Func<ResponseStream, Task> bodyWriter = o => o.Write("Hello World!");
+			BodyWriter bodyWriter = o => o.Write("Hello World!");
 
 			var headers = new[]
 			{

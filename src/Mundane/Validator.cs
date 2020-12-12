@@ -54,9 +54,9 @@ namespace Mundane
 		/// <typeparam name="T">The type of object being validated.</typeparam>
 		/// <returns>The result of the validation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="validate"/> is <see langword="null"/>.</exception>
-		/// <exception cref="ValidationReturnedNull">The validation returns a <see langword="null"/> <see cref="Task"/> or the <see cref="Task"/> result is a <see langword="null"/> <typeparamref name="T"/>.</exception>
-		[return: NotNull]
-		public static async Task<ValidationResult<T>> Validate<T>([DisallowNull] ValidatorDelegate<Task<T>> validate)
+		/// <exception cref="ValidationReturnedNull">The validation result is a <see langword="null"/> <typeparamref name="T"/>.</exception>
+		public static async ValueTask<ValidationResult<T>> Validate<T>(
+			[DisallowNull] ValidatorDelegate<ValueTask<T>> validate)
 			where T : notnull
 		{
 			if (validate == null)
@@ -66,14 +66,7 @@ namespace Mundane
 
 			var validation = new Validator();
 
-			var task = validate(validation);
-
-			if (task == null)
-			{
-				throw new ValidationReturnedNull("The validation returned a null Task<T>.");
-			}
-
-			var model = await task;
+			var model = await validate.Invoke(validation);
 
 			if (model == null)
 			{

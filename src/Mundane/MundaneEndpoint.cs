@@ -7,13 +7,11 @@ namespace Mundane
 	/// <summary>An asynchronous endpoint delegate receiving the current request.</summary>
 	/// <param name="request">The current request.</param>
 	/// <returns>The endpoint response.</returns>
-	[return: NotNull]
-	public delegate Task<Response> MundaneEndpointDelegate([DisallowNull] Request request);
+	public delegate ValueTask<Response> MundaneEndpointDelegate([DisallowNull] Request request);
 
 	/// <summary>An asynchronous endpoint delegate receiving no parameters.</summary>
 	/// <returns>The endpoint response.</returns>
-	[return: NotNull]
-	public delegate Task<Response> MundaneEndpointDelegateNoParameters();
+	public delegate ValueTask<Response> MundaneEndpointDelegateNoParameters();
 
 	/// <summary>A synchronous endpoint delegate receiving the current request.</summary>
 	/// <param name="request">The current request.</param>
@@ -41,7 +39,17 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(endpoint));
 			}
 
-			return r => Task.Run(() => endpoint());
+			return request =>
+			{
+				try
+				{
+					return ValueTask.FromResult(endpoint.Invoke());
+				}
+				catch (Exception exception)
+				{
+					return ValueTask.FromException<Response>(exception);
+				}
+			};
 		}
 
 		/// <summary>Creates a Mundane endpoint delegate from a synchronous delegate which receives the current request.</summary>
@@ -56,7 +64,17 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(endpoint));
 			}
 
-			return r => Task.Run(() => endpoint(r));
+			return request =>
+			{
+				try
+				{
+					return ValueTask.FromResult(endpoint.Invoke(request));
+				}
+				catch (Exception exception)
+				{
+					return ValueTask.FromException<Response>(exception);
+				}
+			};
 		}
 
 		/// <summary>Creates a Mundane endpoint delegate from an asynchronous delegate which receives no parameters.</summary>
@@ -71,7 +89,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(endpoint));
 			}
 
-			return r => endpoint();
+			return request => endpoint();
 		}
 
 		/// <summary>Creates a Mundane endpoint delegate from an asynchronous delegate which receives the current request.</summary>

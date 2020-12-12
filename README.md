@@ -49,7 +49,7 @@ Mundane uses a simple request/response model to handle HTTP requests. There is n
 
     internal static class DataController
     {
-        internal static async Task<Response> GetData(Request request)
+        internal static async ValueTask<Response> GetData(Request request)
         {
             var dataRepository = request.Dependency<DataRepository>();
 
@@ -89,7 +89,7 @@ All of the request parameter methods return empty string if the parameter was no
         var uploadedFileExists = request.FileExists("fileParameterName");
         var formExists = request.FormExists("formParameterName");
         var headerExists = request.HeaderExists("headerName");
-        var queryExists= request.QueryExists("queryParameterName");
+        var queryExists = request.QueryExists("queryParameterName");
 
         return Response.Ok();
     }
@@ -121,7 +121,7 @@ or by using one of the static helper methods on the `Response` object.
 Response headers can be added using the `AddHeader()` method and either a custom `HeaderValue` e.g. `new HeaderValue("MyHeader", "MyValue")`, or by using the static helper methods of `HeaderValue`.
 
 ```c#
-    return Response.File(o => o.Write(imageData.DataStream)), "image/png")
+    return Response.File(o => o.Write(imageData.Bytes)), "image/png")
         .AddHeader(HeaderValue.CacheControl("public, max-age=31536000"))
         .AddHeader(HeaderValue.LastModified(imageData.LastModified));
 ```
@@ -130,7 +130,7 @@ Response headers can be added using the `AddHeader()` method and either a custom
 
 Cookies are HTTP headers so they are also added with the `AddHeader()` method.
 ```c#
-    internal static async Task<Response> Authenticate(Request request)
+    internal static async ValueTask<Response> Authenticate(Request request)
     {
         var userRepository = request.Dependency<UserRepository>();
 
@@ -159,8 +159,8 @@ Mundane has four endpoint signatures:
 ```c#
     Response Endpoint();
     Response Endpoint(Request request);
-    Task<Response> Endpoint();
-    Task<Response> Endpoint(Request request);
+    ValueTask<Response> Endpoint();
+    ValueTask<Response> Endpoint(Request request);
 ```
 
 Endpoints are added to the `Routing` configuration using `RouteConfiguration`. The HTTP methods `DELETE`, `GET`, `POST`, and `PUT` are supported, along with any custom method using `Endpoint()`. A custom 404 handler can be specified with `NotFound()`.
@@ -171,8 +171,8 @@ Endpoints are added to the `Routing` configuration using `RouteConfiguration`. T
         {
             routeConfiguration.Delete("/delete", () => Response.Ok());
             routeConfiguration.Get("/get", request => Response.Ok());
-            routeConfiguration.Post("/post", () => Task.FromResult(Response.Ok());
-            routeConfiguration.Put("/put", request => Task.FromResult(Response.Ok());
+            routeConfiguration.Post("/post", () => ValueTask.FromResult(Response.Ok());
+            routeConfiguration.Put("/put", request => ValueTask.FromResult(Response.Ok());
             routeConfiguration.Endpoint("PATCH", "/patch", PatchController.Patch);
             routeConfiguration.NotFound(NotFoundController.NotFound);
         });
@@ -267,28 +267,29 @@ The lambda expression optionally takes the current `Request` as a parameter.
 
 Mundane includes some helpers to validate parameters in the request.
 
-In this example for updating a user profile, the controller makes use of the `Validator` class to convert the paramters in the request into a command object.
+In this example for updating a user profile, the controller makes use of the `Validator` class to convert the parameters in the request into a command object.
 
 ```c#
     internal static class ProfileController
     {
-        internal static async Task<Response> UpdateProfile(Request request)
+        // POST /profile/edit
+        internal static async ValueTask<Response> UpdateProfile(Request request)
         {
             (var invalid, var updateProfileCommand) = Validator.Validate(
                 validator => new UpdateProfileCommand(request, validator));
 
             if (invalid)
             {
-                return Response.Ok(/*
-                    Show the input form prefilled with the values
-                    and the error messages in updateProfileCommand. */);
+                // Show the input form prefilled with the values and error messages in updateProfileCommand.
+                return Response.Ok(...);
             }
 
             var profileRepository = request.Dependency<ProfileRepository>();
 
             await profileRepository.UpdateProfile(updateProfileCommand);
 
-            return Response.RedirectSeeOther(/* Success... */);
+            // Success.
+            return Response.RedirectSeeOther("/profile");
         }
     }
 ```
@@ -296,8 +297,6 @@ In this example for updating a user profile, the controller makes use of the `Va
 In this example, the validation takes place in the command object constructor by calling the `Validate()` method.
 
 The Validated&lt;T&gt; properties contain the validated value and the list of errors which occurred for that property during validation.
-
-
 
 ```c#
     internal sealed class UpdateProfileCommand

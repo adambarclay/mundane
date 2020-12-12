@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 		{
 			var request = RequestHelper.Request();
 			const int statusCode = 200;
-			Func<ResponseStream, Task> bodyWriter = o => o.Write("Hello World!");
+			BodyWriter bodyWriter = o => o.Write("Hello World!");
 
 			var headers = new[]
 			{

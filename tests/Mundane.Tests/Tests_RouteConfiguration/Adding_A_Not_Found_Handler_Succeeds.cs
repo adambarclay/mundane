@@ -24,7 +24,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 			await Adding_A_Not_Found_Handler_Succeeds.Test(o => o.NotFound(endpoint), statusCode);
 		}
 
-		private static async Task Test(RouteConfigurationDelegate routeConfiguration, int statusCode)
+		private static async Task Test(RouteConfigurationBuilder routeConfiguration, int statusCode)
 		{
 			var route = new Routing(routeConfiguration).FindEndpoint(HttpMethod.Get, "/");
 

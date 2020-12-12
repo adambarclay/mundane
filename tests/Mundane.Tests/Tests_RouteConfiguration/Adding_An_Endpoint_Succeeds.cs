@@ -40,7 +40,7 @@ namespace Mundane.Tests.Tests_RouteBuilder
 			await Adding_An_Endpoint_Succeeds.Test(HttpMethod.Put, o => o.Put("/", endpoint), statusCode);
 		}
 
-		private static async Task Test(string method, RouteConfigurationDelegate routeConfiguration, int statusCode)
+		private static async Task Test(string method, RouteConfigurationBuilder routeConfiguration, int statusCode)
 		{
 			var route = new Routing(routeConfiguration).FindEndpoint(method, "/");
 

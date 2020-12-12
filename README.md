@@ -163,7 +163,7 @@ Mundane has four endpoint signatures:
     ValueTask<Response> Endpoint(Request request);
 ```
 
-Endpoints are added to the `Routing` configuration using `RouteConfiguration`. The HTTP methods `DELETE`, `GET`, `POST`, and `PUT` are supported, along with any custom method using `Endpoint()`. A custom 404 handler can be specified with `NotFound()`.
+Endpoints are added to the `Routing` configuration using `RouteConfiguration`. The HTTP methods `DELETE`, `GET`, `POST`, and `PUT` are supported, along with any custom method using `Endpoint()`. A custom 404 handler can optionally be specified as the second parameter of the `Routing` constructor.
 
 ```c#
     new Routing(
@@ -174,8 +174,8 @@ Endpoints are added to the `Routing` configuration using `RouteConfiguration`. T
             routeConfiguration.Post("/post", () => ValueTask.FromResult(Response.Ok());
             routeConfiguration.Put("/put", request => ValueTask.FromResult(Response.Ok());
             routeConfiguration.Endpoint("PATCH", "/patch", PatchController.Patch);
-            routeConfiguration.NotFound(NotFoundController.NotFound);
-        });
+        },
+        MundaneEndpoint.Create(NotFoundController.NotFound));
 ```
 
 ### Routes

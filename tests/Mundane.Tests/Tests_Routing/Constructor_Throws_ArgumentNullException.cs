@@ -8,11 +8,24 @@ namespace Mundane.Tests.Tests_Routing
 	public static class Constructor_Throws_ArgumentNullException
 	{
 		[Fact]
+		public static void When_The_NotFoundEndpoint_Parameter_Is_Null()
+		{
+			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new Routing(o => { }, null!));
+
+			Assert.Equal("notFoundEndpoint", exception.ParamName!);
+		}
+
+		[Fact]
 		public static void When_The_RouteConfigurationBuilder_Parameter_Is_Null()
 		{
-			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new Routing(null!));
+			var exception1 = Assert.ThrowsAny<ArgumentNullException>(() => new Routing(null!));
 
-			Assert.Equal("routeConfigurationBuilder", exception.ParamName!);
+			Assert.Equal("routeConfigurationBuilder", exception1.ParamName!);
+
+			var exception2 = Assert.ThrowsAny<ArgumentNullException>(
+				() => new Routing(null!, MundaneEndpoint.Create(Response.NotFound)));
+
+			Assert.Equal("routeConfigurationBuilder", exception2.ParamName!);
 		}
 	}
 }

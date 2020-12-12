@@ -11,15 +11,12 @@ namespace Mundane
 	{
 		private readonly Dictionary<string, RouteNodeTreeBuilder> lookupBuilder;
 
-		private MundaneEndpointDelegate notFoundHandler;
-
-		internal RouteConfiguration(MundaneEndpointDelegate notFoundHandler)
+		internal RouteConfiguration()
 		{
-			this.notFoundHandler = notFoundHandler;
 			this.lookupBuilder = new Dictionary<string, RouteNodeTreeBuilder>();
 		}
 
-		private delegate MundaneEndpointDelegate CreateEndpointDelegate<in T>(T endpoint)
+		private delegate MundaneEndpointDelegate CreateEndpoint<in T>(T endpoint)
 			where T : Delegate;
 
 		/// <summary>Adds an endpoint for the "DELETE" HTTP method.</summary>
@@ -276,78 +273,6 @@ namespace Mundane
 			}
 		}
 
-		/// <summary>Configures the endpoint to execute when the request path is not matched to any route.</summary>
-		/// <param name="endpoint">The endpoint to execute.</param>
-		/// <returns>The Mundane engine routing configuration builder.</returns>
-		[return: NotNull]
-		public RouteConfiguration NotFound([DisallowNull] MundaneEndpointDelegateNoParametersSync endpoint)
-		{
-			try
-			{
-				this.notFoundHandler = MundaneEndpoint.Create(endpoint);
-
-				return this;
-			}
-			catch (ArgumentException exception)
-			{
-				throw exception;
-			}
-		}
-
-		/// <summary>Configures the endpoint to execute when the request path is not matched to any route.</summary>
-		/// <param name="endpoint">The endpoint to execute.</param>
-		/// <returns>The Mundane engine routing configuration builder.</returns>
-		[return: NotNull]
-		public RouteConfiguration NotFound([DisallowNull] MundaneEndpointDelegateSync endpoint)
-		{
-			try
-			{
-				this.notFoundHandler = MundaneEndpoint.Create(endpoint);
-
-				return this;
-			}
-			catch (ArgumentException exception)
-			{
-				throw exception;
-			}
-		}
-
-		/// <summary>Configures the endpoint to execute when the request path is not matched to any route.</summary>
-		/// <param name="endpoint">The endpoint to execute.</param>
-		/// <returns>The Mundane engine routing configuration builder.</returns>
-		[return: NotNull]
-		public RouteConfiguration NotFound([DisallowNull] MundaneEndpointDelegateNoParameters endpoint)
-		{
-			try
-			{
-				this.notFoundHandler = MundaneEndpoint.Create(endpoint);
-
-				return this;
-			}
-			catch (ArgumentException exception)
-			{
-				throw exception;
-			}
-		}
-
-		/// <summary>Configures the endpoint to execute when the request path is not matched to any route.</summary>
-		/// <param name="endpoint">The endpoint to execute.</param>
-		/// <returns>The Mundane engine routing configuration builder.</returns>
-		[return: NotNull]
-		public RouteConfiguration NotFound([DisallowNull] MundaneEndpointDelegate endpoint)
-		{
-			try
-			{
-				this.notFoundHandler = MundaneEndpoint.Create(endpoint);
-
-				return this;
-			}
-			catch (ArgumentException exception)
-			{
-				throw exception;
-			}
-		}
-
 		/// <summary>Adds an endpoint for the "POST" HTTP method.</summary>
 		/// <param name="route">The route URL which will trigger this endpoint.</param>
 		/// <param name="endpoint">The endpoint to execute.</param>
@@ -508,7 +433,8 @@ namespace Mundane
 			}
 		}
 
-		internal (Dictionary<string, RouteNode[]> Lookup, EndpointData[] Endpoints) Build()
+		internal (Dictionary<string, RouteNode[]> Lookup, EndpointData[] Endpoints) Build(
+			MundaneEndpointDelegate notFoundHandler)
 		{
 			var lookup = new Dictionary<string, RouteNode[]>(this.lookupBuilder.Count);
 
@@ -524,7 +450,7 @@ namespace Mundane
 
 			endpoints[count++] = new EndpointData(
 				new Score(0, 0, 0, ushort.MaxValue),
-				this.notFoundHandler,
+				notFoundHandler,
 				0,
 				true,
 				Array.Empty<RouteSegment>());
@@ -541,7 +467,7 @@ namespace Mundane
 			string method,
 			string route,
 			T endpoint,
-			CreateEndpointDelegate<T> createEndpoint)
+			CreateEndpoint<T> createEndpoint)
 			where T : Delegate
 		{
 			if (route == null)
@@ -573,7 +499,7 @@ namespace Mundane
 			string method,
 			string route,
 			T endpoint,
-			CreateEndpointDelegate<T> createEndpoint)
+			CreateEndpoint<T> createEndpoint)
 			where T : Delegate
 		{
 			if (method == null)

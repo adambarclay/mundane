@@ -29,11 +29,37 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
 
-			var routeConfiguration = new RouteConfiguration(MundaneEndpoint.Create(this.DefaultNotFoundResponse));
+			var routeConfiguration = new RouteConfiguration();
 
 			routeConfigurationBuilder.Invoke(routeConfiguration);
 
-			(this.lookup, this.endpoints) = routeConfiguration.Build();
+			(this.lookup, this.endpoints) =
+				routeConfiguration.Build(MundaneEndpoint.Create(this.DefaultNotFoundResponse));
+		}
+
+		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
+		/// <param name="routeConfigurationBuilder">The route configuration builder.</param>
+		/// <param name="notFoundEndpoint">The endpoint to execute when the request path is not matched to any route.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
+		public Routing(
+			[DisallowNull] RouteConfigurationBuilder routeConfigurationBuilder,
+			[DisallowNull] MundaneEndpointDelegate notFoundEndpoint)
+		{
+			if (routeConfigurationBuilder == null)
+			{
+				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
+			}
+
+			if (notFoundEndpoint == null)
+			{
+				throw new ArgumentNullException(nameof(notFoundEndpoint));
+			}
+
+			var routeConfiguration = new RouteConfiguration();
+
+			routeConfigurationBuilder.Invoke(routeConfiguration);
+
+			(this.lookup, this.endpoints) = routeConfiguration.Build(notFoundEndpoint);
 		}
 
 		/// <summary>Gets the HTTP methods by which a path can be accessed.</summary>

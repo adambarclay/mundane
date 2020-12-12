@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -13,21 +14,18 @@ namespace Mundane.Tests.Tests_Routing
 		{
 			var path = "/" + Guid.NewGuid();
 
+			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var message = Guid.NewGuid().ToString();
 
 			var routing = new Routing(
-				o =>
-				{
-					o.NotFound(() => Response.NotFound(x => x.Write(message)));
-
-					o.Get("/" + Guid.NewGuid(), () => Response.Ok(x => x.Write(Guid.NewGuid().ToString())));
-				});
+				o => o.Get("/" + Guid.NewGuid(), () => Response.Ok(x => x.Write(Guid.NewGuid().ToString()))),
+				MundaneEndpoint.Create(() => new Response(statusCode, x => x.Write(message))));
 
 			var response = await MundaneEngine.ExecuteRequest(
 				routing.FindEndpoint(HttpMethod.Get, path).Endpoint,
 				RequestHelper.Request(HttpMethod.Get, path));
 
-			Assert.Equal(404, response.StatusCode);
+			Assert.Equal(statusCode, response.StatusCode);
 			Assert.Equal(message, await ResponseHelper.Body(response));
 		}
 	}

@@ -9,7 +9,7 @@ namespace Mundane
 {
 	/// <summary>The route configuration delegate.</summary>
 	/// <param name="routeConfiguration">Configures routes for <see cref="Routing"/>.</param>
-	public delegate void RouteConfigurationDelegate([DisallowNull] RouteConfiguration routeConfiguration);
+	public delegate void RouteConfigurationBuilder([DisallowNull] RouteConfiguration routeConfiguration);
 
 	/// <summary>The Mundane engine routing configuration.</summary>
 	public sealed class Routing
@@ -20,20 +20,20 @@ namespace Mundane
 		private readonly Dictionary<string, RouteNode[]> lookup;
 
 		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
-		/// <param name="routeConfiguration">The route configuration delegate.</param>
-		/// <exception cref="ArgumentNullException"><paramref name="routeConfiguration"/> is <see langword="null"/>.</exception>
-		public Routing([DisallowNull] RouteConfigurationDelegate routeConfiguration)
+		/// <param name="routeConfigurationBuilder">The route configuration builder.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> is <see langword="null"/>.</exception>
+		public Routing([DisallowNull] RouteConfigurationBuilder routeConfigurationBuilder)
 		{
-			if (routeConfiguration == null)
+			if (routeConfigurationBuilder == null)
 			{
-				throw new ArgumentNullException(nameof(routeConfiguration));
+				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
 
-			var routes = new RouteConfiguration(MundaneEndpoint.Create(this.DefaultNotFoundResponse));
+			var routeConfiguration = new RouteConfiguration(MundaneEndpoint.Create(this.DefaultNotFoundResponse));
 
-			routeConfiguration.Invoke(routes);
+			routeConfigurationBuilder.Invoke(routeConfiguration);
 
-			(this.lookup, this.endpoints) = routes.Build();
+			(this.lookup, this.endpoints) = routeConfiguration.Build();
 		}
 
 		/// <summary>Gets the HTTP methods by which a path can be accessed.</summary>

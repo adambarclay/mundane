@@ -8,11 +8,11 @@ namespace Mundane.Tests.Tests_Routing
 	public static class Constructor_Throws_ArgumentNullException
 	{
 		[Fact]
-		public static void When_The_RouteConfiguration_Parameter_Is_Null()
+		public static void When_The_RouteConfigurationBuilder_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(() => new Routing(null!));
 
-			Assert.Equal("routeConfiguration", exception.ParamName);
+			Assert.Equal("routeConfigurationBuilder", exception.ParamName);
 		}
 	}
 }

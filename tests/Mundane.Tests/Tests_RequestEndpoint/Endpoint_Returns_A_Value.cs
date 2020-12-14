@@ -10,7 +10,7 @@ namespace Mundane.Tests.Tests_RequestEndpoint
 		[Fact]
 		public static void Which_Was_Passed_To_The_Constructor()
 		{
-			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
 
 			var routing = new Routing(o => o.Get("/", endpoint));
 

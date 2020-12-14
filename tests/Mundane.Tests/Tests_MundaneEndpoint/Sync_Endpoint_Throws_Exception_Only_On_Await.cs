@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xunit;
@@ -29,7 +29,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 			const string message = "Custom Exception";
 
 			var endpoint = MundaneEndpoint.Create(
-				(MundaneEndpointDelegateSync)(request => throw new InvalidOperationException(message)));
+				(MundaneEndpointDelegateSync)(_ => throw new InvalidOperationException(message)));
 
 			var task = endpoint.Invoke(RequestHelper.Request());
 

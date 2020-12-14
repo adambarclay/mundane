@@ -39,7 +39,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(endpoint));
 			}
 
-			return request =>
+			return _ =>
 			{
 				try
 				{
@@ -89,7 +89,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(endpoint));
 			}
 
-			return request => endpoint();
+			return _ => endpoint();
 		}
 
 		/// <summary>Creates a Mundane endpoint delegate from an asynchronous delegate which receives the current request.</summary>

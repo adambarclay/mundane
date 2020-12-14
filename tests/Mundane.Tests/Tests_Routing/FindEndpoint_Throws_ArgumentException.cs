@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_Routing
 		public static void When_The_Path_Does_Not_Begin_With_A_Forward_Slash()
 		{
 			var exception = Assert.ThrowsAny<ArgumentException>(
-				() => new Routing(o => { }).FindEndpoint(HttpMethod.Get, "path"));
+				() => new Routing(_ => { }).FindEndpoint(HttpMethod.Get, "path"));
 
 			Assert.Equal("path", exception.ParamName!);
 
@@ -25,7 +25,7 @@ namespace Mundane.Tests.Tests_Routing
 		public static void When_The_Path_Is_Empty()
 		{
 			var exception = Assert.ThrowsAny<ArgumentException>(
-				() => new Routing(o => { }).FindEndpoint(HttpMethod.Get, string.Empty));
+				() => new Routing(_ => { }).FindEndpoint(HttpMethod.Get, string.Empty));
 
 			Assert.Equal("path", exception.ParamName!);
 

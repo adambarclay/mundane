@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 		{
 			var value = Validator.Validate(validator => validator.Value(Guid.NewGuid().ToString())).Model;
 
-			var exception = Assert.ThrowsAny<ArgumentNullException>(() => value.Validate(x => true, null!));
+			var exception = Assert.ThrowsAny<ArgumentNullException>(() => value.Validate(_ => true, null!));
 
 			Assert.Equal("errorMessage", exception.ParamName!);
 		}

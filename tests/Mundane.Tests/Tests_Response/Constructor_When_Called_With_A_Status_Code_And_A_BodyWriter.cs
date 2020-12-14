@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_Response
 		{
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					() => new Response(RandomNumberGenerator.GetInt32(0, int.MaxValue), o => ValueTask.CompletedTask)),
+					() => new Response(RandomNumberGenerator.GetInt32(0, int.MaxValue), _ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Empty(response.Headers);
@@ -39,7 +39,7 @@ namespace Mundane.Tests.Tests_Response
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => new Response(statusCode, o => ValueTask.CompletedTask)),
+				MundaneEndpoint.Create(() => new Response(statusCode, _ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Equal(statusCode, response.StatusCode);

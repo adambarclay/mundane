@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 		public static void When_Validation_Succeeds()
 		{
 			var validatedValue = Validator.Validate(
-				validator => validator.Value(Guid.NewGuid().ToString()).Validate(x => true, "Error Message"));
+				validator => validator.Value(Guid.NewGuid().ToString()).Validate(_ => true, "Error Message"));
 
 			Assert.Empty(validatedValue.Model.ErrorMessages);
 		}

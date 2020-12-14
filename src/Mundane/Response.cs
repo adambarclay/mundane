@@ -13,7 +13,7 @@ namespace Mundane
 	/// <summary>The HTTP response.</summary>
 	public sealed class Response
 	{
-		private static readonly BodyWriter EmptyBody = stream => ValueTask.CompletedTask;
+		private static readonly BodyWriter EmptyBody = _ => ValueTask.CompletedTask;
 
 		private readonly BodyWriter bodyWriter;
 		private readonly List<HeaderValue> headers;

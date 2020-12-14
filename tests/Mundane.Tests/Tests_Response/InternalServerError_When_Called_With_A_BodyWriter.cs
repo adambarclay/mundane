@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Adds_The_Content_Type_Header_For_Html()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.InternalServerError(o => ValueTask.CompletedTask)),
+				MundaneEndpoint.Create(() => Response.InternalServerError(_ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);
@@ -37,7 +37,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_Status_Code_To_500()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.InternalServerError(o => ValueTask.CompletedTask)),
+				MundaneEndpoint.Create(() => Response.InternalServerError(_ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Equal(500, response.StatusCode);

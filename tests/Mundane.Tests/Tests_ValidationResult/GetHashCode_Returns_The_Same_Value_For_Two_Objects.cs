@@ -12,8 +12,8 @@ namespace Mundane.Tests.Tests_ValidationResult
 		{
 			var value = Guid.NewGuid().ToString();
 
-			var first = Validator.Validate(validator => value);
-			var second = Validator.Validate(validator => value);
+			var first = Validator.Validate(_ => value);
+			var second = Validator.Validate(_ => value);
 
 			Assert.Equal(first.GetHashCode(), second.GetHashCode());
 		}

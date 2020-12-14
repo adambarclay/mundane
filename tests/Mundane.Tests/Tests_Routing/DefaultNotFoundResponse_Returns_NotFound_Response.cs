@@ -10,7 +10,7 @@ namespace Mundane.Tests.Tests_Routing
 		[Fact]
 		public static async Task When_The_Route_Does_Not_Exist_For_Any_Method()
 		{
-			var routing = new Routing(o => { });
+			var routing = new Routing(_ => { });
 
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(routing.DefaultNotFoundResponse),

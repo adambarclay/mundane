@@ -53,11 +53,11 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		public static void When_The_Method_Parameter_Is_Null()
 		{
 			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
-			var endpointSync = (MundaneEndpointDelegateSync)(r => Response.Ok());
+			var endpointSync = (MundaneEndpointDelegateSync)(_ => Response.Ok());
 
 			var noParameters = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
 
-			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
 
 			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{
@@ -76,9 +76,9 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		public static void When_The_Route_Parameter_Is_Null()
 		{
 			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
-			var endpointSync = (MundaneEndpointDelegateSync)(r => Response.Ok());
+			var endpointSync = (MundaneEndpointDelegateSync)(_ => Response.Ok());
 			var noParameters = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
-			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
 
 			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{

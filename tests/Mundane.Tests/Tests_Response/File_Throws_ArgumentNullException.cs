@@ -26,12 +26,12 @@ namespace Mundane.Tests.Tests_Response
 		public static void When_The_ContentType_Parameter_Is_Null()
 		{
 			var exception1 = Assert.ThrowsAny<ArgumentNullException>(
-				() => Response.File(o => ValueTask.CompletedTask, null!));
+				() => Response.File(_ => ValueTask.CompletedTask, null!));
 
 			Assert.Equal("contentType", exception1.ParamName!);
 
 			var exception2 = Assert.ThrowsAny<ArgumentNullException>(
-				() => Response.File(o => ValueTask.CompletedTask, null!, Guid.NewGuid().ToString()));
+				() => Response.File(_ => ValueTask.CompletedTask, null!, Guid.NewGuid().ToString()));
 
 			Assert.Equal("contentType", exception2.ParamName!);
 		}
@@ -40,7 +40,7 @@ namespace Mundane.Tests.Tests_Response
 		public static void When_The_FileName_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => Response.File(o => ValueTask.CompletedTask, Guid.NewGuid().ToString(), null!));
+				() => Response.File(_ => ValueTask.CompletedTask, Guid.NewGuid().ToString(), null!));
 
 			Assert.Equal("fileName", exception.ParamName!);
 		}

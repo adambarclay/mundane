@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_ValidationResult
 		{
 			var value = Guid.NewGuid().ToString();
 
-			var first = Validator.Validate(validator => value);
+			var first = Validator.Validate(_ => value);
 
 			var second = new
 			{
@@ -26,8 +26,8 @@ namespace Mundane.Tests.Tests_ValidationResult
 		[Fact]
 		public static void When_The_Values_Are_Different()
 		{
-			var first = Validator.Validate(validator => Guid.NewGuid().ToString());
-			var second = Validator.Validate(validator => Guid.NewGuid().ToString());
+			var first = Validator.Validate(_ => Guid.NewGuid().ToString());
+			var second = Validator.Validate(_ => Guid.NewGuid().ToString());
 
 			Assert.False(first.Equals((object)second));
 		}

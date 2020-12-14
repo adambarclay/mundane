@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_Routing
 		public static void When_The_Method_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => new Routing(o => { }).FindEndpoint(null!, "/"));
+				() => new Routing(_ => { }).FindEndpoint(null!, "/"));
 
 			Assert.Equal("method", exception.ParamName!);
 		}
@@ -20,7 +20,7 @@ namespace Mundane.Tests.Tests_Routing
 		public static void When_The_Path_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => new Routing(o => { }).FindEndpoint(HttpMethod.Get, null!));
+				() => new Routing(_ => { }).FindEndpoint(HttpMethod.Get, null!));
 
 			Assert.Equal("path", exception.ParamName!);
 		}

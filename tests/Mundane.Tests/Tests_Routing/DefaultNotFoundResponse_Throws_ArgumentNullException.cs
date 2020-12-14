@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_Routing
 		public static void When_The_Request_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => new Routing(o => { }).DefaultNotFoundResponse(null!));
+				() => new Routing(_ => { }).DefaultNotFoundResponse(null!));
 
 			Assert.Equal("request", exception.ParamName!);
 		}

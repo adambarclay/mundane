@@ -32,7 +32,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(dependency));
 			}
 
-			this.CreateDependencyAction = request => dependency;
+			this.CreateDependencyAction = _ => dependency;
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="Dependency{T}"/> class.</summary>
@@ -46,7 +46,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(createDependency));
 			}
 
-			this.CreateDependencyAction = request => createDependency();
+			this.CreateDependencyAction = _ => createDependency();
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="Dependency{T}"/> class.</summary>

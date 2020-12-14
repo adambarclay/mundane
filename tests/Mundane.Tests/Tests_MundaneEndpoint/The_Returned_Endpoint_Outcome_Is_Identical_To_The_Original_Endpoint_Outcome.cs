@@ -18,7 +18,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					r =>
+					_ =>
 					{
 						output = input;
 
@@ -81,7 +81,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
-					r =>
+					_ =>
 					{
 						output = input;
 

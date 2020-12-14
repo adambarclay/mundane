@@ -16,7 +16,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 			var response = await MundaneEngine.ExecuteRequest(
 				MundaneEndpoint.Create(
 					() => Response.Ok(
-						o =>
+						_ =>
 						{
 							bodyGenerationHasRun = true;
 

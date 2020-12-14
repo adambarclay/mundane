@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 		public static async Task When_The_ErrorMessage_Parameter_Is_Null()
 		{
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await ValueTask.FromResult((Validated<string>)string.Empty).Validate(value => true, null!));
+				async () => await ValueTask.FromResult((Validated<string>)string.Empty).Validate(_ => true, null!));
 
 			Assert.Equal("errorMessage", exception.ParamName!);
 		}

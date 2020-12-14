@@ -12,9 +12,9 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		public static void When_The_Method_Parameter_Is_Empty()
 		{
 			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
-			var endpointSync = (MundaneEndpointDelegateSync)(r => Response.Ok());
+			var endpointSync = (MundaneEndpointDelegateSync)(_ => Response.Ok());
 			var noParams = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
-			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
 
 			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{
@@ -38,9 +38,9 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		public static void When_The_Route_Parameter_Does_Not_Begin_With_A_Forward_Slash(string route)
 		{
 			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
-			var endpointSync = (MundaneEndpointDelegateSync)(r => Response.Ok());
+			var endpointSync = (MundaneEndpointDelegateSync)(_ => Response.Ok());
 			var noParameters = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
-			var endpoint = (MundaneEndpointDelegate)(r => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
 
 			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{

@@ -9,8 +9,7 @@ namespace Mundane.Tests.Tests_Validator
 		[Fact]
 		public static void When_The_Validation_Returns_Null()
 		{
-			var exception = Assert.ThrowsAny<ValidationReturnedNull>(
-				() => Validator.Validate(validator => (object)null!));
+			var exception = Assert.ThrowsAny<ValidationReturnedNull>(() => Validator.Validate(_ => (object)null!));
 
 			Assert.Equal("The validation returned null.", exception.Message);
 		}

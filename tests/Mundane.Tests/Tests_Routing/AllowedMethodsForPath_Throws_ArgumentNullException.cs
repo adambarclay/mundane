@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_Routing
 		public static void When_The_Path_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => new Routing(o => { }).AllowedMethodsForPath(null!));
+				() => new Routing(_ => { }).AllowedMethodsForPath(null!));
 
 			Assert.Equal("path", exception.ParamName!);
 		}

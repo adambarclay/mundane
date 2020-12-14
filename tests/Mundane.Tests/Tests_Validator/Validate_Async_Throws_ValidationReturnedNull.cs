@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_Validator
 		public static async Task When_The_Validation_Returns_Null()
 		{
 			var exception = await Assert.ThrowsAnyAsync<ValidationReturnedNull>(
-				async () => await Validator.Validate(validator => ValueTask.FromResult((object)null!)));
+				async () => await Validator.Validate(_ => ValueTask.FromResult((object)null!)));
 
 			Assert.Equal("The validation returned null.", exception.Message);
 		}

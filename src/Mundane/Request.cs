@@ -210,11 +210,19 @@ namespace Mundane
 		/// <summary>Returns an instance of the dependency registered for the requested type <typeparamref name="T"/>.</summary>
 		/// <typeparam name="T">The type of the dependency.</typeparam>
 		/// <returns>An instance of the dependency registered for the requested type <typeparamref name="T"/>.</returns>
+		/// <exception cref="DependencyNotFound">No concrete type has been registered for the requested dependency type.</exception>
 		[return: NotNull]
 		public T Dependency<T>()
 			where T : notnull
 		{
-			return this.dependencyFinder.Find<T>(this);
+			var dependency = this.dependencyFinder.Find<T>(this);
+
+			if (dependency == null)
+			{
+				throw new DependencyNotFound(typeof(T));
+			}
+
+			return dependency;
 		}
 
 		/// <summary>Gets the uploaded file with the specified parameter name.</summary>

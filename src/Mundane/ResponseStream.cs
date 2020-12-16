@@ -29,51 +29,51 @@ namespace Mundane
 
 		/// <summary>Flushes the response stream.</summary>
 		/// <returns>A task that represents the asynchronous operation.</returns>
-		public async ValueTask Flush()
+		public ValueTask Flush()
 		{
-			await this.Stream.FlushAsync(this.Request.RequestAborted);
+			return new ValueTask(this.Stream.FlushAsync(this.Request.RequestAborted));
 		}
 
 		/// <summary>Writes a string to the response stream, encoding as UTF-8.</summary>
 		/// <param name="value">The string to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		public async ValueTask Write([DisallowNull] string value)
+		public ValueTask Write([DisallowNull] string value)
 		{
 			if (value == null)
 			{
-				throw new ArgumentNullException(nameof(value));
+				return ValueTask.FromException(new ArgumentNullException(nameof(value)));
 			}
 
-			await this.Stream.WriteAsync(Encoding.UTF8.GetBytes(value), this.Request.RequestAborted);
+			return this.Stream.WriteAsync(Encoding.UTF8.GetBytes(value), this.Request.RequestAborted);
 		}
 
 		/// <summary>Writes a byte array to the response stream.</summary>
 		/// <param name="value">The byte array to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		public async ValueTask Write([DisallowNull] byte[] value)
+		public ValueTask Write([DisallowNull] byte[] value)
 		{
 			if (value == null)
 			{
-				throw new ArgumentNullException(nameof(value));
+				return ValueTask.FromException(new ArgumentNullException(nameof(value)));
 			}
 
-			await this.Stream.WriteAsync(value, this.Request.RequestAborted);
+			return this.Stream.WriteAsync(value, this.Request.RequestAborted);
 		}
 
 		/// <summary>Writes a stream to the response stream.</summary>
 		/// <param name="value">The stream to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		public async ValueTask Write([DisallowNull] Stream value)
+		public ValueTask Write([DisallowNull] Stream value)
 		{
 			if (value == null)
 			{
-				throw new ArgumentNullException(nameof(value));
+				return ValueTask.FromException(new ArgumentNullException(nameof(value)));
 			}
 
-			await value.CopyToAsync(this.Stream, this.Request.RequestAborted);
+			return new ValueTask(value.CopyToAsync(this.Stream, this.Request.RequestAborted));
 		}
 	}
 }

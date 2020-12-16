@@ -85,14 +85,14 @@ namespace Mundane
 		/// <param name="stream">The response stream.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="stream"/> is <see langword="null"/>.</exception>
-		public async ValueTask WriteBodyToStream([DisallowNull] Stream stream)
+		public ValueTask WriteBodyToStream([DisallowNull] Stream stream)
 		{
 			if (stream == null)
 			{
-				throw new ArgumentNullException(nameof(stream));
+				return ValueTask.FromException(new ArgumentNullException(nameof(stream)));
 			}
 
-			await this.bodyWriter.Invoke(new ResponseStream(this.request, stream));
+			return this.bodyWriter.Invoke(new ResponseStream(this.request, stream));
 		}
 	}
 }

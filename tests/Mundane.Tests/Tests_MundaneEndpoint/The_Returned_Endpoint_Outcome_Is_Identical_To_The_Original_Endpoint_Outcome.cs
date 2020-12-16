@@ -10,7 +10,7 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 	public static class The_Returned_Endpoint_Outcome_Is_Identical_To_The_Original_Endpoint_Outcome
 	{
 		[Fact]
-		public static async ValueTask When_Creating_From_A_MundaneEndpointDelegate()
+		public static async Task When_Creating_From_A_MundaneEndpointDelegate()
 		{
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();

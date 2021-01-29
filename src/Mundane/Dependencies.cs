@@ -59,7 +59,7 @@ namespace Mundane
 				throw new DependencyNotFound(typeof(T));
 			}
 
-			return ((Dependency<T>)dependency).CreateDependencyAction(request);
+			return ((Dependency<T>)dependency).CreateDependency(request);
 		}
 	}
 }

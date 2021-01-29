@@ -8,13 +8,13 @@ namespace Mundane
 	/// <param name="request">The current request.</param>
 	/// <returns>An instance of the dependency registered for the requested type <typeparamref name="T"/>.</returns>
 	[return: NotNull]
-	public delegate T CreateDependencyDelegate<out T>([DisallowNull] Request request);
+	public delegate T CreateDependency<out T>([DisallowNull] Request request);
 
 	/// <summary>The method for creating an object which fulfils the dependency receiving no parameters.</summary>
 	/// <typeparam name="T">The type of the dependency.</typeparam>
 	/// <returns>An instance of the dependency registered for the requested type <typeparamref name="T"/>.</returns>
 	[return: NotNull]
-	public delegate T CreateDependencyDelegateNoParameters<out T>();
+	public delegate T CreateDependencyNoParameters<out T>();
 
 	/// <summary>Contains a method for creating an object which fulfils a dependency.</summary>
 	/// <typeparam name="T">The type of the dependency.</typeparam>
@@ -32,13 +32,13 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(dependency));
 			}
 
-			this.CreateDependencyAction = _ => dependency;
+			this.CreateDependency = _ => dependency;
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="Dependency{T}"/> class.</summary>
 		/// <param name="createDependency">The method for creating an object which fulfils the dependency.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="createDependency"/> is <see langword="null"/>.</exception>
-		public Dependency([DisallowNull] CreateDependencyDelegateNoParameters<T> createDependency)
+		public Dependency([DisallowNull] CreateDependencyNoParameters<T> createDependency)
 			: base(typeof(T))
 		{
 			if (createDependency == null)
@@ -46,13 +46,13 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(createDependency));
 			}
 
-			this.CreateDependencyAction = _ => createDependency();
+			this.CreateDependency = _ => createDependency();
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="Dependency{T}"/> class.</summary>
 		/// <param name="createDependency">The method for creating an object which fulfils the dependency.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="createDependency"/> is <see langword="null"/>.</exception>
-		public Dependency([DisallowNull] CreateDependencyDelegate<T> createDependency)
+		public Dependency([DisallowNull] CreateDependency<T> createDependency)
 			: base(typeof(T))
 		{
 			if (createDependency == null)
@@ -60,9 +60,9 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(createDependency));
 			}
 
-			this.CreateDependencyAction = createDependency;
+			this.CreateDependency = createDependency;
 		}
 
-		internal CreateDependencyDelegate<T> CreateDependencyAction { get; }
+		internal CreateDependency<T> CreateDependency { get; }
 	}
 }

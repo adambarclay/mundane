@@ -19,7 +19,7 @@ namespace Mundane.Tests.Tests_DependencyT
 		public static void When_The_No_Parameters_CreateDependency_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => new Dependency<object>((null as CreateDependencyDelegateNoParameters<object>)!));
+				() => new Dependency<object>((null as CreateDependencyNoParameters<object>)!));
 
 			Assert.Equal("createDependency", exception.ParamName!);
 		}
@@ -28,7 +28,7 @@ namespace Mundane.Tests.Tests_DependencyT
 		public static void When_The_Request_CreateDependency_Parameter_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => new Dependency<object>((null as CreateDependencyDelegate<object>)!));
+				() => new Dependency<object>((null as CreateDependency<object>)!));
 
 			Assert.Equal("createDependency", exception.ParamName!);
 		}

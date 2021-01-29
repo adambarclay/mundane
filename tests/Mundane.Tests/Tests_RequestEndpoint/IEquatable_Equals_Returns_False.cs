@@ -26,7 +26,7 @@ namespace Mundane.Tests.Tests_RequestEndpoint
 		[Fact]
 		public static void When_The_Objects_Have_The_Same_Endpoint_But_Different_Parameters()
 		{
-			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpoint)(_ => ValueTask.FromResult(Response.Ok()));
 
 			var routing = new Routing(
 				o =>

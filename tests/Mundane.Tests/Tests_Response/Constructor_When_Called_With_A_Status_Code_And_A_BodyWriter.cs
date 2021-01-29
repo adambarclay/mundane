@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Does_Not_Set_Any_Headers()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(RandomNumberGenerator.GetInt32(0, int.MaxValue), _ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
@@ -26,7 +26,7 @@ namespace Mundane.Tests.Tests_Response
 			var output = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(RandomNumberGenerator.GetInt32(0, int.MaxValue), o => o.Write(output))),
 				RequestHelper.Request(HttpMethod.Get, "/"));
 
@@ -39,7 +39,7 @@ namespace Mundane.Tests.Tests_Response
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => new Response(statusCode, _ => ValueTask.CompletedTask)),
+				MundaneEndpointFactory.Create(() => new Response(statusCode, _ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Equal(statusCode, response.StatusCode);

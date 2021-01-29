@@ -3,20 +3,20 @@ namespace Mundane.RoutingImplementation.Lookup
 	internal readonly struct EndpointData
 	{
 		internal readonly bool CaptureTrailingSlash;
-		internal readonly MundaneEndpointDelegate EndpointDelegate;
+		internal readonly MundaneEndpoint Endpoint;
 		internal readonly RouteSegment[] NodesInRoute;
 		internal readonly int NumberOfCaptureParameters;
 		internal readonly Score Score;
 
 		internal EndpointData(
 			in Score score,
-			MundaneEndpointDelegate endpointDelegate,
+			MundaneEndpoint endpoint,
 			int numberOfCaptureParameters,
 			bool captureTrailingSlash,
 			RouteSegment[] nodesInRoute)
 		{
 			this.Score = score;
-			this.EndpointDelegate = endpointDelegate;
+			this.Endpoint = endpoint;
 			this.NumberOfCaptureParameters = numberOfCaptureParameters;
 			this.NodesInRoute = nodesInRoute;
 			this.CaptureTrailingSlash = captureTrailingSlash;

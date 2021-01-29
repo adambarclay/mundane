@@ -19,7 +19,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			};
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.Ok().AddHeader(headers[0]).AddHeader(headers[1]).AddHeader(headers[2])),
 				RequestHelper.Request());
 

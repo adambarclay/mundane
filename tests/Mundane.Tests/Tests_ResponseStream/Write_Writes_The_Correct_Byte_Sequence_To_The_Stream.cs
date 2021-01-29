@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 			const string expected = "Test String";
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Ok(o => o.Write(Encoding.UTF8.GetBytes(expected)))),
+				MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write(Encoding.UTF8.GetBytes(expected)))),
 				RequestHelper.Request());
 
 			Assert.Equal(expected, await ResponseHelper.Body(response));
@@ -27,7 +27,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 			const string expected = "Test String";
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.Ok(
 						async o =>
 						{
@@ -47,7 +47,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 			const string expected = "Test String";
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Ok(o => o.Write(expected))),
+				MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write(expected))),
 				RequestHelper.Request());
 
 			Assert.Equal(expected, await ResponseHelper.Body(response));

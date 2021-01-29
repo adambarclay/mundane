@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Does_Not_Set_Any_Headers()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(Response.BadRequest),
+				MundaneEndpointFactory.Create(Response.BadRequest),
 				RequestHelper.Request());
 
 			Assert.Empty(response.Headers);
@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_BodyWriter_To_Return_Empty()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(Response.BadRequest),
+				MundaneEndpointFactory.Create(Response.BadRequest),
 				RequestHelper.Request(HttpMethod.Get, "/"));
 
 			Assert.Equal(string.Empty, await ResponseHelper.Body(response));
@@ -31,7 +31,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_Status_Code_To_400()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(Response.BadRequest),
+				MundaneEndpointFactory.Create(Response.BadRequest),
 				RequestHelper.Request());
 
 			Assert.Equal(400, response.StatusCode);

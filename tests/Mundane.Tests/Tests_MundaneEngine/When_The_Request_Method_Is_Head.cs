@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 			var bodyGenerationHasRun = false;
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.Ok(
 						_ =>
 						{
@@ -33,7 +33,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 		public static async Task The_Response_Body_Is_Empty()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Ok(o => o.Write(Guid.NewGuid().ToString()))),
+				MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write(Guid.NewGuid().ToString()))),
 				RequestHelper.Request(HttpMethod.Head, "/"));
 
 			Assert.Equal(string.Empty, await ResponseHelper.Body(response));

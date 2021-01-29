@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Adds_The_Content_Type_Header_For_Json()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.Json(RandomNumberGenerator.GetInt32(0, int.MaxValue), _ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
@@ -29,7 +29,7 @@ namespace Mundane.Tests.Tests_Response
 			var output = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.Json(RandomNumberGenerator.GetInt32(0, int.MaxValue), o => o.Write(output))),
 				RequestHelper.Request());
 
@@ -42,7 +42,7 @@ namespace Mundane.Tests.Tests_Response
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Json(statusCode, _ => ValueTask.CompletedTask)),
+				MundaneEndpointFactory.Create(() => Response.Json(statusCode, _ => ValueTask.CompletedTask)),
 				RequestHelper.Request());
 
 			Assert.Equal(statusCode, response.StatusCode);

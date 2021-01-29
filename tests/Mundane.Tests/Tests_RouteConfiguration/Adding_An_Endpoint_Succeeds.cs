@@ -13,13 +13,12 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		{
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 
-			var noParametersSync = (MundaneEndpointDelegateNoParametersSync)(() => new Response(statusCode));
-			var endpointSync = (MundaneEndpointDelegateSync)(_ => new Response(statusCode));
+			var noParametersSync = (MundaneEndpointNoParametersSync)(() => new Response(statusCode));
+			var endpointSync = (MundaneEndpointSync)(_ => new Response(statusCode));
 
-			var noParameters =
-				(MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(new Response(statusCode)));
+			var noParameters = (MundaneEndpointNoParameters)(() => ValueTask.FromResult(new Response(statusCode)));
 
-			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(new Response(statusCode)));
+			var endpoint = (MundaneEndpoint)(_ => ValueTask.FromResult(new Response(statusCode)));
 
 			static async Task Test(string method, RouteConfigurationBuilder routeConfigurationBuilder, int statusCode)
 			{

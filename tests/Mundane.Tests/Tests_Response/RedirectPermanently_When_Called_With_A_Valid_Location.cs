@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_Response
 			var location = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.RedirectPermanently(location)),
+				MundaneEndpointFactory.Create(() => Response.RedirectPermanently(location)),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);
@@ -26,7 +26,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_Status_Code_To_301()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.RedirectPermanently("http://example.com")),
+				MundaneEndpointFactory.Create(() => Response.RedirectPermanently("http://example.com")),
 				RequestHelper.Request());
 
 			Assert.Equal(301, response.StatusCode);

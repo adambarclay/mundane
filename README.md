@@ -175,7 +175,7 @@ Endpoints are added to the `Routing` configuration using `RouteConfiguration`. T
             routeConfiguration.Put("/put", request => ValueTask.FromResult(Response.Ok());
             routeConfiguration.Endpoint("PATCH", "/patch", PatchController.Patch);
         },
-        MundaneEndpoint.Create(NotFoundController.NotFound));
+        MundaneEndpointFactory.Create(NotFoundController.NotFound));
 ```
 
 ### Routes

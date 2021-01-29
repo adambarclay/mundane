@@ -16,7 +16,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 			Request? actual = null;
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.Ok(
 						o =>
 						{

@@ -12,7 +12,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 		{
 			var exception = await Assert.ThrowsAnyAsync<EndpointReturnedNull>(
 				async () => await MundaneEngine.ExecuteRequest(
-					MundaneEndpoint.Create(() => null!),
+					MundaneEndpointFactory.Create(() => null!),
 					RequestHelper.Request()));
 
 			Assert.Equal("The endpoint returned a null Response.", exception.Message);

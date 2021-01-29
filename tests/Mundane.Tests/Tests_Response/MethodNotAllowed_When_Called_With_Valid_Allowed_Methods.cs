@@ -18,7 +18,7 @@ namespace Mundane.Tests.Tests_Response
 			};
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.MethodNotAllowed(allowedMethods)),
+				MundaneEndpointFactory.Create(() => Response.MethodNotAllowed(allowedMethods)),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);
@@ -30,7 +30,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_Status_Code_To_405()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.MethodNotAllowed(
 						new[] { Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString() })),
 				RequestHelper.Request());

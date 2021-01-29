@@ -19,7 +19,7 @@ namespace Mundane.Tests.Tests_Routing
 
 			var routing = new Routing(
 				o => o.Get("/" + Guid.NewGuid(), () => Response.Ok(x => x.Write(Guid.NewGuid().ToString()))),
-				MundaneEndpoint.Create(() => new Response(statusCode, x => x.Write(message))));
+				MundaneEndpointFactory.Create(() => new Response(statusCode, x => x.Write(message))));
 
 			var response = await MundaneEngine.ExecuteRequest(
 				routing.FindEndpoint(HttpMethod.Get, path).Endpoint,

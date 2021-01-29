@@ -17,7 +17,7 @@ namespace Mundane.RoutingImplementation.Build
 
 		internal int NumberOfEndpoints { get; private set; }
 
-		internal void AddRoute(string route, MundaneEndpointDelegate endpoint)
+		internal void AddRoute(string route, MundaneEndpoint endpoint)
 		{
 			++this.NumberOfEndpoints;
 
@@ -103,7 +103,7 @@ namespace Mundane.RoutingImplementation.Build
 				{
 					node.EndpointIndex = endpointCount;
 
-					endpoints[endpointCount++] = node.Endpoint;
+					endpoints[endpointCount++] = node.EndpointData;
 				}
 			}
 

@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_MundaneEndpoint
+namespace Mundane.Tests.Tests_MundaneEndpointFactory
 {
 	[ExcludeFromCodeCoverage]
 	public static class Sync_Endpoint_Throws_Exception_Only_On_Await
@@ -13,8 +13,8 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		{
 			const string message = "Custom Exception";
 
-			var endpoint = MundaneEndpoint.Create(
-				(MundaneEndpointDelegateNoParametersSync)(() => throw new InvalidOperationException(message)));
+			var endpoint = MundaneEndpointFactory.Create(
+				(MundaneEndpointNoParametersSync)(() => throw new InvalidOperationException(message)));
 
 			var task = endpoint.Invoke(RequestHelper.Request());
 
@@ -28,8 +28,8 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		{
 			const string message = "Custom Exception";
 
-			var endpoint = MundaneEndpoint.Create(
-				(MundaneEndpointDelegateSync)(_ => throw new InvalidOperationException(message)));
+			var endpoint = MundaneEndpointFactory.Create(
+				(MundaneEndpointSync)(_ => throw new InvalidOperationException(message)));
 
 			var task = endpoint.Invoke(RequestHelper.Request());
 

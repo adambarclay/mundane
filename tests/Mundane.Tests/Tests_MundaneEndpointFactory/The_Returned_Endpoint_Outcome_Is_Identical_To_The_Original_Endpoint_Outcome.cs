@@ -4,20 +4,20 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_MundaneEndpoint
+namespace Mundane.Tests.Tests_MundaneEndpointFactory
 {
 	[ExcludeFromCodeCoverage]
 	public static class The_Returned_Endpoint_Outcome_Is_Identical_To_The_Original_Endpoint_Outcome
 	{
 		[Fact]
-		public static async Task When_Creating_From_A_MundaneEndpointDelegate()
+		public static async Task When_Creating_From_A_MundaneEndpoint()
 		{
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					_ =>
 					{
 						output = input;
@@ -31,14 +31,14 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		}
 
 		[Fact]
-		public static async Task When_Creating_From_A_MundaneEndpointDelegateNoParameters()
+		public static async Task When_Creating_From_A_MundaneEndpointNoParameters()
 		{
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() =>
 					{
 						output = input;
@@ -52,14 +52,14 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		}
 
 		[Fact]
-		public static async Task When_Creating_From_A_MundaneEndpointDelegateNoParametersSync()
+		public static async Task When_Creating_From_A_MundaneEndpointNoParametersSync()
 		{
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() =>
 					{
 						output = input;
@@ -73,14 +73,14 @@ namespace Mundane.Tests.Tests_MundaneEndpoint
 		}
 
 		[Fact]
-		public static async Task When_Creating_From_A_MundaneEndpointDelegateSync()
+		public static async Task When_Creating_From_A_MundaneEndpointSync()
 		{
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 			var input = Guid.NewGuid();
 			var output = Guid.Empty;
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					_ =>
 					{
 						output = input;

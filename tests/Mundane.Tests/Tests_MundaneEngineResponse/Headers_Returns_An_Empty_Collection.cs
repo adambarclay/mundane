@@ -11,7 +11,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 		public static async Task When_No_Headers_Have_Been_Set()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(Response.Ok),
+				MundaneEndpointFactory.Create(Response.Ok),
 				RequestHelper.Request());
 
 			Assert.Empty(response.Headers);

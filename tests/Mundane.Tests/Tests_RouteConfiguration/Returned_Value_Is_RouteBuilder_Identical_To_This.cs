@@ -8,7 +8,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 	public static class Returned_Value_Is_RouteBuilder_Identical_To_This
 	{
 		[Fact]
-		public static void When_Delete_Is_Called_With_MundaneEndpointDelegate()
+		public static void When_Delete_Is_Called_With_MundaneEndpoint()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -24,7 +24,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Delete_Is_Called_With_MundaneEndpointDelegateNoParameters()
+		public static void When_Delete_Is_Called_With_MundaneEndpointNoParameters()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -40,7 +40,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Delete_Is_Called_With_MundaneEndpointDelegateNoParametersSync()
+		public static void When_Delete_Is_Called_With_MundaneEndpointNoParametersSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -56,7 +56,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Delete_Is_Called_With_MundaneEndpointDelegateSync()
+		public static void When_Delete_Is_Called_With_MundaneEndpointSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -72,7 +72,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Endpoint_Is_Called_With_MundaneEndpointDelegate()
+		public static void When_Endpoint_Is_Called_With_MundaneEndpoint()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -88,7 +88,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Endpoint_Is_Called_With_MundaneEndpointDelegateNoParameters()
+		public static void When_Endpoint_Is_Called_With_MundaneEndpointNoParameters()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -104,7 +104,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Endpoint_Is_Called_With_MundaneEndpointDelegateNoParametersSync()
+		public static void When_Endpoint_Is_Called_With_MundaneEndpointNoParametersSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -120,7 +120,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Endpoint_Is_Called_With_MundaneEndpointDelegateSync()
+		public static void When_Endpoint_Is_Called_With_MundaneEndpointSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -136,7 +136,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Get_Is_Called_With_MundaneEndpointDelegate()
+		public static void When_Get_Is_Called_With_MundaneEndpoint()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -152,7 +152,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Get_Is_Called_With_MundaneEndpointDelegateNoParameters()
+		public static void When_Get_Is_Called_With_MundaneEndpointNoParameters()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -168,7 +168,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Get_Is_Called_With_MundaneEndpointDelegateNoParametersSync()
+		public static void When_Get_Is_Called_With_MundaneEndpointNoParametersSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -184,7 +184,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Get_Is_Called_With_MundaneEndpointDelegateSync()
+		public static void When_Get_Is_Called_With_MundaneEndpointSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -200,7 +200,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Post_Is_Called_With_MundaneEndpointDelegate()
+		public static void When_Post_Is_Called_With_MundaneEndpoint()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -216,7 +216,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Post_Is_Called_With_MundaneEndpointDelegateNoParameters()
+		public static void When_Post_Is_Called_With_MundaneEndpointNoParameters()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -232,7 +232,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Post_Is_Called_With_MundaneEndpointDelegateNoParametersSync()
+		public static void When_Post_Is_Called_With_MundaneEndpointNoParametersSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -248,7 +248,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Post_Is_Called_With_MundaneEndpointDelegateSync()
+		public static void When_Post_Is_Called_With_MundaneEndpointSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -264,7 +264,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Put_Is_Called_With_MundaneEndpointDelegate()
+		public static void When_Put_Is_Called_With_MundaneEndpoint()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -280,7 +280,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Put_Is_Called_With_MundaneEndpointDelegateNoParameters()
+		public static void When_Put_Is_Called_With_MundaneEndpointNoParameters()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -296,7 +296,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Put_Is_Called_With_MundaneEndpointDelegateNoParametersSync()
+		public static void When_Put_Is_Called_With_MundaneEndpointNoParametersSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;
@@ -312,7 +312,7 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		}
 
 		[Fact]
-		public static void When_Put_Is_Called_With_MundaneEndpointDelegateSync()
+		public static void When_Put_Is_Called_With_MundaneEndpointSync()
 		{
 			RouteConfiguration expected = null!;
 			RouteConfiguration actual = null!;

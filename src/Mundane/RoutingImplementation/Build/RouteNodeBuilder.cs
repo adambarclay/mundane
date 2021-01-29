@@ -14,7 +14,7 @@ namespace Mundane.RoutingImplementation.Build
 
 		internal List<RouteNodeBuilder> Children { get; }
 
-		internal EndpointData Endpoint { get; private set; }
+		internal EndpointData EndpointData { get; private set; }
 
 		internal int EndpointIndex { get; set; }
 
@@ -52,14 +52,14 @@ namespace Mundane.RoutingImplementation.Build
 		internal void SetEndpoint(
 			string originalRoute,
 			in Score score,
-			MundaneEndpointDelegate endpoint,
+			MundaneEndpoint endpoint,
 			int numberOfCaptureParameters,
 			bool captureTrailingSlash,
 			RouteSegment[] nodesInRoute)
 		{
 			this.OriginalRoute = originalRoute;
 
-			this.Endpoint = new EndpointData(
+			this.EndpointData = new EndpointData(
 				in score,
 				endpoint,
 				numberOfCaptureParameters,

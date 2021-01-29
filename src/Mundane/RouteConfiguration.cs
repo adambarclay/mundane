@@ -16,7 +16,7 @@ namespace Mundane
 			this.lookupBuilder = new Dictionary<string, RouteNodeTreeBuilder>();
 		}
 
-		private delegate MundaneEndpointDelegate CreateEndpoint<in T>(T endpoint)
+		private delegate MundaneEndpoint CreateEndpoint<in T>(T endpoint)
 			where T : Delegate;
 
 		/// <summary>Adds an endpoint for the "DELETE" HTTP method.</summary>
@@ -28,11 +28,30 @@ namespace Mundane
 		[return: NotNull]
 		public RouteConfiguration Delete(
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParametersSync endpoint)
+			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpointFactory.Create);
+			}
+			catch (ArgumentException exception)
+			{
+				throw exception;
+			}
+		}
+
+		/// <summary>Adds an endpoint for the "DELETE" HTTP method.</summary>
+		/// <param name="route">The route URL which will trigger this endpoint.</param>
+		/// <param name="endpoint">The endpoint to execute.</param>
+		/// <returns>The Mundane engine routing configuration builder.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
+		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
+		[return: NotNull]
+		public RouteConfiguration Delete([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
+		{
+			try
+			{
+				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -49,11 +68,11 @@ namespace Mundane
 		[return: NotNull]
 		public RouteConfiguration Delete(
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateSync endpoint)
+			[DisallowNull] MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -68,32 +87,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Delete(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParameters endpoint)
+		public RouteConfiguration Delete([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
-			}
-			catch (ArgumentException exception)
-			{
-				throw exception;
-			}
-		}
-
-		/// <summary>Adds an endpoint for the "DELETE" HTTP method.</summary>
-		/// <param name="route">The route URL which will trigger this endpoint.</param>
-		/// <param name="endpoint">The endpoint to execute.</param>
-		/// <returns>The Mundane engine routing configuration builder.</returns>
-		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
-		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Delete([DisallowNull] string route, [DisallowNull] MundaneEndpointDelegate endpoint)
-		{
-			try
-			{
-				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Delete, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -112,11 +110,11 @@ namespace Mundane
 		public RouteConfiguration Endpoint(
 			[DisallowNull] string method,
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParametersSync endpoint)
+			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -135,11 +133,11 @@ namespace Mundane
 		public RouteConfiguration Endpoint(
 			[DisallowNull] string method,
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateSync endpoint)
+			[DisallowNull] MundaneEndpointSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -158,11 +156,11 @@ namespace Mundane
 		public RouteConfiguration Endpoint(
 			[DisallowNull] string method,
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParameters endpoint)
+			[DisallowNull] MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
-				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -181,11 +179,11 @@ namespace Mundane
 		public RouteConfiguration Endpoint(
 			[DisallowNull] string method,
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegate endpoint)
+			[DisallowNull] MundaneEndpoint endpoint)
 		{
 			try
 			{
-				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpointWithValidatedMethod(method, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -202,11 +200,11 @@ namespace Mundane
 		[return: NotNull]
 		public RouteConfiguration Get(
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParametersSync endpoint)
+			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -221,11 +219,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpointDelegateSync endpoint)
+		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -240,13 +238,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Get(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParameters endpoint)
+		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -261,11 +257,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpointDelegate endpoint)
+		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Get, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -282,11 +278,11 @@ namespace Mundane
 		[return: NotNull]
 		public RouteConfiguration Post(
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParametersSync endpoint)
+			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -301,11 +297,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpointDelegateSync endpoint)
+		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -320,13 +316,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Post(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParameters endpoint)
+		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -341,11 +335,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpointDelegate endpoint)
+		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Post, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -362,11 +356,11 @@ namespace Mundane
 		[return: NotNull]
 		public RouteConfiguration Put(
 			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParametersSync endpoint)
+			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -381,11 +375,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpointDelegateSync endpoint)
+		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -400,13 +394,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Put(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointDelegateNoParameters endpoint)
+		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -421,11 +413,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
 		[return: NotNull]
-		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpointDelegate endpoint)
+		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
 		{
 			try
 			{
-				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpoint.Create);
+				return this.AddEndpoint(HttpMethod.Put, route, endpoint, MundaneEndpointFactory.Create);
 			}
 			catch (ArgumentException exception)
 			{
@@ -434,7 +426,7 @@ namespace Mundane
 		}
 
 		internal (Dictionary<string, RouteNode[]> Lookup, EndpointData[] Endpoints) Build(
-			MundaneEndpointDelegate notFoundHandler)
+			MundaneEndpoint notFoundHandler)
 		{
 			var lookup = new Dictionary<string, RouteNode[]>(this.lookupBuilder.Count);
 

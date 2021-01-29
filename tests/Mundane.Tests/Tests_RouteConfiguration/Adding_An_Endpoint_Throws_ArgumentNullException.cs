@@ -11,14 +11,14 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		[Fact]
 		public static void When_The_Endpoint_Parameter_Is_Null()
 		{
-			static T NullEndpointDelegate<T>()
+			static T NullEndpoint<T>()
 				where T : class =>
 				null!;
 
-			var noParamsSync = NullEndpointDelegate<MundaneEndpointDelegateNoParametersSync>();
-			var endpointSync = NullEndpointDelegate<MundaneEndpointDelegateSync>();
-			var noParameters = NullEndpointDelegate<MundaneEndpointDelegateNoParameters>();
-			var endpoint = NullEndpointDelegate<MundaneEndpointDelegate>();
+			var noParamsSync = NullEndpoint<MundaneEndpointNoParametersSync>();
+			var endpointSync = NullEndpoint<MundaneEndpointSync>();
+			var noParameters = NullEndpoint<MundaneEndpointNoParameters>();
+			var endpoint = NullEndpoint<MundaneEndpoint>();
 
 			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{
@@ -52,12 +52,12 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		[Fact]
 		public static void When_The_Method_Parameter_Is_Null()
 		{
-			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
-			var endpointSync = (MundaneEndpointDelegateSync)(_ => Response.Ok());
+			var noParamsSync = (MundaneEndpointNoParametersSync)Response.Ok;
+			var endpointSync = (MundaneEndpointSync)(_ => Response.Ok());
 
-			var noParameters = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
+			var noParameters = (MundaneEndpointNoParameters)(() => ValueTask.FromResult(Response.Ok()));
 
-			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpoint)(_ => ValueTask.FromResult(Response.Ok()));
 
 			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{
@@ -75,10 +75,10 @@ namespace Mundane.Tests.Tests_RouteConfiguration
 		[Fact]
 		public static void When_The_Route_Parameter_Is_Null()
 		{
-			var noParamsSync = (MundaneEndpointDelegateNoParametersSync)Response.Ok;
-			var endpointSync = (MundaneEndpointDelegateSync)(_ => Response.Ok());
-			var noParameters = (MundaneEndpointDelegateNoParameters)(() => ValueTask.FromResult(Response.Ok()));
-			var endpoint = (MundaneEndpointDelegate)(_ => ValueTask.FromResult(Response.Ok()));
+			var noParamsSync = (MundaneEndpointNoParametersSync)Response.Ok;
+			var endpointSync = (MundaneEndpointSync)(_ => Response.Ok());
+			var noParameters = (MundaneEndpointNoParameters)(() => ValueTask.FromResult(Response.Ok()));
+			var endpoint = (MundaneEndpoint)(_ => ValueTask.FromResult(Response.Ok()));
 
 			static void Test(RouteConfigurationBuilder routeConfigurationBuilder)
 			{

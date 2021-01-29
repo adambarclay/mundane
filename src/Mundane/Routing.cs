@@ -34,7 +34,7 @@ namespace Mundane
 			routeConfigurationBuilder.Invoke(routeConfiguration);
 
 			(this.lookup, this.endpoints) =
-				routeConfiguration.Build(MundaneEndpoint.Create(this.DefaultNotFoundResponse));
+				routeConfiguration.Build(MundaneEndpointFactory.Create(this.DefaultNotFoundResponse));
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
@@ -43,7 +43,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
 		public Routing(
 			[DisallowNull] RouteConfigurationBuilder routeConfigurationBuilder,
-			[DisallowNull] MundaneEndpointDelegate notFoundEndpoint)
+			[DisallowNull] MundaneEndpoint notFoundEndpoint)
 		{
 			if (routeConfigurationBuilder == null)
 			{
@@ -165,24 +165,24 @@ namespace Mundane
 				? Routing.Find(this.endpoints, tree, path)
 				: 0;
 
-			ref readonly var endpoint = ref this.endpoints[endpointIndex];
+			ref readonly var endpointData = ref this.endpoints[endpointIndex];
 
-			var routeParameters = endpoint.NumberOfCaptureParameters > 0
-				? Routing.CaptureRouteParameters(in endpoint, path)
+			var routeParameters = endpointData.NumberOfCaptureParameters > 0
+				? Routing.CaptureRouteParameters(in endpointData, path)
 				: Routing.EmptyDictionary;
 
 			return new RequestEndpoint(
-				endpoint.EndpointDelegate,
+				endpointData.Endpoint,
 				new EnumerableDictionary<string, string>(routeParameters));
 		}
 
-		private static Dictionary<string, string> CaptureRouteParameters(in EndpointData endpoint, string path)
+		private static Dictionary<string, string> CaptureRouteParameters(in EndpointData endpointData, string path)
 		{
-			var routeParameters = new Dictionary<string, string>(endpoint.NumberOfCaptureParameters);
+			var routeParameters = new Dictionary<string, string>(endpointData.NumberOfCaptureParameters);
 
 			var pathSegments = new PathSegments(path);
 
-			foreach (ref readonly var node in new ReadOnlySpan<RouteSegment>(endpoint.NodesInRoute))
+			foreach (ref readonly var node in new ReadOnlySpan<RouteSegment>(endpointData.NodesInRoute))
 			{
 				Debug.Assert(pathSegments.MoreSegments);
 
@@ -194,7 +194,7 @@ namespace Mundane
 				{
 					routeParameters.Add(
 						node.Value,
-						WebUtility.UrlDecode(new string(pathSegments.AllRemaining(endpoint.CaptureTrailingSlash))));
+						WebUtility.UrlDecode(new string(pathSegments.AllRemaining(endpointData.CaptureTrailingSlash))));
 				}
 				else
 				{

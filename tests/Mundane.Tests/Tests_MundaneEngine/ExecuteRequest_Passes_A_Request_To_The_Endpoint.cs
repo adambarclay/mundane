@@ -26,7 +26,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 					memoryStream);
 
 				var response = await MundaneEngine.ExecuteRequest(
-					MundaneEndpoint.Create(r => Response.Ok(o => o.Write(r.Body))),
+					MundaneEndpointFactory.Create(r => Response.Ok(o => o.Write(r.Body))),
 					request);
 
 				Assert.Equal(value, await ResponseHelper.Body(response));

@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_Response
 			var location = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.RedirectSeeOther(location)),
+				MundaneEndpointFactory.Create(() => Response.RedirectSeeOther(location)),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);
@@ -26,7 +26,7 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_Status_Code_To_303()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.RedirectSeeOther("http://example.com")),
+				MundaneEndpointFactory.Create(() => Response.RedirectSeeOther("http://example.com")),
 				RequestHelper.Request());
 
 			Assert.Equal(303, response.StatusCode);

@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 				async () =>
 				{
 					var response = await MundaneEngine.ExecuteRequest(
-						MundaneEndpoint.Create(Response.Ok),
+						MundaneEndpointFactory.Create(Response.Ok),
 						RequestHelper.Request());
 
 					await response.WriteBodyToStream(null!);

@@ -23,7 +23,7 @@ namespace Mundane.Tests.Tests_Routing
 			Assert.Equal("routeConfigurationBuilder", exception1.ParamName!);
 
 			var exception2 = Assert.ThrowsAny<ArgumentNullException>(
-				() => new Routing(null!, MundaneEndpoint.Create(Response.NotFound)));
+				() => new Routing(null!, MundaneEndpointFactory.Create(Response.NotFound)));
 
 			Assert.Equal("routeConfigurationBuilder", exception2.ParamName!);
 		}

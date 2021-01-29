@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			var statusCode = RandomNumberGenerator.GetInt32(0, int.MaxValue);
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => new Response(statusCode)),
+				MundaneEndpointFactory.Create(() => new Response(statusCode)),
 				RequestHelper.Request());
 
 			Assert.Equal(statusCode, response.StatusCode);

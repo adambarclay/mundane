@@ -17,7 +17,7 @@ namespace Mundane.Tests.Tests_Response
 			var value2 = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => Response.Ok()
 						.AddHeader(new HeaderValue(name, value1))
 						.AddHeader(new HeaderValue(name, value2))),
@@ -37,7 +37,7 @@ namespace Mundane.Tests.Tests_Response
 			var value = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Ok().AddHeader(new HeaderValue(name, value))),
+				MundaneEndpointFactory.Create(() => Response.Ok().AddHeader(new HeaderValue(name, value))),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);

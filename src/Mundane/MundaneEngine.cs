@@ -14,7 +14,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> or <paramref name="request"/> is <see langword="null"/>.</exception>
 		/// <exception cref="EndpointReturnedNull">The endpoint returns a <see langword="null"/> <see cref="Response"/>.</exception>
 		public static async ValueTask<MundaneEngineResponse> ExecuteRequest(
-			[DisallowNull] MundaneEndpointDelegate endpoint,
+			[DisallowNull] MundaneEndpoint endpoint,
 			[DisallowNull] Request request)
 		{
 			if (endpoint == null)

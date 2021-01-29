@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 			await using (var stream = new FakeStream())
 			{
 				var response = await MundaneEngine.ExecuteRequest(
-					MundaneEndpoint.Create(() => Response.Ok(o => o.Flush())),
+					MundaneEndpointFactory.Create(() => Response.Ok(o => o.Flush())),
 					RequestHelper.Request());
 
 				await response.WriteBodyToStream(stream);

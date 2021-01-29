@@ -21,13 +21,13 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			};
 
 			var first = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(statusCode, o => o.Write("Hello!")).AddHeader(
 						new HeaderValue(headers[0].Key, headers[0].Value))),
 				request);
 
 			var second = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(statusCode, o => o.Write("World!")).AddHeader(
 						new HeaderValue(headers[0].Key, headers[0].Value))),
 				request);
@@ -43,13 +43,13 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			BodyWriter bodyWriter = o => o.Write("Hello World!");
 
 			var first = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(statusCode, bodyWriter).AddHeader(
 						new HeaderValue(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()))),
 				request);
 
 			var second = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(statusCode, bodyWriter).AddHeader(
 						new HeaderValue(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()))),
 				request);
@@ -69,13 +69,13 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			};
 
 			var first = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(statusCode, bodyWriter).AddHeader(
 						new HeaderValue(headers[0].Key, headers[0].Value))),
 				RequestHelper.Request());
 
 			var second = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(statusCode, bodyWriter).AddHeader(
 						new HeaderValue(headers[0].Key, headers[0].Value))),
 				RequestHelper.Request());
@@ -95,12 +95,12 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			};
 
 			var first = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(200, bodyWriter).AddHeader(new HeaderValue(headers[0].Key, headers[0].Value))),
 				request);
 
 			var second = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(500, bodyWriter).AddHeader(new HeaderValue(headers[0].Key, headers[0].Value))),
 				request);
 
@@ -120,7 +120,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			};
 
 			var first = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(
+				MundaneEndpointFactory.Create(
 					() => new Response(statusCode, bodyWriter).AddHeader(
 						new HeaderValue(headers[0].Key, headers[0].Value))),
 				request);

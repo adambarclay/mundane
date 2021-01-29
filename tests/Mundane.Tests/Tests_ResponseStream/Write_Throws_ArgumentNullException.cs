@@ -16,7 +16,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 				async () =>
 				{
 					var response = await MundaneEngine.ExecuteRequest(
-						MundaneEndpoint.Create(() => Response.Ok(o => o.Write((byte[])null!))),
+						MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write((byte[])null!))),
 						RequestHelper.Request());
 
 					await ResponseHelper.Body(response);
@@ -32,7 +32,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 				async () =>
 				{
 					var response = await MundaneEngine.ExecuteRequest(
-						MundaneEndpoint.Create(() => Response.Ok(o => o.Write((Stream)null!))),
+						MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write((Stream)null!))),
 						RequestHelper.Request());
 
 					await ResponseHelper.Body(response);
@@ -48,7 +48,7 @@ namespace Mundane.Tests.Tests_ResponseStream
 				async () =>
 				{
 					var response = await MundaneEngine.ExecuteRequest(
-						MundaneEndpoint.Create(() => Response.Ok(o => o.Write((string)null!))),
+						MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write((string)null!))),
 						RequestHelper.Request());
 
 					await ResponseHelper.Body(response);

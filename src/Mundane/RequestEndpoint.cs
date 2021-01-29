@@ -9,7 +9,7 @@ namespace Mundane
 	public readonly struct RequestEndpoint : IEquatable<RequestEndpoint>
 	{
 		internal RequestEndpoint(
-			[DisallowNull] MundaneEndpointDelegate endpoint,
+			[DisallowNull] MundaneEndpoint endpoint,
 			EnumerableDictionary<string, string> routeParameters)
 		{
 			this.Endpoint = endpoint;
@@ -18,7 +18,7 @@ namespace Mundane
 
 		/// <summary>Gets the endpoint delegate.</summary>
 		[NotNull]
-		public MundaneEndpointDelegate Endpoint { get; }
+		public MundaneEndpoint Endpoint { get; }
 
 		/// <summary>Gets the route parameters.</summary>
 		public EnumerableDictionary<string, string> RouteParameters { get; }
@@ -46,7 +46,7 @@ namespace Mundane
 		/// <param name="routeParameters">The route parameters.</param>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void Deconstruct(
-			[NotNull] out MundaneEndpointDelegate endpoint,
+			[NotNull] out MundaneEndpoint endpoint,
 			out EnumerableDictionary<string, string> routeParameters)
 		{
 			endpoint = this.Endpoint;

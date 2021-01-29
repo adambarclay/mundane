@@ -15,7 +15,7 @@ namespace Mundane.Tests.Tests_Response
 			var contentType = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.File(_ => ValueTask.CompletedTask, contentType)),
+				MundaneEndpointFactory.Create(() => Response.File(_ => ValueTask.CompletedTask, contentType)),
 				RequestHelper.Request());
 
 			Assert.Single(response.Headers);
@@ -28,7 +28,7 @@ namespace Mundane.Tests.Tests_Response
 			var output = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.File(o => o.Write(output), Guid.NewGuid().ToString())),
+				MundaneEndpointFactory.Create(() => Response.File(o => o.Write(output), Guid.NewGuid().ToString())),
 				RequestHelper.Request());
 
 			Assert.Equal(output, await ResponseHelper.Body(response));
@@ -38,7 +38,8 @@ namespace Mundane.Tests.Tests_Response
 		public static async Task Sets_The_Status_Code_To_200()
 		{
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.File(_ => ValueTask.CompletedTask, Guid.NewGuid().ToString())),
+				MundaneEndpointFactory.Create(
+					() => Response.File(_ => ValueTask.CompletedTask, Guid.NewGuid().ToString())),
 				RequestHelper.Request());
 
 			Assert.Equal(200, response.StatusCode);

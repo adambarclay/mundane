@@ -14,7 +14,7 @@ namespace Mundane.Tests.Tests_MundaneEngineResponse
 			var output = Guid.NewGuid().ToString();
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(() => Response.Ok(o => o.Write(output))),
+				MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write(output))),
 				RequestHelper.Request());
 
 			Assert.Equal(output, await ResponseHelper.Body(response));

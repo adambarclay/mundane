@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_MundaneEngine
 		public static async Task When_The_Request_Parameter_Is_Null()
 		{
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await MundaneEngine.ExecuteRequest(MundaneEndpoint.Create(Response.Ok), null!));
+				async () => await MundaneEngine.ExecuteRequest(MundaneEndpointFactory.Create(Response.Ok), null!));
 
 			Assert.Equal("request", exception.ParamName!);
 		}

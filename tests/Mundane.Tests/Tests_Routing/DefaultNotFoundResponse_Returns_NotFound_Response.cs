@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_Routing
 			var routing = new Routing(_ => { });
 
 			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpoint.Create(routing.DefaultNotFoundResponse),
+				MundaneEndpointFactory.Create(routing.DefaultNotFoundResponse),
 				RequestHelper.Request(HttpMethod.Get, "/"));
 
 			Assert.Equal(404, response.StatusCode);

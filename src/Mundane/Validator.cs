@@ -10,7 +10,7 @@ namespace Mundane
 	/// <param name="validator">Manages the validation of input values.</param>
 	/// <typeparam name="T">The type of object being validated.</typeparam>
 	[return: NotNull]
-	public delegate T ValidatorDelegate<out T>([DisallowNull] Validator validator);
+	public delegate T ValidationOperation<out T>([DisallowNull] Validator validator);
 
 	/// <summary>Manages the validation of input values.</summary>
 	public sealed class Validator
@@ -23,23 +23,23 @@ namespace Mundane
 		}
 
 		/// <summary>Validates an object.</summary>
-		/// <param name="validate">The validation to perform, typically constructing a validated object.</param>
+		/// <param name="validationOperation">The validation to perform, typically constructing a validated object.</param>
 		/// <typeparam name="T">The type of object being validated.</typeparam>
 		/// <returns>The result of the validation.</returns>
-		/// <exception cref="ArgumentNullException"><paramref name="validate"/> is <see langword="null"/>.</exception>
+		/// <exception cref="ArgumentNullException"><paramref name="validationOperation"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ValidationReturnedNull">The validation returns a <see langword="null"/> <typeparamref name="T"/>.</exception>
 		[return: NotNull]
-		public static ValidationResult<T> Validate<T>([DisallowNull] ValidatorDelegate<T> validate)
+		public static ValidationResult<T> Validate<T>([DisallowNull] ValidationOperation<T> validationOperation)
 			where T : notnull
 		{
-			if (validate == null)
+			if (validationOperation == null)
 			{
-				throw new ArgumentNullException(nameof(validate));
+				throw new ArgumentNullException(nameof(validationOperation));
 			}
 
 			var validator = new Validator();
 
-			var model = validate(validator);
+			var model = validationOperation(validator);
 
 			if (model == null)
 			{
@@ -50,23 +50,23 @@ namespace Mundane
 		}
 
 		/// <summary>Validates an object.</summary>
-		/// <param name="validate">The validation to perform, typically constructing a validated object.</param>
+		/// <param name="validationOperation">The validation to perform, typically constructing a validated object.</param>
 		/// <typeparam name="T">The type of object being validated.</typeparam>
 		/// <returns>The result of the validation.</returns>
-		/// <exception cref="ArgumentNullException"><paramref name="validate"/> is <see langword="null"/>.</exception>
+		/// <exception cref="ArgumentNullException"><paramref name="validationOperation"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ValidationReturnedNull">The validation result is a <see langword="null"/> <typeparamref name="T"/>.</exception>
 		public static async ValueTask<ValidationResult<T>> Validate<T>(
-			[DisallowNull] ValidatorDelegate<ValueTask<T>> validate)
+			[DisallowNull] ValidationOperation<ValueTask<T>> validationOperation)
 			where T : notnull
 		{
-			if (validate == null)
+			if (validationOperation == null)
 			{
-				throw new ArgumentNullException(nameof(validate));
+				throw new ArgumentNullException(nameof(validationOperation));
 			}
 
 			var validation = new Validator();
 
-			var model = await validate.Invoke(validation);
+			var model = await validationOperation.Invoke(validation);
 
 			if (model == null)
 			{

@@ -17,7 +17,7 @@ namespace Mundane
 		/// <exception cref="ValidationReturnedNull">The validation returns a <see langword="null"/> <typeparamref name="T"/>.</exception>
 		public static async ValueTask<Validated<T>> Validate<T>(
 			this ValueTask<Validated<T>> task,
-			[DisallowNull] ValidationPredicateDelegateAsync<T> predicate,
+			[DisallowNull] ValidationPredicateAsync<T> predicate,
 			[DisallowNull] string errorMessage)
 			where T : notnull
 		{
@@ -51,7 +51,7 @@ namespace Mundane
 		/// <exception cref="ValidationReturnedNull">The validation returns a <see langword="null"/> <typeparamref name="T"/>.</exception>
 		public static async ValueTask<Validated<T>> Validate<T>(
 			this ValueTask<Validated<T>> task,
-			[DisallowNull] ValidationPredicateDelegate<T> predicate,
+			[DisallowNull] ValidationPredicate<T> predicate,
 			[DisallowNull] string errorMessage)
 			where T : notnull
 		{

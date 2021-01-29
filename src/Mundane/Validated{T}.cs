@@ -7,13 +7,13 @@ namespace Mundane
 	/// <summary>The predicate to evaluate.</summary>
 	/// <param name="value">The value to evaluate.</param>
 	/// <typeparam name="T">The type of the value to evaluate.</typeparam>
-	public delegate bool ValidationPredicateDelegate<in T>([DisallowNull] T value)
+	public delegate bool ValidationPredicate<in T>([DisallowNull] T value)
 		where T : notnull;
 
 	/// <summary>Async version of the predicate to evaluate.</summary>
 	/// <param name="value">The value to evaluate.</param>
 	/// <typeparam name="T">The type of the value to evaluate.</typeparam>
-	public delegate ValueTask<bool> ValidationPredicateDelegateAsync<in T>([DisallowNull] T value)
+	public delegate ValueTask<bool> ValidationPredicateAsync<in T>([DisallowNull] T value)
 		where T : notnull;
 
 	/// <summary>Represents a validated value.</summary>
@@ -105,7 +105,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 		[return: NotNull]
 		public Validated<T> Validate(
-			[DisallowNull] ValidationPredicateDelegate<T> predicate,
+			[DisallowNull] ValidationPredicate<T> predicate,
 			[DisallowNull] string errorMessage)
 		{
 			if (predicate == null)
@@ -132,7 +132,7 @@ namespace Mundane
 		/// <returns>The validated value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 		public async ValueTask<Validated<T>> Validate(
-			[DisallowNull] ValidationPredicateDelegateAsync<T> predicate,
+			[DisallowNull] ValidationPredicateAsync<T> predicate,
 			[DisallowNull] string errorMessage)
 		{
 			if (predicate == null)

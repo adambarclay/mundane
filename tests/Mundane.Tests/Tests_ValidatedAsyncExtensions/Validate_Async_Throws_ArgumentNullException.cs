@@ -23,7 +23,7 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 		{
 			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
 				async () => await ValueTask.FromResult((Validated<string>)string.Empty)
-					.Validate((ValidationPredicateDelegateAsync<string>)null!, "Error Message."));
+					.Validate((ValidationPredicateAsync<string>)null!, "Error Message."));
 
 			Assert.Equal("predicate", exception.ParamName!);
 		}

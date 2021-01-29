@@ -23,7 +23,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 			var value = Validator.Validate(validator => validator.Value(Guid.NewGuid().ToString())).Model;
 
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() => value.Validate((null as ValidationPredicateDelegate<string>)!, "Error Message"));
+				() => value.Validate((null as ValidationPredicate<string>)!, "Error Message"));
 
 			Assert.Equal("predicate", exception.ParamName!);
 		}

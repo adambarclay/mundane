@@ -13,7 +13,7 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 		{
 			Validated<string> value = string.Empty;
 
-			var erroringValidator = (ValidationPredicateDelegate<string>)(_ => throw new InvalidOperationException());
+			var erroringValidator = (ValidationPredicate<string>)(_ => throw new InvalidOperationException());
 
 			var task = value.Validate(_ => ValueTask.FromResult(true), "Error Message")
 				.Validate(erroringValidator, "Error Message");

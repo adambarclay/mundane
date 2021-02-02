@@ -10,10 +10,16 @@ namespace Mundane.Tests.Tests_ValidatedT
 		[Fact]
 		public static void When_The_Values_Are_Different()
 		{
-			Validated<string> first = Guid.NewGuid().ToString();
-			Validated<string> second = Guid.NewGuid().ToString();
+			Validator.Validate(
+				validator =>
+				{
+					var first = validator.Value(Guid.NewGuid().ToString());
+					var second = validator.Value(Guid.NewGuid().ToString());
 
-			Assert.True(first != second);
+					Assert.True(first != second);
+
+					return string.Empty;
+				});
 		}
 	}
 }

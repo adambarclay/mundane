@@ -10,12 +10,18 @@ namespace Mundane.Tests.Tests_ValidatedT
 		[Fact]
 		public static void When_The_Values_Are_The_Same()
 		{
-			var value = Guid.NewGuid().ToString();
+			Validator.Validate(
+				validator =>
+				{
+					var value = Guid.NewGuid().ToString();
 
-			Validated<string> first = value;
-			Validated<string> second = value;
+					var first = validator.Value(value);
+					var second = validator.Value(value);
 
-			Assert.True(first == second);
+					Assert.True(first == second);
+
+					return string.Empty;
+				});
 		}
 	}
 }

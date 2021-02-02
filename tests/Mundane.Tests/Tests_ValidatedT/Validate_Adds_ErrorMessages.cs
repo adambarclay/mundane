@@ -12,11 +12,11 @@ namespace Mundane.Tests.Tests_ValidatedT
 		{
 			var message = Guid.NewGuid().ToString();
 
-			var validatedValue = Validator.Validate(
+			(var _, var model) = Validator.Validate(
 				validator => validator.Value(Guid.NewGuid().ToString()).Validate(_ => false, message));
 
-			Assert.Single(validatedValue.Model.ErrorMessages);
-			Assert.Equal(message, validatedValue.Model.ErrorMessages[0]);
+			Assert.Single(model.ErrorMessages);
+			Assert.Equal(message, model.ErrorMessages[0]);
 		}
 	}
 }

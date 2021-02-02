@@ -8,11 +8,25 @@ namespace Mundane.Tests.Tests_Validated
 	public static class Failed_Returns_False
 	{
 		[Fact]
-		public static void When_No_Errors_Have_Been_Added()
+		public static void When_Initialised_With_A_String_And_No_Errors_Have_Been_Added()
 		{
-			Validated<string> validatedValue = Guid.NewGuid().ToString();
+			Validated<string> value = Guid.NewGuid().ToString();
 
-			Assert.False(validatedValue.Failed);
+			Assert.False(value.Failed);
+		}
+
+		[Fact]
+		public static void When_Initialised_With_A_Value_And_No_Errors_Have_Been_Added()
+		{
+			Validator.Validate(
+				validator =>
+				{
+					var value = validator.Value(Guid.NewGuid().ToString());
+
+					Assert.False(value.Failed);
+
+					return value;
+				});
 		}
 	}
 }

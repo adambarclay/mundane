@@ -32,7 +32,7 @@ namespace Mundane.Tests.Tests_Validator
 
 			var result = await Validator.Validate(validator => ValueTask.FromResult(new TestModel(validator, number)));
 
-			Assert.Equal(number, (int)result.Model.Number);
+			Assert.Equal(number, result.Model.Number);
 		}
 
 		private sealed class TestModel

@@ -11,14 +11,20 @@ namespace Mundane.Tests.Tests_ValidatedAsyncExtensions
 		[Fact]
 		public static async Task Exceptions_Are_Only_Thrown_On_Await()
 		{
-			Validated<string> value = string.Empty;
+			await Validator.Validate(
+				async validator =>
+				{
+					var value = validator.Value(string.Empty);
 
-			var erroringValidator = (ValidationPredicate<string>)(_ => throw new InvalidOperationException());
+					var erroringValidator = (ValidationPredicate<string>)(_ => throw new InvalidOperationException());
 
-			var task = value.Validate(_ => ValueTask.FromResult(true), "Error Message")
-				.Validate(erroringValidator, "Error Message");
+					var task = value.Validate(_ => ValueTask.FromResult(true), "Error Message")
+						.Validate(erroringValidator, "Error Message");
 
-			await Assert.ThrowsAnyAsync<InvalidOperationException>(async () => await task);
+					await Assert.ThrowsAnyAsync<InvalidOperationException>(async () => await task);
+
+					return value;
+				});
 		}
 	}
 }

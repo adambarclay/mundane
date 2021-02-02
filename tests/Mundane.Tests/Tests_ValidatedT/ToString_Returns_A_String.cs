@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
@@ -6,16 +7,24 @@ namespace Mundane.Tests.Tests_ValidatedT
 	[ExcludeFromCodeCoverage]
 	public static class ToString_Returns_A_String
 	{
-		[Theory]
-		[InlineData(123.456)]
-		[InlineData(42)]
-		[InlineData("hello")]
-		public static void Identical_To_Calling_ToString_On_The_Underlying_Object<T>(T value)
-			where T : notnull
+		[Fact]
+		public static void Equal_To_Empty_String_When_Value_Is_Null()
 		{
-			Validated<T> validatedValue = value;
+			string value = null!;
 
-			Assert.Equal(value.ToString()!, validatedValue.ToString()!);
+			Validated<string> validatedValue = value;
+
+			Assert.Equal(string.Empty, validatedValue.ToString());
+		}
+
+		[Fact]
+		public static void Identical_To_The_String_Used_To_Initialise_The_Value()
+		{
+			var value = Guid.NewGuid().ToString();
+
+			Validated<int> validatedValue = value;
+
+			Assert.Equal(value, validatedValue.ToString());
 		}
 	}
 }

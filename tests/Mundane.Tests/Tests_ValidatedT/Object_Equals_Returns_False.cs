@@ -11,26 +11,38 @@ namespace Mundane.Tests.Tests_ValidatedT
 		[Fact]
 		public static void When_The_Other_Object_Is_Not_A_Validated_Object()
 		{
-			var value = Guid.NewGuid().ToString();
+			Validator.Validate(
+				validator =>
+				{
+					var value = Guid.NewGuid().ToString();
 
-			Validated<string> first = value;
+					var first = validator.Value(value);
 
-			var second = new
-			{
-				Value = value,
-				ErrorMessages = new ReadOnlyCollection<string>(Array.Empty<string>())
-			};
+					var second = new
+					{
+						Value = value,
+						ErrorMessages = new ReadOnlyCollection<string>(Array.Empty<string>())
+					};
 
-			Assert.False(first.Equals(second));
+					Assert.False(first.Equals(second));
+
+					return string.Empty;
+				});
 		}
 
 		[Fact]
 		public static void When_The_Values_Are_Different()
 		{
-			Validated<string> first = Guid.NewGuid().ToString();
-			Validated<string> second = Guid.NewGuid().ToString();
+			Validator.Validate(
+				validator =>
+				{
+					var first = validator.Value(Guid.NewGuid().ToString());
+					var second = validator.Value(Guid.NewGuid().ToString());
 
-			Assert.False(first.Equals((object)second));
+					Assert.False(first.Equals((object)second));
+
+					return string.Empty;
+				});
 		}
 	}
 }

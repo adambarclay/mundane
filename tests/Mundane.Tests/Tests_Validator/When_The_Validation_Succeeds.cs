@@ -33,7 +33,7 @@ namespace Mundane.Tests.Tests_Validator
 			var result = Validator.Validate(
 				validator => new TestModel(validator, When_The_Validation_Succeeds.Expected));
 
-			Assert.Equal(When_The_Validation_Succeeds.Expected, (int)result.Model.Number);
+			Assert.Equal(When_The_Validation_Succeeds.Expected, result.Model.Number);
 		}
 
 		private sealed class TestModel

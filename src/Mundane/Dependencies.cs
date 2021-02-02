@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Mundane
 {
@@ -19,7 +18,7 @@ namespace Mundane
 		/// <param name="dependencies">The dependencies to register.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="dependencies"/> or any of its elements is <see langword="null"/>.</exception>
 		/// <exception cref="DuplicateDependencyRegistered">A dependency type appears in <paramref name="dependencies"/> more than once.</exception>
-		public Dependencies([DisallowNull] params Dependency[] dependencies)
+		public Dependencies(params Dependency[] dependencies)
 		{
 			if (dependencies == null)
 			{
@@ -45,8 +44,7 @@ namespace Mundane
 		}
 
 		/// <inheritdoc/>
-		[return: NotNull]
-		public T Find<T>([DisallowNull] Request request)
+		public T Find<T>(Request request)
 			where T : notnull
 		{
 			if (request == null)

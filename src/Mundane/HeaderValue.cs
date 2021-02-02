@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Text;
@@ -17,7 +16,7 @@ namespace Mundane
 		/// <param name="value">The value of the header.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="value"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/> does not have a value.</exception>
-		public HeaderValue([DisallowNull] string name, [DisallowNull] string value)
+		public HeaderValue(string name, string value)
 		{
 			if (name == null)
 			{
@@ -39,11 +38,9 @@ namespace Mundane
 		}
 
 		/// <summary>Gets the name of the header.</summary>
-		[NotNull]
 		public string Name { get; }
 
 		/// <summary>Gets the value of the header.</summary>
-		[NotNull]
 		public string Value { get; }
 
 		/// <summary>Equality operator.</summary>
@@ -68,7 +65,7 @@ namespace Mundane
 		/// <param name="allowedMethods">The allowed HTTP methods.</param>
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="allowedMethods"/> is <see langword="null"/>.</exception>
-		public static HeaderValue Allow([DisallowNull] IEnumerable<string> allowedMethods)
+		public static HeaderValue Allow(IEnumerable<string> allowedMethods)
 		{
 			if (allowedMethods == null)
 			{
@@ -82,7 +79,7 @@ namespace Mundane
 		/// <param name="directives">The cache control directives.</param>
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="directives"/> is <see langword="null"/>.</exception>
-		public static HeaderValue CacheControl([DisallowNull] string directives)
+		public static HeaderValue CacheControl(string directives)
 		{
 			if (directives == null)
 			{
@@ -96,7 +93,7 @@ namespace Mundane
 		/// <param name="fileName">The name of the file.</param>
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="fileName"/> is <see langword="null"/>.</exception>
-		public static HeaderValue ContentDisposition([DisallowNull] string fileName)
+		public static HeaderValue ContentDisposition(string fileName)
 		{
 			if (fileName == null)
 			{
@@ -110,7 +107,7 @@ namespace Mundane
 		/// <param name="contentType">The media type of the content.</param>
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="contentType"/> is <see langword="null"/>.</exception>
-		public static HeaderValue ContentType([DisallowNull] string contentType)
+		public static HeaderValue ContentType(string contentType)
 		{
 			if (contentType == null)
 			{
@@ -139,7 +136,7 @@ namespace Mundane
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/> must not be empty.</exception>
-		public static HeaderValue DeleteCookie([DisallowNull] string name)
+		public static HeaderValue DeleteCookie(string name)
 		{
 			try
 			{
@@ -163,7 +160,7 @@ namespace Mundane
 		/// <param name="request">The HTTP request.</param>
 		/// <returns>A <see cref="DateTimeOffset"/> representing the last modification time of a resource.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="request"/> is <see langword="null"/>.</exception>
-		public static DateTimeOffset IfModifiedSince([DisallowNull] Request request)
+		public static DateTimeOffset IfModifiedSince(Request request)
 		{
 			if (request == null)
 			{
@@ -194,7 +191,7 @@ namespace Mundane
 		/// <param name="location">The location of the resource.</param>
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="location"/> is <see langword="null"/>.</exception>
-		public static HeaderValue Location([DisallowNull] string location)
+		public static HeaderValue Location(string location)
 		{
 			if (location == null)
 			{
@@ -211,10 +208,7 @@ namespace Mundane
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="value"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/> and <paramref name="value"/> must not be empty.</exception>
-		public static HeaderValue PersistentCookie(
-			[DisallowNull] string name,
-			[DisallowNull] string value,
-			TimeSpan maxAge)
+		public static HeaderValue PersistentCookie(string name, string value, TimeSpan maxAge)
 		{
 			try
 			{
@@ -234,11 +228,7 @@ namespace Mundane
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="name"/>, <paramref name="value"/> or <paramref name="path"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/>, <paramref name="value"/> and <paramref name="path"/> must not be empty. <paramref name="path"/> must start with a forward slash.</exception>
-		public static HeaderValue PersistentCookie(
-			[DisallowNull] string name,
-			[DisallowNull] string value,
-			TimeSpan maxAge,
-			[DisallowNull] string path)
+		public static HeaderValue PersistentCookie(string name, string value, TimeSpan maxAge, string path)
 		{
 			try
 			{
@@ -260,11 +250,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="name"/>, <paramref name="value"/>, <paramref name="path"/> or <paramref name="domain"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/>, <paramref name="value"/> and <paramref name="path"/> must not be empty. <paramref name="path"/> must start with a forward slash.</exception>
 		public static HeaderValue PersistentCookie(
-			[DisallowNull] string name,
-			[DisallowNull] string value,
+			string name,
+			string value,
 			TimeSpan maxAge,
-			[DisallowNull] string path,
-			[DisallowNull] string domain)
+			string path,
+			string domain)
 		{
 			try
 			{
@@ -288,11 +278,11 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="name"/>, <paramref name="value"/>, <paramref name="path"/> or <paramref name="domain"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/>, <paramref name="value"/> and <paramref name="path"/> must not be empty. <paramref name="path"/> must start with a forward slash.</exception>
 		public static HeaderValue PersistentCookie(
-			[DisallowNull] string name,
-			[DisallowNull] string value,
+			string name,
+			string value,
 			TimeSpan maxAge,
-			[DisallowNull] string path,
-			[DisallowNull] string domain,
+			string path,
+			string domain,
 			bool httpOnly,
 			bool secure)
 		{
@@ -312,7 +302,7 @@ namespace Mundane
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="value"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/> and <paramref name="value"/> must not be empty.</exception>
-		public static HeaderValue SessionCookie([DisallowNull] string name, [DisallowNull] string value)
+		public static HeaderValue SessionCookie(string name, string value)
 		{
 			try
 			{
@@ -331,10 +321,7 @@ namespace Mundane
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="name"/>, <paramref name="value"/> or <paramref name="path"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/>, <paramref name="value"/> and <paramref name="path"/> must not be empty. <paramref name="path"/> must start with a forward slash.</exception>
-		public static HeaderValue SessionCookie(
-			[DisallowNull] string name,
-			[DisallowNull] string value,
-			[DisallowNull] string path)
+		public static HeaderValue SessionCookie(string name, string value, string path)
 		{
 			try
 			{
@@ -354,11 +341,7 @@ namespace Mundane
 		/// <returns>The response header value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="name"/>, <paramref name="value"/>, <paramref name="path"/> or <paramref name="domain"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/>, <paramref name="value"/> and <paramref name="path"/> must not be empty. <paramref name="path"/> must start with a forward slash.</exception>
-		public static HeaderValue SessionCookie(
-			[DisallowNull] string name,
-			[DisallowNull] string value,
-			[DisallowNull] string path,
-			[DisallowNull] string domain)
+		public static HeaderValue SessionCookie(string name, string value, string path, string domain)
 		{
 			try
 			{
@@ -381,10 +364,10 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="name"/>, <paramref name="value"/>, <paramref name="path"/> or <paramref name="domain"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="name"/>, <paramref name="value"/> and <paramref name="path"/> must not be empty. <paramref name="path"/> must start with a forward slash.</exception>
 		public static HeaderValue SessionCookie(
-			[DisallowNull] string name,
-			[DisallowNull] string value,
-			[DisallowNull] string path,
-			[DisallowNull] string domain,
+			string name,
+			string value,
+			string path,
+			string domain,
 			bool httpOnly,
 			bool secure)
 		{
@@ -405,7 +388,7 @@ namespace Mundane
 		}
 
 		/// <inheritdoc/>
-		public override bool Equals([AllowNull] object? obj)
+		public override bool Equals(object? obj)
 		{
 			return obj is HeaderValue other && this.Equals(other);
 		}

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -59,7 +58,7 @@ namespace Mundane
 		}
 
 		/// <inheritdoc/>
-		public override bool Equals([AllowNull] object? obj)
+		public override bool Equals(object? obj)
 		{
 			return obj is MundaneEngineResponse other && this.Equals(other);
 		}
@@ -85,7 +84,7 @@ namespace Mundane
 		/// <param name="stream">The response stream.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="stream"/> is <see langword="null"/>.</exception>
-		public ValueTask WriteBodyToStream([DisallowNull] Stream stream)
+		public ValueTask WriteBodyToStream(Stream stream)
 		{
 			if (stream == null)
 			{

@@ -44,7 +44,7 @@ namespace Mundane
 		[return: NotNullIfNotNull("value")]
 		public static implicit operator T?(Validated<T> value)
 		{
-			return value != null ? value.Value : default;
+			return value is not null ? value.Value : default;
 		}
 
 		/// <summary>Implicitly converts the underlying type to its validated value equivalent.</summary>

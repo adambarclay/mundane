@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Mundane
@@ -13,9 +12,7 @@ namespace Mundane
 		/// <returns>The response returned by the endpoint.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> or <paramref name="request"/> is <see langword="null"/>.</exception>
 		/// <exception cref="EndpointReturnedNull">The endpoint returns a <see langword="null"/> <see cref="Response"/>.</exception>
-		public static async ValueTask<MundaneEngineResponse> ExecuteRequest(
-			[DisallowNull] MundaneEndpoint endpoint,
-			[DisallowNull] Request request)
+		public static async ValueTask<MundaneEngineResponse> ExecuteRequest(MundaneEndpoint endpoint, Request request)
 		{
 			if (endpoint == null)
 			{

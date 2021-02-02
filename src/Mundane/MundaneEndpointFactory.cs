@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Mundane
@@ -7,7 +6,7 @@ namespace Mundane
 	/// <summary>An asynchronous endpoint delegate receiving the current request.</summary>
 	/// <param name="request">The current request.</param>
 	/// <returns>The endpoint response.</returns>
-	public delegate ValueTask<Response> MundaneEndpoint([DisallowNull] Request request);
+	public delegate ValueTask<Response> MundaneEndpoint(Request request);
 
 	/// <summary>An asynchronous endpoint delegate receiving no parameters.</summary>
 	/// <returns>The endpoint response.</returns>
@@ -16,12 +15,10 @@ namespace Mundane
 	/// <summary>A synchronous endpoint delegate receiving the current request.</summary>
 	/// <param name="request">The current request.</param>
 	/// <returns>The endpoint response.</returns>
-	[return: NotNull]
-	public delegate Response MundaneEndpointSync([DisallowNull] Request request);
+	public delegate Response MundaneEndpointSync(Request request);
 
 	/// <summary>A synchronous endpoint delegate receiving no parameters.</summary>
 	/// <returns>The endpoint response.</returns>
-	[return: NotNull]
 	public delegate Response MundaneEndpointNoParametersSync();
 
 	/// <summary>Converts all of the possible endpoints to <see cref="MundaneEndpoint"/> which the engine requires.</summary>
@@ -31,8 +28,7 @@ namespace Mundane
 		/// <param name="endpoint">The endpoint delegate.</param>
 		/// <returns>A Mundane endpoint delegate.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static MundaneEndpoint Create([DisallowNull] MundaneEndpointNoParametersSync endpoint)
+		public static MundaneEndpoint Create(MundaneEndpointNoParametersSync endpoint)
 		{
 			if (endpoint == null)
 			{
@@ -56,8 +52,7 @@ namespace Mundane
 		/// <param name="endpoint">The endpoint delegate.</param>
 		/// <returns>A Mundane endpoint delegate.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static MundaneEndpoint Create([DisallowNull] MundaneEndpointSync endpoint)
+		public static MundaneEndpoint Create(MundaneEndpointSync endpoint)
 		{
 			if (endpoint == null)
 			{
@@ -81,8 +76,7 @@ namespace Mundane
 		/// <param name="endpoint">The endpoint delegate.</param>
 		/// <returns>A Mundane endpoint delegate.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static MundaneEndpoint Create([DisallowNull] MundaneEndpointNoParameters endpoint)
+		public static MundaneEndpoint Create(MundaneEndpointNoParameters endpoint)
 		{
 			if (endpoint == null)
 			{
@@ -96,8 +90,7 @@ namespace Mundane
 		/// <param name="endpoint">The endpoint delegate.</param>
 		/// <returns>A Mundane endpoint delegate.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static MundaneEndpoint Create([DisallowNull] MundaneEndpoint endpoint)
+		public static MundaneEndpoint Create(MundaneEndpoint endpoint)
 		{
 			if (endpoint == null)
 			{

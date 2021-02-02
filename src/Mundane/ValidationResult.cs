@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Mundane
 {
@@ -16,11 +15,9 @@ namespace Mundane
 		}
 
 		/// <summary>Gets a value indicating whether the model is invalid.</summary>
-		[NotNull]
 		public bool Invalid { get; }
 
 		/// <summary>Gets the model object created during validation.</summary>
-		[NotNull]
 		public TModel Model { get; }
 
 		/// <summary>Equality operator.</summary>
@@ -45,14 +42,14 @@ namespace Mundane
 		/// <param name="invalid">A value indicating whether the model is invalid.</param>
 		/// <param name="model">The model object created during validation.</param>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public void Deconstruct(out bool invalid, [NotNull] out TModel model)
+		public void Deconstruct(out bool invalid, out TModel model)
 		{
 			invalid = this.Invalid;
 			model = this.Model;
 		}
 
 		/// <inheritdoc/>
-		public override bool Equals([AllowNull] object? obj)
+		public override bool Equals(object? obj)
 		{
 			if (obj is ValidationResult<TModel> other)
 			{

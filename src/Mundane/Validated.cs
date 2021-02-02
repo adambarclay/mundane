@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Mundane
 {
@@ -17,7 +16,6 @@ namespace Mundane
 		}
 
 		/// <summary>Gets the collection of error messages.</summary>
-		[NotNull]
 		public ReadOnlyCollection<string> ErrorMessages { get; }
 
 		/// <summary>Gets a value indicating whether the validation failed.</summary>
@@ -33,7 +31,7 @@ namespace Mundane
 		/// <param name="errorMessage">The error message to add.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="errorMessage"/> does not have a value.</exception>
-		public void AddErrorMessage([DisallowNull] string errorMessage)
+		public void AddErrorMessage(string errorMessage)
 		{
 			if (errorMessage == null)
 			{

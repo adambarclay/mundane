@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Mundane
 {
@@ -13,7 +12,7 @@ namespace Mundane
 		/// <summary>Initializes a new instance of the <see cref="EnumerableCollection{T}"/> struct.</summary>
 		/// <param name="collection">The underlying collection.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="collection"/> is <see langword="null"/>.</exception>
-		public EnumerableCollection([DisallowNull] List<T> collection)
+		public EnumerableCollection(List<T> collection)
 		{
 			if (collection == null)
 			{
@@ -50,7 +49,7 @@ namespace Mundane
 		}
 
 		/// <inheritdoc/>
-		public override bool Equals([AllowNull] object? obj)
+		public override bool Equals(object? obj)
 		{
 			return obj is EnumerableCollection<T> other && this.Equals(other);
 		}

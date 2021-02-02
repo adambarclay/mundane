@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
 
@@ -32,17 +31,17 @@ namespace Mundane
 		/// <param name="requestAborted">A cancellation token which is signalled if the user cancels the request.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="method"/>, <paramref name="path"/>, <paramref name="route"/>, <paramref name="headers"/>, <paramref name="body"/>, <paramref name="query"/>, <paramref name="form"/>, <paramref name="cookies"/>, <paramref name="uploadedFiles"/> or <paramref name="host"/> is <see langword="null"/>.</exception>
 		public Request(
-			[DisallowNull] string method,
-			[DisallowNull] string path,
+			string method,
+			string path,
 			EnumerableDictionary<string, string> route,
 			EnumerableDictionary<string, string> headers,
-			[DisallowNull] Stream body,
+			Stream body,
 			EnumerableDictionary<string, string> query,
 			EnumerableDictionary<string, string> form,
 			EnumerableDictionary<string, string> cookies,
 			EnumerableDictionary<string, FileUpload> uploadedFiles,
-			[DisallowNull] DependencyFinder dependencyFinder,
-			[DisallowNull] RequestHost host,
+			DependencyFinder dependencyFinder,
+			RequestHost host,
 			CancellationToken requestAborted)
 		{
 			if (method == null)
@@ -160,19 +159,15 @@ namespace Mundane
 		}
 
 		/// <summary>Gets the body of the request.</summary>
-		[NotNull]
 		public Stream Body { get; }
 
 		/// <summary>Gets the host of the request.</summary>
-		[NotNull]
 		public RequestHost Host { get; }
 
 		/// <summary>Gets the HTTP request method.</summary>
-		[NotNull]
 		public string Method { get; }
 
 		/// <summary>Gets the path of the request.</summary>
-		[NotNull]
 		public string Path { get; }
 
 		/// <summary>Gets a cancellation token which is signalled when the user cancels the request.</summary>
@@ -182,8 +177,7 @@ namespace Mundane
 		/// <param name="cookieName">The name of the cookie.</param>
 		/// <returns>The cookie value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="cookieName"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public string Cookie([DisallowNull] string cookieName)
+		public string Cookie(string cookieName)
 		{
 			if (cookieName == null)
 			{
@@ -197,7 +191,7 @@ namespace Mundane
 		/// <param name="cookieName">The name of the cookie.</param>
 		/// <returns>true if the collection contains the cookie, otherwise false.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="cookieName"/> is <see langword="null"/>.</exception>
-		public bool CookieExists([DisallowNull] string cookieName)
+		public bool CookieExists(string cookieName)
 		{
 			if (cookieName == null)
 			{
@@ -211,7 +205,6 @@ namespace Mundane
 		/// <typeparam name="T">The type of the dependency.</typeparam>
 		/// <returns>An instance of the dependency registered for the requested type <typeparamref name="T"/>.</returns>
 		/// <exception cref="DependencyNotFound">No concrete type has been registered for the requested dependency type.</exception>
-		[return: NotNull]
 		public T Dependency<T>()
 			where T : notnull
 		{
@@ -229,8 +222,7 @@ namespace Mundane
 		/// <param name="parameterName">The name of the file parameter.</param>
 		/// <returns>The uploaded file.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="parameterName"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public FileUpload File([DisallowNull] string parameterName)
+		public FileUpload File(string parameterName)
 		{
 			if (parameterName == null)
 			{
@@ -244,7 +236,7 @@ namespace Mundane
 		/// <param name="parameterName">The name of the file parameter.</param>
 		/// <returns>true if the collection contains the file, otherwise false.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="parameterName"/> is <see langword="null"/>.</exception>
-		public bool FileExists([DisallowNull] string parameterName)
+		public bool FileExists(string parameterName)
 		{
 			if (parameterName == null)
 			{
@@ -258,8 +250,7 @@ namespace Mundane
 		/// <param name="parameterName">The name of the form parameter.</param>
 		/// <returns>The value of the form parameter.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="parameterName"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public string Form([DisallowNull] string parameterName)
+		public string Form(string parameterName)
 		{
 			if (parameterName == null)
 			{
@@ -273,7 +264,7 @@ namespace Mundane
 		/// <param name="parameterName">The name of the form parameter.</param>
 		/// <returns>true if the collection contains the form parameter, otherwise false.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="parameterName"/> is <see langword="null"/>.</exception>
-		public bool FormExists([DisallowNull] string parameterName)
+		public bool FormExists(string parameterName)
 		{
 			if (parameterName == null)
 			{
@@ -287,8 +278,7 @@ namespace Mundane
 		/// <param name="headerName">The name of the header.</param>
 		/// <returns>The value of the query parameter.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="headerName"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public string Header([DisallowNull] string headerName)
+		public string Header(string headerName)
 		{
 			if (headerName == null)
 			{
@@ -302,7 +292,7 @@ namespace Mundane
 		/// <param name="headerName">The name of the header.</param>
 		/// <returns>true if the collection contains the header, otherwise false.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="headerName"/> is <see langword="null"/>.</exception>
-		public bool HeaderExists([DisallowNull] string headerName)
+		public bool HeaderExists(string headerName)
 		{
 			if (headerName == null)
 			{
@@ -316,8 +306,7 @@ namespace Mundane
 		/// <param name="parameterName">The name of the query parameter.</param>
 		/// <returns>The value of the query parameter.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="parameterName"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public string Query([DisallowNull] string parameterName)
+		public string Query(string parameterName)
 		{
 			if (parameterName == null)
 			{
@@ -331,7 +320,7 @@ namespace Mundane
 		/// <param name="parameterName">The name of the query parameter.</param>
 		/// <returns>true if the collection contains the query parameter, otherwise false.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="parameterName"/> is <see langword="null"/>.</exception>
-		public bool QueryExists([DisallowNull] string parameterName)
+		public bool QueryExists(string parameterName)
 		{
 			if (parameterName == null)
 			{
@@ -345,8 +334,7 @@ namespace Mundane
 		/// <param name="parameterName">The name of the route parameter.</param>
 		/// <returns>The value of the route parameter.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="parameterName"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public string Route([DisallowNull] string parameterName)
+		public string Route(string parameterName)
 		{
 			if (parameterName == null)
 			{

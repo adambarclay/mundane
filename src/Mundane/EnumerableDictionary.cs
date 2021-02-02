@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Mundane
 {
@@ -16,7 +15,7 @@ namespace Mundane
 		/// <summary>Initializes a new instance of the <see cref="EnumerableDictionary{TKey, TValue}"/> struct.</summary>
 		/// <param name="dictionary">The underlying dictionary.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is <see langword="null"/>.</exception>
-		public EnumerableDictionary([DisallowNull] Dictionary<TKey, TValue> dictionary)
+		public EnumerableDictionary(Dictionary<TKey, TValue> dictionary)
 		{
 			if (dictionary == null)
 			{
@@ -59,7 +58,7 @@ namespace Mundane
 		}
 
 		/// <inheritdoc/>
-		public override bool Equals([AllowNull] object? obj)
+		public override bool Equals(object? obj)
 		{
 			return obj is EnumerableDictionary<TKey, TValue> other && this.Equals(other);
 		}

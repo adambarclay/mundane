@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Mundane.RoutingImplementation.Lookup;
 
@@ -9,7 +8,7 @@ namespace Mundane
 {
 	/// <summary>The route configuration delegate.</summary>
 	/// <param name="routeConfiguration">Configures routes for <see cref="Routing"/>.</param>
-	public delegate void RouteConfigurationBuilder([DisallowNull] RouteConfiguration routeConfiguration);
+	public delegate void RouteConfigurationBuilder(RouteConfiguration routeConfiguration);
 
 	/// <summary>The Mundane engine routing configuration.</summary>
 	public sealed class Routing
@@ -22,7 +21,7 @@ namespace Mundane
 		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
 		/// <param name="routeConfigurationBuilder">The route configuration builder.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> is <see langword="null"/>.</exception>
-		public Routing([DisallowNull] RouteConfigurationBuilder routeConfigurationBuilder)
+		public Routing(RouteConfigurationBuilder routeConfigurationBuilder)
 		{
 			if (routeConfigurationBuilder == null)
 			{
@@ -41,9 +40,7 @@ namespace Mundane
 		/// <param name="routeConfigurationBuilder">The route configuration builder.</param>
 		/// <param name="notFoundEndpoint">The endpoint to execute when the request path is not matched to any route.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
-		public Routing(
-			[DisallowNull] RouteConfigurationBuilder routeConfigurationBuilder,
-			[DisallowNull] MundaneEndpoint notFoundEndpoint)
+		public Routing(RouteConfigurationBuilder routeConfigurationBuilder, MundaneEndpoint notFoundEndpoint)
 		{
 			if (routeConfigurationBuilder == null)
 			{
@@ -66,8 +63,7 @@ namespace Mundane
 		/// <param name="path">The request path.</param>
 		/// <returns>A collection of HTTP methods.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public string[] AllowedMethodsForPath([DisallowNull] string path)
+		public string[] AllowedMethodsForPath(string path)
 		{
 			if (path == null)
 			{
@@ -126,8 +122,7 @@ namespace Mundane
 		/// <summary>The default response when no match is found for a route. This can be overriden with NotFound methods of <see cref="RouteConfiguration"/>.</summary>
 		/// <param name="request">The HTTP request.</param>
 		/// <returns>405 Method Not Allowed if the route is registered to a different method, otherwise 404 Not Found.</returns>
-		[return: NotNull]
-		public Response DefaultNotFoundResponse([DisallowNull] Request request)
+		public Response DefaultNotFoundResponse(Request request)
 		{
 			if (request == null)
 			{
@@ -144,7 +139,7 @@ namespace Mundane
 		/// <param name="path">The request path.</param>
 		/// <returns>The matching endpoint and any parameters extracted from the route.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="method"/> or <paramref name="path"/> is <see langword="null"/>.</exception>
-		public RequestEndpoint FindEndpoint([DisallowNull] string method, [DisallowNull] string path)
+		public RequestEndpoint FindEndpoint(string method, string path)
 		{
 			if (method == null)
 			{

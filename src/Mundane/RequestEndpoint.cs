@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Mundane
@@ -8,16 +7,13 @@ namespace Mundane
 	/// <summary>The endpoint for the request and the captured route parameters.</summary>
 	public readonly struct RequestEndpoint : IEquatable<RequestEndpoint>
 	{
-		internal RequestEndpoint(
-			[DisallowNull] MundaneEndpoint endpoint,
-			EnumerableDictionary<string, string> routeParameters)
+		internal RequestEndpoint(MundaneEndpoint endpoint, EnumerableDictionary<string, string> routeParameters)
 		{
 			this.Endpoint = endpoint;
 			this.RouteParameters = routeParameters;
 		}
 
 		/// <summary>Gets the endpoint delegate.</summary>
-		[NotNull]
 		public MundaneEndpoint Endpoint { get; }
 
 		/// <summary>Gets the route parameters.</summary>
@@ -45,9 +41,7 @@ namespace Mundane
 		/// <param name="endpoint">The endpoint delegate.</param>
 		/// <param name="routeParameters">The route parameters.</param>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public void Deconstruct(
-			[NotNull] out MundaneEndpoint endpoint,
-			out EnumerableDictionary<string, string> routeParameters)
+		public void Deconstruct(out MundaneEndpoint endpoint, out EnumerableDictionary<string, string> routeParameters)
 		{
 			endpoint = this.Endpoint;
 			routeParameters = this.RouteParameters;
@@ -61,7 +55,7 @@ namespace Mundane
 		}
 
 		/// <inheritdoc/>
-		public override bool Equals([AllowNull] object? obj)
+		public override bool Equals(object? obj)
 		{
 			return obj is RequestEndpoint other && this.Equals(other);
 		}

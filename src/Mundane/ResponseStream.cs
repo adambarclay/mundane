@@ -20,11 +20,9 @@ namespace Mundane
 		}
 
 		/// <summary>Gets the current request.</summary>
-		[NotNull]
 		public Request Request { get; }
 
 		/// <summary>Gets the underlying response stream.</summary>
-		[NotNull]
 		public Stream Stream { get; }
 
 		/// <summary>Flushes the response stream.</summary>
@@ -38,7 +36,7 @@ namespace Mundane
 		/// <param name="value">The string to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		public ValueTask Write([DisallowNull] string value)
+		public ValueTask Write(string value)
 		{
 			if (value == null)
 			{
@@ -52,7 +50,7 @@ namespace Mundane
 		/// <param name="value">The byte array to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		public ValueTask Write([DisallowNull] byte[] value)
+		public ValueTask Write(byte[] value)
 		{
 			if (value == null)
 			{
@@ -66,7 +64,7 @@ namespace Mundane
 		/// <param name="value">The stream to write.</param>
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-		public ValueTask Write([DisallowNull] Stream value)
+		public ValueTask Write(Stream value)
 		{
 			if (value == null)
 			{

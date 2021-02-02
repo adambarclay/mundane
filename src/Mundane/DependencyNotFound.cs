@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Mundane
 {
@@ -8,7 +7,7 @@ namespace Mundane
 	{
 		/// <summary>Initializes a new instance of the <see cref="DependencyNotFound"/> class.</summary>
 		/// <param name="dependencyType">The type of the dependency.</param>
-		public DependencyNotFound([DisallowNull] Type dependencyType)
+		public DependencyNotFound(Type dependencyType)
 			: base(DependencyNotFound.CreateMessage(dependencyType))
 		{
 		}

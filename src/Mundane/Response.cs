@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Mundane
@@ -30,7 +29,7 @@ namespace Mundane
 		/// <param name="statusCode">The HTTP response status code.</param>
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		public Response(int statusCode, [DisallowNull] BodyWriter bodyWriter)
+		public Response(int statusCode, BodyWriter bodyWriter)
 		{
 			if (bodyWriter == null)
 			{
@@ -44,7 +43,6 @@ namespace Mundane
 
 		/// <summary>Creates a "bad request" response (status code 400).</summary>
 		/// <returns>The HTTP response.</returns>
-		[return: NotNull]
 		public static Response BadRequest()
 		{
 			return new Response(400);
@@ -54,8 +52,7 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response BadRequest([DisallowNull] BodyWriter bodyWriter)
+		public static Response BadRequest(BodyWriter bodyWriter)
 		{
 			return new Response(400, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -65,8 +62,7 @@ namespace Mundane
 		/// <param name="contentType">The media type of the file.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> or <paramref name="contentType"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response File([DisallowNull] BodyWriter bodyWriter, [DisallowNull] string contentType)
+		public static Response File(BodyWriter bodyWriter, string contentType)
 		{
 			return new Response(200, bodyWriter).AddHeader(HeaderValue.ContentType(contentType));
 		}
@@ -77,11 +73,7 @@ namespace Mundane
 		/// <param name="fileName">The name the file will have when it is downloaded.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/>, <paramref name="contentType"/> or <paramref name="fileName"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response File(
-			[DisallowNull] BodyWriter bodyWriter,
-			[DisallowNull] string contentType,
-			[DisallowNull] string fileName)
+		public static Response File(BodyWriter bodyWriter, string contentType, string fileName)
 		{
 			return new Response(200, bodyWriter).AddHeader(HeaderValue.ContentType(contentType))
 				.AddHeader(HeaderValue.ContentDisposition(fileName));
@@ -89,7 +81,6 @@ namespace Mundane
 
 		/// <summary>Creates a "forbidden" response (status code 403).</summary>
 		/// <returns>The HTTP response.</returns>
-		[return: NotNull]
 		public static Response Forbidden()
 		{
 			return new Response(403);
@@ -99,15 +90,13 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response Forbidden([DisallowNull] BodyWriter bodyWriter)
+		public static Response Forbidden(BodyWriter bodyWriter)
 		{
 			return new Response(403, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
 
 		/// <summary>Creates an "internal server error" response (status code 500).</summary>
 		/// <returns>The HTTP response.</returns>
-		[return: NotNull]
 		public static Response InternalServerError()
 		{
 			return new Response(500);
@@ -117,8 +106,7 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response InternalServerError([DisallowNull] BodyWriter bodyWriter)
+		public static Response InternalServerError(BodyWriter bodyWriter)
 		{
 			return new Response(500, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -127,8 +115,7 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response Json([DisallowNull] BodyWriter bodyWriter)
+		public static Response Json(BodyWriter bodyWriter)
 		{
 			return new Response(200, bodyWriter).AddHeader(HeaderValue.ContentTypeJson());
 		}
@@ -138,8 +125,7 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response Json(int statusCode, [DisallowNull] BodyWriter bodyWriter)
+		public static Response Json(int statusCode, BodyWriter bodyWriter)
 		{
 			return new Response(statusCode, bodyWriter).AddHeader(HeaderValue.ContentTypeJson());
 		}
@@ -148,15 +134,13 @@ namespace Mundane
 		/// <param name="allowedMethods">The allowed HTTP methods which will be sent in the "allow" header.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="allowedMethods"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response MethodNotAllowed([DisallowNull] IEnumerable<string> allowedMethods)
+		public static Response MethodNotAllowed(IEnumerable<string> allowedMethods)
 		{
 			return new Response(405).AddHeader(HeaderValue.Allow(allowedMethods));
 		}
 
 		/// <summary>Creates a "not found" response (status code 404).</summary>
 		/// <returns>The HTTP response.</returns>
-		[return: NotNull]
 		public static Response NotFound()
 		{
 			return new Response(404);
@@ -166,15 +150,13 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response NotFound([DisallowNull] BodyWriter bodyWriter)
+		public static Response NotFound(BodyWriter bodyWriter)
 		{
 			return new Response(404, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
 
 		/// <summary>Creates an "ok" response (status code 200).</summary>
 		/// <returns>The HTTP response.</returns>
-		[return: NotNull]
 		public static Response Ok()
 		{
 			return new Response(200);
@@ -184,8 +166,7 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response Ok([DisallowNull] BodyWriter bodyWriter)
+		public static Response Ok(BodyWriter bodyWriter)
 		{
 			return new Response(200, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -194,8 +175,7 @@ namespace Mundane
 		/// <param name="location">The location to which the client is redirected.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="location"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response RedirectPermanently([DisallowNull] string location)
+		public static Response RedirectPermanently(string location)
 		{
 			return new Response(301).AddHeader(HeaderValue.Location(location));
 		}
@@ -204,15 +184,13 @@ namespace Mundane
 		/// <param name="location">The location to which the client is redirected.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="location"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response RedirectSeeOther([DisallowNull] string location)
+		public static Response RedirectSeeOther(string location)
 		{
 			return new Response(303).AddHeader(HeaderValue.Location(location));
 		}
 
 		/// <summary>Creates an "unauthorized" response (status code 401).</summary>
 		/// <returns>The HTTP response.</returns>
-		[return: NotNull]
 		public static Response Unauthorized()
 		{
 			return new Response(401);
@@ -222,8 +200,7 @@ namespace Mundane
 		/// <param name="bodyWriter">Writes the response body to the output stream.</param>
 		/// <returns>The HTTP response.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
-		[return: NotNull]
-		public static Response Unauthorized([DisallowNull] BodyWriter bodyWriter)
+		public static Response Unauthorized(BodyWriter bodyWriter)
 		{
 			return new Response(401, bodyWriter).AddHeader(HeaderValue.ContentTypeHtml());
 		}
@@ -231,7 +208,6 @@ namespace Mundane
 		/// <summary>Sets a header in the response.</summary>
 		/// <param name="headerValue">The value of the header to set.</param>
 		/// <returns>The HTTP response.</returns>
-		[return: NotNull]
 		public Response AddHeader(HeaderValue headerValue)
 		{
 			if (headerValue == default)
@@ -246,12 +222,12 @@ namespace Mundane
 			return this;
 		}
 
-		internal MundaneEngineResponse BuildResponse([DisallowNull] Request request)
+		internal MundaneEngineResponse BuildResponse(Request request)
 		{
 			return new MundaneEngineResponse(request, this.statusCode, this.headers, this.bodyWriter);
 		}
 
-		internal MundaneEngineResponse BuildResponseWithNoBody([DisallowNull] Request request)
+		internal MundaneEngineResponse BuildResponseWithNoBody(Request request)
 		{
 			return new MundaneEngineResponse(request, this.statusCode, this.headers, Response.EmptyBody);
 		}

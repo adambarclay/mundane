@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Mundane.RoutingImplementation.Build;
 using Mundane.RoutingImplementation.Lookup;
 
@@ -25,10 +24,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Delete(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
+		public RouteConfiguration Delete(string route, MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
@@ -46,8 +42,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Delete([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
+		public RouteConfiguration Delete(string route, MundaneEndpointSync endpoint)
 		{
 			try
 			{
@@ -65,10 +60,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Delete(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointNoParameters endpoint)
+		public RouteConfiguration Delete(string route, MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
@@ -86,8 +78,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Delete([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
+		public RouteConfiguration Delete(string route, MundaneEndpoint endpoint)
 		{
 			try
 			{
@@ -106,11 +97,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="method"/>, <paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="method"/> is empty or <paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Endpoint(
-			[DisallowNull] string method,
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
+		public RouteConfiguration Endpoint(string method, string route, MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
@@ -129,11 +116,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="method"/>, <paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="method"/> is empty or <paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Endpoint(
-			[DisallowNull] string method,
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointSync endpoint)
+		public RouteConfiguration Endpoint(string method, string route, MundaneEndpointSync endpoint)
 		{
 			try
 			{
@@ -152,11 +135,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="method"/>, <paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="method"/> is empty or <paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Endpoint(
-			[DisallowNull] string method,
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointNoParameters endpoint)
+		public RouteConfiguration Endpoint(string method, string route, MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
@@ -175,11 +154,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="method"/>, <paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="method"/> is empty or <paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Endpoint(
-			[DisallowNull] string method,
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpoint endpoint)
+		public RouteConfiguration Endpoint(string method, string route, MundaneEndpoint endpoint)
 		{
 			try
 			{
@@ -197,10 +172,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Get(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
+		public RouteConfiguration Get(string route, MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
@@ -218,8 +190,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
+		public RouteConfiguration Get(string route, MundaneEndpointSync endpoint)
 		{
 			try
 			{
@@ -237,8 +208,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpointNoParameters endpoint)
+		public RouteConfiguration Get(string route, MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
@@ -256,8 +226,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Get([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
+		public RouteConfiguration Get(string route, MundaneEndpoint endpoint)
 		{
 			try
 			{
@@ -275,10 +244,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Post(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
+		public RouteConfiguration Post(string route, MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
@@ -296,8 +262,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
+		public RouteConfiguration Post(string route, MundaneEndpointSync endpoint)
 		{
 			try
 			{
@@ -315,8 +280,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpointNoParameters endpoint)
+		public RouteConfiguration Post(string route, MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
@@ -334,8 +298,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Post([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
+		public RouteConfiguration Post(string route, MundaneEndpoint endpoint)
 		{
 			try
 			{
@@ -353,10 +316,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Put(
-			[DisallowNull] string route,
-			[DisallowNull] MundaneEndpointNoParametersSync endpoint)
+		public RouteConfiguration Put(string route, MundaneEndpointNoParametersSync endpoint)
 		{
 			try
 			{
@@ -374,8 +334,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpointSync endpoint)
+		public RouteConfiguration Put(string route, MundaneEndpointSync endpoint)
 		{
 			try
 			{
@@ -393,8 +352,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpointNoParameters endpoint)
+		public RouteConfiguration Put(string route, MundaneEndpointNoParameters endpoint)
 		{
 			try
 			{
@@ -412,8 +370,7 @@ namespace Mundane
 		/// <returns>The Mundane engine routing configuration builder.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="route"/> or <paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		/// <exception cref="ArgumentException"><paramref name="route"/> is invalid.</exception>
-		[return: NotNull]
-		public RouteConfiguration Put([DisallowNull] string route, [DisallowNull] MundaneEndpoint endpoint)
+		public RouteConfiguration Put(string route, MundaneEndpoint endpoint)
 		{
 			try
 			{

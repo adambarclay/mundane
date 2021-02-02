@@ -301,10 +301,12 @@ The Validated&lt;T&gt; properties contain the validated value and the list of er
 ```c#
     internal sealed class UpdateProfileCommand
     {
+        // Initalise all of the validated properties to strings which will be displayed on the form.
         internal UpdateProfileCommand()
         {
             this.Name = string.Empty;
             this.Email = string.Empty;
+            this.FavouriteNumber = string.Empty;
             /* etc... */
         }
 
@@ -317,12 +319,21 @@ The Validated&lt;T&gt; properties contain the validated value and the list of er
             this.Email = validator.Value(request.Form("Email"))
                 .ValidEmail();
 
+            // Value() can also convert from string to another type.
+            this.FavouriteNumber = validator.Value(
+                request.Form("FavouriteNumber"),
+                int.Parse,
+                0,
+                "Favourite number must be an integer");
+
             /* etc... */
         }
 
         internal Validated<string> Name { get; }
 
         internal Validated<string> Email { get; }
+
+        internal Validated<int> FavouriteNumber { get; }
 
         /* etc... */
     }

@@ -306,7 +306,7 @@ The Validated&lt;T&gt; properties contain the validated value and the list of er
         {
             this.Name = string.Empty;
             this.Email = string.Empty;
-            this.FavouriteNumber = string.Empty;
+            this.FavouriteNumber = (0, string.Empty); // Initial value with initial display string.
             /* etc... */
         }
 

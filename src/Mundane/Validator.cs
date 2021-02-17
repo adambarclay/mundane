@@ -97,7 +97,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(value));
 			}
 
-			var validatedValue = new ValidatedValue<T>(value.ToString() ?? string.Empty, value);
+			var validatedValue = new Validated<T>(value, value.ToString() ?? string.Empty);
 
 			this.values.Add(validatedValue);
 
@@ -133,11 +133,11 @@ namespace Mundane
 
 			try
 			{
-				validatedValue = new ValidatedValue<T>(value, convert(value));
+				validatedValue = new Validated<T>(convert(value), value);
 			}
 			catch
 			{
-				validatedValue = new ValidatedValue<T>(value, fallbackValue);
+				validatedValue = new Validated<T>(fallbackValue, value);
 				validatedValue.AddErrorMessage(errorMessage);
 			}
 
@@ -171,11 +171,11 @@ namespace Mundane
 
 			if (convert(value, out var convertedValue))
 			{
-				validatedValue = new ValidatedValue<T>(value, convertedValue);
+				validatedValue = new Validated<T>(convertedValue, value);
 			}
 			else
 			{
-				validatedValue = new ValidatedValue<T>(value, fallbackValue);
+				validatedValue = new Validated<T>(fallbackValue, value);
 				validatedValue.AddErrorMessage(errorMessage);
 			}
 

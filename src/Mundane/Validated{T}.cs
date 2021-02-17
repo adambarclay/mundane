@@ -18,41 +18,42 @@ namespace Mundane
 
 	/// <summary>Represents a validated value.</summary>
 	/// <typeparam name="T">The type of the validated value.</typeparam>
-	public class Validated<T> : Validated, IEquatable<Validated<T>>
+	public sealed class Validated<T> : Validated, IEquatable<Validated<T>>
 		where T : notnull
 	{
-		private readonly string stringValue;
+		private readonly string displayString;
 
-		internal Validated(string stringValue)
-		{
-			this.stringValue = stringValue;
-		}
+		private readonly T value;
 
-		/// <summary>Gets the validated value.</summary>
-		/// <exception cref="InvalidOperationException">The validated value has not been set.</exception>
-		protected virtual T Value
+		internal Validated(T value, string displayString)
 		{
-			get
-			{
-				throw new InvalidOperationException("A validated value has not been set.");
-			}
+			this.value = value;
+			this.displayString = displayString;
 		}
 
 		/// <summary>Implicitly converts the validated value to its underlying type.</summary>
 		/// <param name="value">The validated value.</param>
 		/// <returns>The value converted to its underlying type.</returns>
 		[return: NotNullIfNotNull("value")]
-		public static implicit operator T?(Validated<T> value)
+		public static implicit operator T?(Validated<T>? value)
 		{
-			return value is not null ? value.Value : default;
+			return value is not null ? value.value : default;
 		}
 
 		/// <summary>Implicitly converts the underlying type to its validated value equivalent.</summary>
 		/// <param name="value">The underlying type value.</param>
 		/// <returns>The underlying type value converted to its validated value equivalent.</returns>
-		public static implicit operator Validated<T>(string value)
+		public static implicit operator Validated<T>(T value)
 		{
-			return new Validated<T>(value ?? string.Empty);
+			return new Validated<T>(value, value?.ToString() ?? string.Empty);
+		}
+
+		/// <summary>Implicitly converts the underlying type to its validated value equivalent with a display string.</summary>
+		/// <param name="value">The underlying type value and a display string representation.</param>
+		/// <returns>The underlying type value converted to its validated value equivalent.</returns>
+		public static implicit operator Validated<T>((T Value, string DisplayString) value)
+		{
+			return new Validated<T>(value.Value, value.DisplayString);
 		}
 
 		/// <summary>Equality operator.</summary>
@@ -83,7 +84,7 @@ namespace Mundane
 		{
 			if (obj is Validated<T> other)
 			{
-				return this.Value.Equals(other.Value);
+				return this.value.Equals(other.value);
 			}
 
 			return false;
@@ -92,19 +93,19 @@ namespace Mundane
 		/// <inheritdoc/>
 		public bool Equals(Validated<T>? other)
 		{
-			return other is not null && this.Value.Equals(other.Value);
+			return other is not null && this.value.Equals(other.value);
 		}
 
 		/// <inheritdoc/>
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(this.Value);
+			return HashCode.Combine(this.value);
 		}
 
 		/// <inheritdoc/>
 		public override string ToString()
 		{
-			return this.stringValue;
+			return this.displayString;
 		}
 
 		/// <summary>Validates a value. If the predicate returns false, the error message is added to this value's collection of error messages.</summary>
@@ -124,7 +125,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(errorMessage));
 			}
 
-			if (!predicate.Invoke(this.Value))
+			if (!predicate.Invoke(this.value))
 			{
 				this.AddErrorMessage(errorMessage);
 			}
@@ -149,7 +150,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(errorMessage));
 			}
 
-			if (!await predicate.Invoke(this.Value))
+			if (!await predicate.Invoke(this.value))
 			{
 				this.AddErrorMessage(errorMessage);
 			}

@@ -22,7 +22,7 @@ namespace Mundane.Tests.Tests_ValidatedT
 		{
 			var value = Guid.NewGuid().ToString();
 
-			Validated<int> validatedValue = value;
+			Validated<int> validatedValue = (0, value);
 
 			Assert.Equal(value, validatedValue.ToString());
 		}

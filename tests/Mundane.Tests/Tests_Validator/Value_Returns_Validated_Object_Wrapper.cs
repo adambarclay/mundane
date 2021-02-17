@@ -21,7 +21,7 @@ namespace Mundane.Tests.Tests_Validator
 			Assert.True(invalid);
 			Assert.NotNull(validatedValue);
 			Assert.IsAssignableFrom<Validated<int>>(validatedValue);
-			Assert.Equal(fallback, validatedValue);
+			Assert.Equal(fallback, (int)validatedValue);
 			Assert.Single(validatedValue.ErrorMessages);
 			Assert.Equal(errorMessage, validatedValue.ErrorMessages[0]);
 		}
@@ -38,7 +38,7 @@ namespace Mundane.Tests.Tests_Validator
 			Assert.True(invalid);
 			Assert.NotNull(validatedValue);
 			Assert.IsAssignableFrom<Validated<int>>(validatedValue);
-			Assert.Equal(fallback, validatedValue);
+			Assert.Equal(fallback, (int)validatedValue);
 			Assert.Single(validatedValue.ErrorMessages);
 			Assert.Equal(errorMessage, validatedValue.ErrorMessages[0]);
 		}
@@ -68,7 +68,7 @@ namespace Mundane.Tests.Tests_Validator
 			Assert.False(invalid);
 			Assert.NotNull(validatedValue);
 			Assert.IsAssignableFrom<Validated<int>>(validatedValue);
-			Assert.Equal(value, validatedValue);
+			Assert.Equal(value, (int)validatedValue);
 			Assert.Empty(validatedValue.ErrorMessages);
 		}
 
@@ -83,7 +83,7 @@ namespace Mundane.Tests.Tests_Validator
 			Assert.False(invalid);
 			Assert.NotNull(validatedValue);
 			Assert.IsAssignableFrom<Validated<int>>(validatedValue);
-			Assert.Equal(value, validatedValue);
+			Assert.Equal(value, (int)validatedValue);
 			Assert.Empty(validatedValue.ErrorMessages);
 		}
 	}

@@ -16,6 +16,11 @@ For ASP.NET, install the [Mundane.Hosting.AspNet](https://www.nuget.org/packages
 ```c#
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        var dependencies = new Dependencies(
+            new Dependency<Configuration>(new Configuration(env)),
+            new Dependency<DataRepository>(request => new DataRepositorySqlServer(
+                request.Dependency<Configuration>().ConnectionString)));
+
         var routing = new Routing(
             routeConfiguration =>
             {
@@ -24,12 +29,7 @@ For ASP.NET, install the [Mundane.Hosting.AspNet](https://www.nuget.org/packages
                 routeConfiguration.Post("/data/{id}", DataController.UpdateData);
             });
 
-        var dependencies = new Dependencies(
-            new Dependency<Configuration>(new Configuration(env)),
-            new Dependency<DataRepository>(request => new DataRepositorySqlServer(
-                request.Dependency<Configuration>().ConnectionString)));
-
-        app.UseMundane(routing, dependencies);
+        app.UseMundane(dependencies, routing);
     }
 ```
 
@@ -55,7 +55,7 @@ Mundane uses a simple request/response model to handle HTTP requests. There is n
 
             var data = await dataRepository.GetData(request.Route("id"));
 			
-            return Response.Json(o => JsonSerializer.SerializeAsync(o.Stream, data));
+            return Response.Json(async o => await JsonSerializer.SerializeAsync(o.Stream, data));
         }
     }
 ```
@@ -175,7 +175,7 @@ Endpoints are added to the `Routing` configuration using `RouteConfiguration`. T
             routeConfiguration.Put("/put", request => ValueTask.FromResult(Response.Ok());
             routeConfiguration.Endpoint("PATCH", "/patch", PatchController.Patch);
         },
-        MundaneEndpointFactory.Create(NotFoundController.NotFound));
+        NotFoundController.NotFound);
 ```
 
 ### Routes

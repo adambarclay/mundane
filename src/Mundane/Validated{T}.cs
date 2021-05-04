@@ -22,11 +22,20 @@ namespace Mundane
 		where T : notnull
 	{
 		private readonly string displayString;
-
 		private readonly T value;
 
 		internal Validated(T value, string displayString)
 		{
+			if (value == null)
+			{
+				throw new ArgumentNullException(nameof(value));
+			}
+
+			if (displayString == null)
+			{
+				throw new ArgumentNullException(nameof(displayString));
+			}
+
 			this.value = value;
 			this.displayString = displayString;
 		}
@@ -43,9 +52,10 @@ namespace Mundane
 		/// <summary>Implicitly converts the underlying type to its validated value equivalent.</summary>
 		/// <param name="value">The underlying type value.</param>
 		/// <returns>The underlying type value converted to its validated value equivalent.</returns>
-		public static implicit operator Validated<T>(T value)
+		[return: NotNullIfNotNull("value")]
+		public static implicit operator Validated<T>?(T? value)
 		{
-			return new Validated<T>(value, value?.ToString() ?? string.Empty);
+			return value is not null ? new Validated<T>(value, value.ToString() ?? string.Empty) : null;
 		}
 
 		/// <summary>Implicitly converts the underlying type to its validated value equivalent with a display string.</summary>

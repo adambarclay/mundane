@@ -11,75 +11,78 @@ namespace Mundane.RoutingImplementation.Build
 		{
 			Debug.Assert(route[0] == '/');
 
-			var captureSegmentNames = new HashSet<string>();
-			var routeSegments = new List<RouteSegment>();
-
-			if (route.Length > 1)
+			if (route.Length == 1)
 			{
-				var pathSegments = new PathSegments(route);
+				return Array.Empty<RouteSegment>();
+			}
 
-				var usedGreedy = false;
+			var captureSegmentNames = new HashSet<string>();
+			var pathSegments = new PathSegments(route);
 
-				while (pathSegments.MoreSegments)
+			var routeSegments = new RouteSegment[pathSegments.NumberOfSegments];
+			var routeSegmentCount = 0;
+
+			var usedGreedy = false;
+
+			while (pathSegments.MoreSegments)
+			{
+				var pathSegment = pathSegments.Next();
+
+				try
 				{
-					var pathSegment = pathSegments.Next();
-
-					try
+					if (!pathSegment.IsEmpty || pathSegments.MoreSegments)
 					{
-						if (!pathSegment.IsEmpty || pathSegments.MoreSegments)
+						if (usedGreedy)
 						{
-							if (usedGreedy)
-							{
-								throw new ArgumentException(
-									"A greedy segment has previously been used. Greedy segments may only appear once, at the end of the route.");
-							}
-
-							var segment = RouteParser.ParseRouteSegment(pathSegment, captureSegmentNames);
-
-							if (segment.Type == NodeType.Greedy)
-							{
-								usedGreedy = true;
-							}
-
-							routeSegments.Add(segment);
+							throw new ArgumentException(
+								"A greedy segment has previously been used. Greedy segments may only appear once, at the end of the route.");
 						}
-						else
+
+						var segment = RouteParser.ParseRouteSegment(pathSegment, captureSegmentNames);
+
+						if (segment.Type == NodeType.Greedy)
 						{
-							routeSegments.Add(new RouteSegment(NodeType.Literal, string.Empty));
+							usedGreedy = true;
 						}
+
+						routeSegments[routeSegmentCount++] = segment;
 					}
-					catch (ArgumentException exception)
+					else
 					{
-						throw new ArgumentException(
-							$"The route segment \"{new string(pathSegment)}\" is not valid. {exception.Message}",
-							nameof(route));
+						routeSegments[routeSegmentCount++] = new RouteSegment(NodeType.Literal, string.Empty);
 					}
+				}
+				catch (ArgumentException exception)
+				{
+					throw new ArgumentException(
+						$"The route segment \"{new string(pathSegment)}\" is not valid. {exception.Message}",
+						nameof(route));
 				}
 			}
 
-			return routeSegments.ToArray();
+			return routeSegments;
 		}
 
 		private static RouteSegment ParseRouteSegment(
-			ReadOnlySpan<char> routeSegment,
+			ReadOnlySpan<char> currentRouteSegment,
 			HashSet<string> captureSegmentNames)
 		{
 			NodeType nodeType;
 			ReadOnlySpan<char> routeToken;
 
-			if (!routeSegment.IsEmpty && routeSegment[0] == '{')
+			if (!currentRouteSegment.IsEmpty && currentRouteSegment[0] == '{')
 			{
-				if (routeSegment[^1] == '}')
+				if (currentRouteSegment[^1] == '}')
 				{
-					if (routeSegment.Length > 2 && routeSegment[^2] == '*')
+					if (currentRouteSegment.Length > 2 && currentRouteSegment[^2] == '*')
 					{
 						nodeType = NodeType.Greedy;
-						routeToken = routeSegment[1..^2];
+						routeToken = currentRouteSegment[1..^2];
 					}
 					else
 					{
 						nodeType = NodeType.Capture;
-						routeToken = routeSegment[1..^1];
+						routeToken = currentRouteSegment[1..^1];
 					}
 				}
 				else
@@ -91,7 +94,7 @@ namespace Mundane.RoutingImplementation.Build
 			else
 			{
 				nodeType = NodeType.Literal;
-				routeToken = routeSegment;
+				routeToken = currentRouteSegment;
 			}
 
 			if (routeToken.Trim().IsEmpty)
@@ -119,7 +122,7 @@ namespace Mundane.RoutingImplementation.Build
 
 			var routeTokenString = new string(routeToken);
 
-			if (nodeType == NodeType.Capture || nodeType == NodeType.Greedy)
+			if (nodeType is NodeType.Capture or NodeType.Greedy)
 			{
 				if (captureSegmentNames.Contains(routeTokenString))
 				{

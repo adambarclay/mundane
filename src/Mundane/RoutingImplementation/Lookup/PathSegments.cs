@@ -21,6 +21,24 @@ namespace Mundane.RoutingImplementation.Lookup
 			}
 		}
 
+		internal readonly int NumberOfSegments
+		{
+			get
+			{
+				var count = 0;
+
+				foreach (var character in this.route)
+				{
+					if (character == '/')
+					{
+						++count;
+					}
+				}
+
+				return count;
+			}
+		}
+
 		internal readonly ReadOnlySpan<char> AllRemaining(bool captureTrailingSlash)
 		{
 			return captureTrailingSlash ? this.route[(this.startIndex + 1)..] : this.route[(this.startIndex + 1)..^1];
@@ -34,7 +52,7 @@ namespace Mundane.RoutingImplementation.Lookup
 
 			if (endIndex >= 0)
 			{
-				routeSegment = routeSegment.Slice(0, endIndex);
+				routeSegment = routeSegment[..endIndex];
 			}
 
 			this.startIndex += routeSegment.Length + 1;

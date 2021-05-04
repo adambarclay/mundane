@@ -70,8 +70,7 @@ namespace Mundane.Tests.Tests_RequestEndpoint
 			var second = new
 			{
 				Endpoint = endpoint,
-				RouteParameters = new EnumerableDictionary<string, string>(
-					new Dictionary<string, string> { { "param", "hello" } })
+				RouteParameters = new RouteParameters(new Dictionary<string, string> { { "param", "hello" } })
 			};
 
 			Assert.False(first.Equals(second));

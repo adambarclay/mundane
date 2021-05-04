@@ -13,7 +13,8 @@ namespace Mundane
 	/// <summary>The Mundane engine routing configuration.</summary>
 	public sealed class Routing
 	{
-		private static readonly Dictionary<string, string> EmptyDictionary = new Dictionary<string, string>(0);
+		private static readonly RouteParameters EmptyRouteParameters =
+			new RouteParameters(new Dictionary<string, string>(0));
 
 		private readonly EndpointData[] endpoints;
 		private readonly Dictionary<string, RouteNode[]> lookup;
@@ -28,12 +29,76 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
 
-			var routeConfiguration = new RouteConfiguration();
+			(this.lookup, this.endpoints) = Routing.Build(
+				routeConfigurationBuilder,
+				MundaneEndpointFactory.Create(this.DefaultNotFoundResponse));
+		}
 
-			routeConfigurationBuilder.Invoke(routeConfiguration);
+		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
+		/// <param name="routeConfigurationBuilder">The route configuration builder.</param>
+		/// <param name="notFoundEndpoint">The endpoint to execute when the request path is not matched to any route.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
+		public Routing(RouteConfigurationBuilder routeConfigurationBuilder, MundaneEndpointSync notFoundEndpoint)
+		{
+			if (routeConfigurationBuilder == null)
+			{
+				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
+			}
 
-			(this.lookup, this.endpoints) =
-				routeConfiguration.Build(MundaneEndpointFactory.Create(this.DefaultNotFoundResponse));
+			if (notFoundEndpoint == null)
+			{
+				throw new ArgumentNullException(nameof(notFoundEndpoint));
+			}
+
+			(this.lookup, this.endpoints) = Routing.Build(
+				routeConfigurationBuilder,
+				MundaneEndpointFactory.Create(notFoundEndpoint));
+		}
+
+		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
+		/// <param name="routeConfigurationBuilder">The route configuration builder.</param>
+		/// <param name="notFoundEndpoint">The endpoint to execute when the request path is not matched to any route.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
+		public Routing(
+			RouteConfigurationBuilder routeConfigurationBuilder,
+			MundaneEndpointNoParametersSync notFoundEndpoint)
+		{
+			if (routeConfigurationBuilder == null)
+			{
+				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
+			}
+
+			if (notFoundEndpoint == null)
+			{
+				throw new ArgumentNullException(nameof(notFoundEndpoint));
+			}
+
+			(this.lookup, this.endpoints) = Routing.Build(
+				routeConfigurationBuilder,
+				MundaneEndpointFactory.Create(notFoundEndpoint));
+		}
+
+		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
+		/// <param name="routeConfigurationBuilder">The route configuration builder.</param>
+		/// <param name="notFoundEndpoint">The endpoint to execute when the request path is not matched to any route.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
+		public Routing(
+			RouteConfigurationBuilder routeConfigurationBuilder,
+			MundaneEndpointNoParameters notFoundEndpoint)
+		{
+			if (routeConfigurationBuilder == null)
+			{
+				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
+			}
+
+			if (notFoundEndpoint == null)
+			{
+				throw new ArgumentNullException(nameof(notFoundEndpoint));
+			}
+
+			(this.lookup, this.endpoints) = Routing.Build(
+				routeConfigurationBuilder,
+				MundaneEndpointFactory.Create(notFoundEndpoint));
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="Routing"/> class.</summary>
@@ -52,11 +117,7 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(notFoundEndpoint));
 			}
 
-			var routeConfiguration = new RouteConfiguration();
-
-			routeConfigurationBuilder.Invoke(routeConfiguration);
-
-			(this.lookup, this.endpoints) = routeConfiguration.Build(notFoundEndpoint);
+			(this.lookup, this.endpoints) = Routing.Build(routeConfigurationBuilder, notFoundEndpoint);
 		}
 
 		/// <summary>Gets the HTTP methods by which a path can be accessed.</summary>
@@ -164,14 +225,23 @@ namespace Mundane
 
 			var routeParameters = endpointData.NumberOfCaptureParameters > 0
 				? Routing.CaptureRouteParameters(in endpointData, path)
-				: Routing.EmptyDictionary;
+				: Routing.EmptyRouteParameters;
 
-			return new RequestEndpoint(
-				endpointData.Endpoint,
-				new EnumerableDictionary<string, string>(routeParameters));
+			return new RequestEndpoint(endpointData.Endpoint, routeParameters);
 		}
 
-		private static Dictionary<string, string> CaptureRouteParameters(in EndpointData endpointData, string path)
+		private static (Dictionary<string, RouteNode[]> Lookup, EndpointData[] Endpoints) Build(
+			RouteConfigurationBuilder routeConfigurationBuilder,
+			MundaneEndpoint notFoundEndpoint)
+		{
+			var routeConfiguration = new RouteConfiguration();
+
+			routeConfigurationBuilder.Invoke(routeConfiguration);
+
+			return routeConfiguration.Build(notFoundEndpoint);
+		}
+
+		private static RouteParameters CaptureRouteParameters(in EndpointData endpointData, string path)
 		{
 			var routeParameters = new Dictionary<string, string>(endpointData.NumberOfCaptureParameters);
 
@@ -197,7 +267,7 @@ namespace Mundane
 				}
 			}
 
-			return routeParameters;
+			return new RouteParameters(routeParameters);
 		}
 
 		private static int Find(EndpointData[] endpoints, RouteNode[] routeNodes, string path)

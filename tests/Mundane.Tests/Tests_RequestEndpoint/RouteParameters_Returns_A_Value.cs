@@ -21,7 +21,17 @@ namespace Mundane.Tests.Tests_RequestEndpoint
 
 			var requestEndpoint = routing.FindEndpoint(HttpMethod.Get, "/" + p[0].Value + "/" + p[1].Value);
 
-			Assert.Equal(p, requestEndpoint.RouteParameters);
+			foreach ((var key, var value) in p)
+			{
+				if (requestEndpoint.RouteParameters.TryGetValue(key, out var actualValue))
+				{
+					Assert.Equal(value, actualValue);
+				}
+				else
+				{
+					Assert.True(false);
+				}
+			}
 		}
 	}
 }

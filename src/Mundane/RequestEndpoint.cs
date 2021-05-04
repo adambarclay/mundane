@@ -7,7 +7,7 @@ namespace Mundane
 	/// <summary>The endpoint for the request and the captured route parameters.</summary>
 	public readonly struct RequestEndpoint : IEquatable<RequestEndpoint>
 	{
-		internal RequestEndpoint(MundaneEndpoint endpoint, EnumerableDictionary<string, string> routeParameters)
+		internal RequestEndpoint(MundaneEndpoint endpoint, RouteParameters routeParameters)
 		{
 			this.Endpoint = endpoint;
 			this.RouteParameters = routeParameters;
@@ -17,7 +17,7 @@ namespace Mundane
 		public MundaneEndpoint Endpoint { get; }
 
 		/// <summary>Gets the route parameters.</summary>
-		public EnumerableDictionary<string, string> RouteParameters { get; }
+		public RouteParameters RouteParameters { get; }
 
 		/// <summary>Equality operator.</summary>
 		/// <param name="left">The left side of the operation.</param>
@@ -41,7 +41,7 @@ namespace Mundane
 		/// <param name="endpoint">The endpoint delegate.</param>
 		/// <param name="routeParameters">The route parameters.</param>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public void Deconstruct(out MundaneEndpoint endpoint, out EnumerableDictionary<string, string> routeParameters)
+		public void Deconstruct(out MundaneEndpoint endpoint, out RouteParameters routeParameters)
 		{
 			endpoint = this.Endpoint;
 			routeParameters = this.RouteParameters;
@@ -50,8 +50,7 @@ namespace Mundane
 		/// <inheritdoc/>
 		public bool Equals(RequestEndpoint other)
 		{
-			return this.Endpoint == other.Endpoint &&
-				this.RouteParameters.Dictionary.SequenceEqual(other.RouteParameters.Dictionary);
+			return this.Endpoint == other.Endpoint && this.RouteParameters.SequenceEqual(other.RouteParameters);
 		}
 
 		/// <inheritdoc/>

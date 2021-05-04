@@ -8,20 +8,6 @@ namespace Mundane.Tests.Tests_ValidatedT
 	public static class ImplicitOperatorValidatedT_Throws_ArgumentNullException
 	{
 		[Fact]
-		public static void When_Value_Is_Null()
-		{
-			var exception = Assert.ThrowsAny<ArgumentNullException>(
-				() =>
-				{
-					Validated<string> implicitValidatedT = (null!, string.Empty);
-
-					return implicitValidatedT;
-				});
-
-			Assert.Equal("value", exception.ParamName!);
-		}
-
-		[Fact]
 		public static void When_DisplayString_Is_Null()
 		{
 			var exception = Assert.ThrowsAny<ArgumentNullException>(
@@ -33,6 +19,20 @@ namespace Mundane.Tests.Tests_ValidatedT
 				});
 
 			Assert.Equal("displayString", exception.ParamName!);
+		}
+
+		[Fact]
+		public static void When_Value_Is_Null()
+		{
+			var exception = Assert.ThrowsAny<ArgumentNullException>(
+				() =>
+				{
+					Validated<string> implicitValidatedT = (null!, string.Empty);
+
+					return implicitValidatedT;
+				});
+
+			Assert.Equal("value", exception.ParamName!);
 		}
 	}
 }

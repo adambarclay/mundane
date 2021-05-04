@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
-namespace Mundane.Tests.Tests_EnumerableDictionary
+namespace Mundane.Tests.Tests_RouteParameters
 {
 	[ExcludeFromCodeCoverage]
 	public static class GetEnumerator_Iterates_Over_Underlying_Dictionary
@@ -19,8 +19,7 @@ namespace Mundane.Tests.Tests_EnumerableDictionary
 				{ Guid.NewGuid().ToString(), Guid.NewGuid().ToString() }
 			};
 
-			var enumerable =
-				(IEnumerable<KeyValuePair<string, string>>)new EnumerableDictionary<string, string>(dictionary);
+			var enumerable = (IEnumerable<KeyValuePair<string, string>>)new RouteParameters(dictionary);
 
 			foreach ((var key, var value) in enumerable)
 			{
@@ -38,7 +37,7 @@ namespace Mundane.Tests.Tests_EnumerableDictionary
 				{ Guid.NewGuid().ToString(), Guid.NewGuid().ToString() }
 			};
 
-			var enumerable = (IEnumerable)new EnumerableDictionary<string, string>(dictionary);
+			var enumerable = (IEnumerable)new RouteParameters(dictionary);
 
 			foreach (var item in enumerable)
 			{
@@ -58,7 +57,7 @@ namespace Mundane.Tests.Tests_EnumerableDictionary
 				{ Guid.NewGuid().ToString(), Guid.NewGuid().ToString() }
 			};
 
-			var enumerable = new EnumerableDictionary<string, string>(dictionary);
+			var enumerable = new RouteParameters(dictionary);
 
 			foreach ((var key, var value) in enumerable)
 			{

@@ -4,3 +4,16 @@ dotnet_diagnostic.CA1707.severity = none
 dotnet_diagnostic.CA1812.severity = none
 dotnet_diagnostic.SA0001.severity = none
 dotnet_diagnostic.SA1600.severity = none
+
+dotnet_naming_style.test_class_case.required_prefix = 
+dotnet_naming_style.test_class_case.required_suffix = 
+dotnet_naming_style.test_class_case.word_separator = _
+dotnet_naming_style.test_class_case.capitalization = pascal_case
+
+dotnet_naming_symbols.test_classes.applicable_kinds = class
+dotnet_naming_symbols.test_classes.applicable_accessibilities = public
+dotnet_naming_symbols.test_classes.required_modifiers = static
+
+dotnet_naming_rule.test_classes_should_be_pascal_case_with_underscore.severity = warning
+dotnet_naming_rule.test_classes_should_be_pascal_case_with_underscore.symbols = test_classes
+dotnet_naming_rule.test_classes_should_be_pascal_case_with_underscore.style = test_class_case

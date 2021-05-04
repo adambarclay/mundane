@@ -9,6 +9,8 @@ namespace Mundane
 	public readonly struct EnumerableCollection<T> : IEnumerable<T>, IEquatable<EnumerableCollection<T>>
 		where T : notnull
 	{
+		private readonly List<T> collection;
+
 		/// <summary>Initializes a new instance of the <see cref="EnumerableCollection{T}"/> struct.</summary>
 		/// <param name="collection">The underlying collection.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="collection"/> is <see langword="null"/>.</exception>
@@ -19,10 +21,8 @@ namespace Mundane
 				throw new ArgumentNullException(nameof(collection));
 			}
 
-			this.Collection = collection;
+			this.collection = collection;
 		}
-
-		internal List<T> Collection { get; }
 
 		/// <summary>Equality operator.</summary>
 		/// <param name="left">The left side of the operation.</param>
@@ -45,7 +45,7 @@ namespace Mundane
 		/// <inheritdoc/>
 		public bool Equals(EnumerableCollection<T> other)
 		{
-			return this.Collection == other.Collection;
+			return this.collection == other.collection;
 		}
 
 		/// <inheritdoc/>
@@ -58,7 +58,7 @@ namespace Mundane
 		/// <returns>An enumerator that can be used to iterate through the collection.</returns>
 		public List<T>.Enumerator GetEnumerator()
 		{
-			return this.Collection.GetEnumerator();
+			return this.collection.GetEnumerator();
 		}
 
 		/// <inheritdoc/>
@@ -76,7 +76,7 @@ namespace Mundane
 		/// <inheritdoc/>
 		public override int GetHashCode()
 		{
-			return this.Collection.GetHashCode();
+			return this.collection.GetHashCode();
 		}
 	}
 }

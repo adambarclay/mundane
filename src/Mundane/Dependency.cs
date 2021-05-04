@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace Mundane
 {
@@ -8,8 +7,6 @@ namespace Mundane
 	{
 		internal Dependency(Type dependencyType)
 		{
-			Debug.Assert(dependencyType != null);
-
 			this.DependencyType = dependencyType;
 		}
 

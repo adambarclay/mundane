@@ -53,7 +53,7 @@ namespace Mundane
 		{
 			return this.request == other.request &&
 				this.StatusCode == other.StatusCode &&
-				this.Headers.Collection.SequenceEqual(other.Headers.Collection) &&
+				this.Headers.SequenceEqual(other.Headers) &&
 				this.bodyWriter == other.bodyWriter;
 		}
 

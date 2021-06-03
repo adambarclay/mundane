@@ -14,19 +14,19 @@ namespace Mundane
 		/// <exception cref="EndpointReturnedNull">The endpoint returns a <see langword="null"/> <see cref="Response"/>.</exception>
 		public static async ValueTask<MundaneEngineResponse> ExecuteRequest(MundaneEndpoint endpoint, Request request)
 		{
-			if (endpoint == null)
+			if (endpoint is null)
 			{
 				throw new ArgumentNullException(nameof(endpoint));
 			}
 
-			if (request == null)
+			if (request is null)
 			{
 				throw new ArgumentNullException(nameof(request));
 			}
 
 			Response response;
 
-			if ((response = await endpoint.Invoke(request)) == null)
+			if ((response = await endpoint.Invoke(request)) is null)
 			{
 				throw new EndpointReturnedNull("The endpoint returned a null Response.");
 			}

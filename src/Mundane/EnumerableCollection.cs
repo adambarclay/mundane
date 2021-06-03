@@ -16,7 +16,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="collection"/> is <see langword="null"/>.</exception>
 		public EnumerableCollection(List<T> collection)
 		{
-			if (collection == null)
+			if (collection is null)
 			{
 				throw new ArgumentNullException(nameof(collection));
 			}

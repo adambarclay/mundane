@@ -14,7 +14,7 @@ namespace Mundane
 
 		private static string CreateMessage(Type dependencyType)
 		{
-			if (dependencyType == null)
+			if (dependencyType is null)
 			{
 				throw new ArgumentNullException(nameof(dependencyType));
 			}

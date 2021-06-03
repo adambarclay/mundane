@@ -40,7 +40,7 @@ namespace Mundane
 		public static ValidationResult<T> Validate<T>(ValidationOperation<T> validationOperation)
 			where T : notnull
 		{
-			if (validationOperation == null)
+			if (validationOperation is null)
 			{
 				throw new ArgumentNullException(nameof(validationOperation));
 			}
@@ -49,7 +49,7 @@ namespace Mundane
 
 			var model = validationOperation(validator);
 
-			if (model == null)
+			if (model is null)
 			{
 				throw new ValidationReturnedNull("The validation returned null.");
 			}
@@ -67,7 +67,7 @@ namespace Mundane
 			ValidationOperation<ValueTask<T>> validationOperation)
 			where T : notnull
 		{
-			if (validationOperation == null)
+			if (validationOperation is null)
 			{
 				throw new ArgumentNullException(nameof(validationOperation));
 			}
@@ -76,7 +76,7 @@ namespace Mundane
 
 			var model = await validationOperation.Invoke(validation);
 
-			if (model == null)
+			if (model is null)
 			{
 				throw new ValidationReturnedNull("The validation returned null.");
 			}
@@ -92,7 +92,7 @@ namespace Mundane
 		public Validated<T> Value<T>(T value)
 			where T : notnull
 		{
-			if (value == null)
+			if (value is null)
 			{
 				throw new ArgumentNullException(nameof(value));
 			}
@@ -119,12 +119,12 @@ namespace Mundane
 			string errorMessage)
 			where T : notnull
 		{
-			if (value == null)
+			if (value is null)
 			{
 				throw new ArgumentNullException(nameof(value));
 			}
 
-			if (convert == null)
+			if (convert is null)
 			{
 				throw new ArgumentNullException(nameof(convert));
 			}
@@ -157,12 +157,12 @@ namespace Mundane
 		public Validated<T> Value<T>(string value, ValidateConvertOut<T> convert, T fallbackValue, string errorMessage)
 			where T : notnull
 		{
-			if (value == null)
+			if (value is null)
 			{
 				throw new ArgumentNullException(nameof(value));
 			}
 
-			if (convert == null)
+			if (convert is null)
 			{
 				throw new ArgumentNullException(nameof(convert));
 			}

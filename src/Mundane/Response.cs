@@ -31,7 +31,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="bodyWriter"/> is <see langword="null"/>.</exception>
 		public Response(int statusCode, BodyWriter bodyWriter)
 		{
-			if (bodyWriter == null)
+			if (bodyWriter is null)
 			{
 				throw new ArgumentNullException(nameof(bodyWriter));
 			}

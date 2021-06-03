@@ -86,7 +86,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="stream"/> is <see langword="null"/>.</exception>
 		public ValueTask WriteBodyToStream(Stream stream)
 		{
-			if (stream == null)
+			if (stream is null)
 			{
 				return ValueTask.FromException(new ArgumentNullException(nameof(stream)));
 			}

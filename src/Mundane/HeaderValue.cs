@@ -18,12 +18,12 @@ namespace Mundane
 		/// <exception cref="ArgumentException"><paramref name="name"/> does not have a value.</exception>
 		public HeaderValue(string name, string value)
 		{
-			if (name == null)
+			if (name is null)
 			{
 				throw new ArgumentNullException(nameof(name));
 			}
 
-			if (value == null)
+			if (value is null)
 			{
 				throw new ArgumentNullException(nameof(value));
 			}
@@ -67,7 +67,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="allowedMethods"/> is <see langword="null"/>.</exception>
 		public static HeaderValue Allow(IEnumerable<string> allowedMethods)
 		{
-			if (allowedMethods == null)
+			if (allowedMethods is null)
 			{
 				throw new ArgumentNullException(nameof(allowedMethods));
 			}
@@ -81,7 +81,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="directives"/> is <see langword="null"/>.</exception>
 		public static HeaderValue CacheControl(string directives)
 		{
-			if (directives == null)
+			if (directives is null)
 			{
 				throw new ArgumentNullException(nameof(directives));
 			}
@@ -95,7 +95,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="fileName"/> is <see langword="null"/>.</exception>
 		public static HeaderValue ContentDisposition(string fileName)
 		{
-			if (fileName == null)
+			if (fileName is null)
 			{
 				throw new ArgumentNullException(nameof(fileName));
 			}
@@ -109,7 +109,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="contentType"/> is <see langword="null"/>.</exception>
 		public static HeaderValue ContentType(string contentType)
 		{
-			if (contentType == null)
+			if (contentType is null)
 			{
 				throw new ArgumentNullException(nameof(contentType));
 			}
@@ -162,7 +162,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="request"/> is <see langword="null"/>.</exception>
 		public static DateTimeOffset IfModifiedSince(Request request)
 		{
-			if (request == null)
+			if (request is null)
 			{
 				throw new ArgumentNullException(nameof(request));
 			}
@@ -193,7 +193,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="location"/> is <see langword="null"/>.</exception>
 		public static HeaderValue Location(string location)
 		{
-			if (location == null)
+			if (location is null)
 			{
 				throw new ArgumentNullException(nameof(location));
 			}
@@ -409,7 +409,7 @@ namespace Mundane
 			bool httpOnly,
 			bool secure)
 		{
-			if (name == null)
+			if (name is null)
 			{
 				throw new ArgumentNullException(nameof(name));
 			}
@@ -419,12 +419,12 @@ namespace Mundane
 				throw new ArgumentException("The cookie name must not be empty.", nameof(name));
 			}
 
-			if (value == null)
+			if (value is null)
 			{
 				throw new ArgumentNullException(nameof(value));
 			}
 
-			if (path == null)
+			if (path is null)
 			{
 				throw new ArgumentNullException(nameof(path));
 			}
@@ -434,7 +434,7 @@ namespace Mundane
 				throw new ArgumentException("The cookie path must begin with a \"/\".", nameof(path));
 			}
 
-			if (domain == null)
+			if (domain is null)
 			{
 				throw new ArgumentNullException(nameof(domain));
 			}

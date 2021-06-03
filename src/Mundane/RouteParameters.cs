@@ -15,7 +15,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="routeParameters"/> is <see langword="null"/>.</exception>
 		public RouteParameters(Dictionary<string, string> routeParameters)
 		{
-			if (routeParameters == null)
+			if (routeParameters is null)
 			{
 				throw new ArgumentNullException(nameof(routeParameters));
 			}

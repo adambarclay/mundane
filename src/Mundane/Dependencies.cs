@@ -20,7 +20,7 @@ namespace Mundane
 		/// <exception cref="DuplicateDependencyRegistered">A dependency type appears in <paramref name="dependencies"/> more than once.</exception>
 		public Dependencies(params Dependency[] dependencies)
 		{
-			if (dependencies == null)
+			if (dependencies is null)
 			{
 				throw new ArgumentNullException(nameof(dependencies));
 			}
@@ -29,7 +29,7 @@ namespace Mundane
 
 			foreach (var dependency in dependencies)
 			{
-				if (dependency == null)
+				if (dependency is null)
 				{
 					throw new ArgumentNullException(nameof(dependencies));
 				}
@@ -47,7 +47,7 @@ namespace Mundane
 		public T Find<T>(Request request)
 			where T : notnull
 		{
-			if (request == null)
+			if (request is null)
 			{
 				throw new ArgumentNullException(nameof(request));
 			}

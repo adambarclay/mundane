@@ -20,19 +20,19 @@ namespace Mundane
 			string errorMessage)
 			where T : notnull
 		{
-			if (predicate == null)
+			if (predicate is null)
 			{
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
-			if (errorMessage == null)
+			if (errorMessage is null)
 			{
 				throw new ArgumentNullException(nameof(errorMessage));
 			}
 
 			var model = await task;
 
-			if (model == null)
+			if (model is null)
 			{
 				throw new ValidationReturnedNull("The validation returned null.");
 			}
@@ -54,19 +54,19 @@ namespace Mundane
 			string errorMessage)
 			where T : notnull
 		{
-			if (predicate == null)
+			if (predicate is null)
 			{
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
-			if (errorMessage == null)
+			if (errorMessage is null)
 			{
 				throw new ArgumentNullException(nameof(errorMessage));
 			}
 
 			var model = await task;
 
-			if (model == null)
+			if (model is null)
 			{
 				throw new ValidationReturnedNull("The validation returned null.");
 			}

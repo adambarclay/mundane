@@ -24,7 +24,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> is <see langword="null"/>.</exception>
 		public Routing(RouteConfigurationBuilder routeConfigurationBuilder)
 		{
-			if (routeConfigurationBuilder == null)
+			if (routeConfigurationBuilder is null)
 			{
 				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
@@ -40,12 +40,12 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
 		public Routing(RouteConfigurationBuilder routeConfigurationBuilder, MundaneEndpointSync notFoundEndpoint)
 		{
-			if (routeConfigurationBuilder == null)
+			if (routeConfigurationBuilder is null)
 			{
 				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
 
-			if (notFoundEndpoint == null)
+			if (notFoundEndpoint is null)
 			{
 				throw new ArgumentNullException(nameof(notFoundEndpoint));
 			}
@@ -63,12 +63,12 @@ namespace Mundane
 			RouteConfigurationBuilder routeConfigurationBuilder,
 			MundaneEndpointNoParametersSync notFoundEndpoint)
 		{
-			if (routeConfigurationBuilder == null)
+			if (routeConfigurationBuilder is null)
 			{
 				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
 
-			if (notFoundEndpoint == null)
+			if (notFoundEndpoint is null)
 			{
 				throw new ArgumentNullException(nameof(notFoundEndpoint));
 			}
@@ -86,12 +86,12 @@ namespace Mundane
 			RouteConfigurationBuilder routeConfigurationBuilder,
 			MundaneEndpointNoParameters notFoundEndpoint)
 		{
-			if (routeConfigurationBuilder == null)
+			if (routeConfigurationBuilder is null)
 			{
 				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
 
-			if (notFoundEndpoint == null)
+			if (notFoundEndpoint is null)
 			{
 				throw new ArgumentNullException(nameof(notFoundEndpoint));
 			}
@@ -107,12 +107,12 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
 		public Routing(RouteConfigurationBuilder routeConfigurationBuilder, MundaneEndpoint notFoundEndpoint)
 		{
-			if (routeConfigurationBuilder == null)
+			if (routeConfigurationBuilder is null)
 			{
 				throw new ArgumentNullException(nameof(routeConfigurationBuilder));
 			}
 
-			if (notFoundEndpoint == null)
+			if (notFoundEndpoint is null)
 			{
 				throw new ArgumentNullException(nameof(notFoundEndpoint));
 			}
@@ -126,7 +126,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
 		public string[] AllowedMethodsForPath(string path)
 		{
-			if (path == null)
+			if (path is null)
 			{
 				throw new ArgumentNullException(nameof(path));
 			}
@@ -185,7 +185,7 @@ namespace Mundane
 		/// <returns>405 Method Not Allowed if the route is registered to a different method, otherwise 404 Not Found.</returns>
 		public Response DefaultNotFoundResponse(Request request)
 		{
-			if (request == null)
+			if (request is null)
 			{
 				throw new ArgumentNullException(nameof(request));
 			}
@@ -202,12 +202,12 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="method"/> or <paramref name="path"/> is <see langword="null"/>.</exception>
 		public RequestEndpoint FindEndpoint(string method, string path)
 		{
-			if (method == null)
+			if (method is null)
 			{
 				throw new ArgumentNullException(nameof(method));
 			}
 
-			if (path == null)
+			if (path is null)
 			{
 				throw new ArgumentNullException(nameof(path));
 			}

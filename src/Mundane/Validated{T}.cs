@@ -26,12 +26,12 @@ namespace Mundane
 
 		internal Validated(T value, string displayString)
 		{
-			if (value == null)
+			if (value is null)
 			{
 				throw new ArgumentNullException(nameof(value));
 			}
 
-			if (displayString == null)
+			if (displayString is null)
 			{
 				throw new ArgumentNullException(nameof(displayString));
 			}
@@ -125,12 +125,12 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 		public Validated<T> Validate(ValidationPredicate<T> predicate, string errorMessage)
 		{
-			if (predicate == null)
+			if (predicate is null)
 			{
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
-			if (errorMessage == null)
+			if (errorMessage is null)
 			{
 				throw new ArgumentNullException(nameof(errorMessage));
 			}
@@ -150,12 +150,12 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 		public async ValueTask<Validated<T>> Validate(ValidationPredicateAsync<T> predicate, string errorMessage)
 		{
-			if (predicate == null)
+			if (predicate is null)
 			{
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
-			if (errorMessage == null)
+			if (errorMessage is null)
 			{
 				throw new ArgumentNullException(nameof(errorMessage));
 			}

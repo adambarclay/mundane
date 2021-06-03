@@ -419,12 +419,12 @@ namespace Mundane
 			CreateEndpoint<T> createEndpoint)
 			where T : Delegate
 		{
-			if (route == null)
+			if (route is null)
 			{
 				throw new ArgumentNullException(nameof(route));
 			}
 
-			if (endpoint == null)
+			if (endpoint is null)
 			{
 				throw new ArgumentNullException(nameof(endpoint));
 			}
@@ -451,7 +451,7 @@ namespace Mundane
 			CreateEndpoint<T> createEndpoint)
 			where T : Delegate
 		{
-			if (method == null)
+			if (method is null)
 			{
 				throw new ArgumentNullException(nameof(method));
 			}

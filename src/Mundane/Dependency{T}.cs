@@ -24,7 +24,7 @@ namespace Mundane
 		public Dependency(T dependency)
 			: base(typeof(T))
 		{
-			if (dependency == null)
+			if (dependency is null)
 			{
 				throw new ArgumentNullException(nameof(dependency));
 			}
@@ -38,7 +38,7 @@ namespace Mundane
 		public Dependency(CreateDependencyNoParameters<T> createDependency)
 			: base(typeof(T))
 		{
-			if (createDependency == null)
+			if (createDependency is null)
 			{
 				throw new ArgumentNullException(nameof(createDependency));
 			}
@@ -52,7 +52,7 @@ namespace Mundane
 		public Dependency(CreateDependency<T> createDependency)
 			: base(typeof(T))
 		{
-			if (createDependency == null)
+			if (createDependency is null)
 			{
 				throw new ArgumentNullException(nameof(createDependency));
 			}

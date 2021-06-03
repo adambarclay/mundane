@@ -38,7 +38,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
 		public ValueTask Write(string value)
 		{
-			if (value == null)
+			if (value is null)
 			{
 				return ValueTask.FromException(new ArgumentNullException(nameof(value)));
 			}
@@ -52,7 +52,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
 		public ValueTask Write(byte[] value)
 		{
-			if (value == null)
+			if (value is null)
 			{
 				return ValueTask.FromException(new ArgumentNullException(nameof(value)));
 			}
@@ -66,7 +66,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
 		public ValueTask Write(Stream value)
 		{
-			if (value == null)
+			if (value is null)
 			{
 				return ValueTask.FromException(new ArgumentNullException(nameof(value)));
 			}

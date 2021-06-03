@@ -52,7 +52,7 @@ namespace Mundane.RoutingImplementation.Build
 
 					var childNode = node.FindChildNode(in routeSegment);
 
-					if (childNode == null)
+					if (childNode is null)
 					{
 						childNode = node.AddChild(in routeSegment);
 

@@ -30,7 +30,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		public static MundaneEndpoint Create(MundaneEndpointNoParametersSync endpoint)
 		{
-			if (endpoint == null)
+			if (endpoint is null)
 			{
 				throw new ArgumentNullException(nameof(endpoint));
 			}
@@ -54,7 +54,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		public static MundaneEndpoint Create(MundaneEndpointSync endpoint)
 		{
-			if (endpoint == null)
+			if (endpoint is null)
 			{
 				throw new ArgumentNullException(nameof(endpoint));
 			}
@@ -78,7 +78,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		public static MundaneEndpoint Create(MundaneEndpointNoParameters endpoint)
 		{
-			if (endpoint == null)
+			if (endpoint is null)
 			{
 				throw new ArgumentNullException(nameof(endpoint));
 			}
@@ -92,7 +92,7 @@ namespace Mundane
 		/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 		public static MundaneEndpoint Create(MundaneEndpoint endpoint)
 		{
-			if (endpoint == null)
+			if (endpoint is null)
 			{
 				throw new ArgumentNullException(nameof(endpoint));
 			}

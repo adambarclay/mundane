@@ -33,7 +33,7 @@ namespace Mundane
 		/// <exception cref="ArgumentException"><paramref name="errorMessage"/> does not have a value.</exception>
 		public void AddErrorMessage(string errorMessage)
 		{
-			if (errorMessage == null)
+			if (errorMessage is null)
 			{
 				throw new ArgumentNullException(nameof(errorMessage));
 			}

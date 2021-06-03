@@ -11,7 +11,7 @@
 		<PackageIcon>Mundane.png</PackageIcon>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>Mundane</PackageTags>
-		<ProjectUrl>https://github.com/adambarclay/mundane</ProjectUrl>
+		<PackageProjectUrl>https://github.com/adambarclay/mundane</PackageProjectUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<Title>Mundane</Title>

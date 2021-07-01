@@ -10,7 +10,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<PackageIcon>Mundane.png</PackageIcon>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageTags>Mundane</PackageTags>
+		<PackageTags>Mundane;Web;Framework</PackageTags>
 		<PackageProjectUrl>https://github.com/adambarclay/mundane</PackageProjectUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>

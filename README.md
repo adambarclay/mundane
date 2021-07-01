@@ -1,4 +1,4 @@
-<img style="float:left;width:100px;margin-right:1em;" src="https://raw.githubusercontent.com/adambarclay/mundane/main/build/Mundane.png"/>
+<img align="left" width="100" src="https://raw.githubusercontent.com/adambarclay/mundane/main/build/Mundane.png"/>
 
 # Mundane
 

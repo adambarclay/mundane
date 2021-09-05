@@ -5,22 +5,6 @@ using System.Threading.Tasks;
 
 namespace Mundane
 {
-	/// <summary>The validation to perform, typically constructing a validated object.</summary>
-	/// <param name="validator">Manages the validation of input values.</param>
-	/// <typeparam name="T">The type of object being validated.</typeparam>
-	public delegate T ValidationOperation<out T>(Validator validator);
-
-	/// <summary>Converts and returns the value as an out parameter.</summary>
-	/// <param name="value">The value to convert.</param>
-	/// <param name="convertedValue">The converted value.</param>
-	/// <typeparam name="T">The type to which the value is converted.</typeparam>
-	public delegate bool ValidateConvertOut<T>(string value, out T convertedValue);
-
-	/// <summary>Converts and returns the value.</summary>
-	/// <param name="value">The value to convert.</param>
-	/// <typeparam name="T">The type to which the value is converted.</typeparam>
-	public delegate T ValidateConvertReturn<out T>(string value);
-
 	/// <summary>Manages the validation of input values.</summary>
 	public sealed class Validator
 	{

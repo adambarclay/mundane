@@ -3,24 +3,6 @@ using System.Threading.Tasks;
 
 namespace Mundane
 {
-	/// <summary>An asynchronous endpoint delegate receiving the current request.</summary>
-	/// <param name="request">The current request.</param>
-	/// <returns>The endpoint response.</returns>
-	public delegate ValueTask<Response> MundaneEndpoint(Request request);
-
-	/// <summary>An asynchronous endpoint delegate receiving no parameters.</summary>
-	/// <returns>The endpoint response.</returns>
-	public delegate ValueTask<Response> MundaneEndpointNoParameters();
-
-	/// <summary>A synchronous endpoint delegate receiving the current request.</summary>
-	/// <param name="request">The current request.</param>
-	/// <returns>The endpoint response.</returns>
-	public delegate Response MundaneEndpointSync(Request request);
-
-	/// <summary>A synchronous endpoint delegate receiving no parameters.</summary>
-	/// <returns>The endpoint response.</returns>
-	public delegate Response MundaneEndpointNoParametersSync();
-
 	/// <summary>Converts all of the possible endpoints to <see cref="MundaneEndpoint"/> which the engine requires.</summary>
 	public static class MundaneEndpointFactory
 	{

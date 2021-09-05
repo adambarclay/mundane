@@ -351,7 +351,8 @@ Use extension methods to create custom reusable validation methods.
             return validated.Validate(
                 email => email.Length > 0 &&
                     email.Length <= 254 &&
-                    email.Contains('@', StringComparison.Ordinal),
+                    email.Contains('@', StringComparison.Ordinal) &&
+                    email.All(c => !char.IsWhiteSpace(c)),
                 "You must supply a valid email address.");
         }
     }

@@ -2,34 +2,33 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
-namespace Mundane.Tests.Tests_ValidationResult
+namespace Mundane.Tests.Tests_ValidationResult;
+
+[ExcludeFromCodeCoverage]
+public static class Object_Equals_Returns_False
 {
-	[ExcludeFromCodeCoverage]
-	public static class Object_Equals_Returns_False
+	[Fact]
+	public static void When_The_Other_Object_Is_Not_A_Validated_Object()
 	{
-		[Fact]
-		public static void When_The_Other_Object_Is_Not_A_Validated_Object()
+		var value = Guid.NewGuid().ToString();
+
+		var first = Validator.Validate(_ => value);
+
+		var second = new
 		{
-			var value = Guid.NewGuid().ToString();
+			Invalid = false,
+			Model = value
+		};
 
-			var first = Validator.Validate(_ => value);
+		Assert.False(first.Equals(second));
+	}
 
-			var second = new
-			{
-				Invalid = false,
-				Model = value
-			};
+	[Fact]
+	public static void When_The_Values_Are_Different()
+	{
+		var first = Validator.Validate(_ => Guid.NewGuid().ToString());
+		var second = Validator.Validate(_ => Guid.NewGuid().ToString());
 
-			Assert.False(first.Equals(second));
-		}
-
-		[Fact]
-		public static void When_The_Values_Are_Different()
-		{
-			var first = Validator.Validate(_ => Guid.NewGuid().ToString());
-			var second = Validator.Validate(_ => Guid.NewGuid().ToString());
-
-			Assert.False(first.Equals((object)second));
-		}
+		Assert.False(first.Equals((object)second));
 	}
 }

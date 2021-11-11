@@ -2,81 +2,80 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Mundane
+namespace Mundane;
+
+/// <summary>Wraps a collection to allow enumeration without modification.</summary>
+/// <typeparam name="T">The type of the elements in the collection.</typeparam>
+public readonly struct EnumerableCollection<T> : IEnumerable<T>, IEquatable<EnumerableCollection<T>>
+	where T : notnull
 {
-	/// <summary>Wraps a collection to allow enumeration without modification.</summary>
-	/// <typeparam name="T">The type of the elements in the collection.</typeparam>
-	public readonly struct EnumerableCollection<T> : IEnumerable<T>, IEquatable<EnumerableCollection<T>>
-		where T : notnull
+	private readonly List<T> collection;
+
+	/// <summary>Initializes a new instance of the <see cref="EnumerableCollection{T}"/> struct.</summary>
+	/// <param name="collection">The underlying collection.</param>
+	/// <exception cref="ArgumentNullException"><paramref name="collection"/> is <see langword="null"/>.</exception>
+	public EnumerableCollection(List<T> collection)
 	{
-		private readonly List<T> collection;
-
-		/// <summary>Initializes a new instance of the <see cref="EnumerableCollection{T}"/> struct.</summary>
-		/// <param name="collection">The underlying collection.</param>
-		/// <exception cref="ArgumentNullException"><paramref name="collection"/> is <see langword="null"/>.</exception>
-		public EnumerableCollection(List<T> collection)
+		if (collection is null)
 		{
-			if (collection is null)
-			{
-				throw new ArgumentNullException(nameof(collection));
-			}
-
-			this.collection = collection;
+			throw new ArgumentNullException(nameof(collection));
 		}
 
-		/// <summary>Equality operator.</summary>
-		/// <param name="left">The left side of the operation.</param>
-		/// <param name="right">The right side of the operation.</param>
-		/// <returns>true if equal, otherwise false.</returns>
-		public static bool operator ==(EnumerableCollection<T> left, EnumerableCollection<T> right)
-		{
-			return left.Equals(right);
-		}
+		this.collection = collection;
+	}
 
-		/// <summary>Inequality operator.</summary>
-		/// <param name="left">The left side of the operation.</param>
-		/// <param name="right">The right side of the operation.</param>
-		/// <returns>true if not equal, otherwise false.</returns>
-		public static bool operator !=(EnumerableCollection<T> left, EnumerableCollection<T> right)
-		{
-			return !left.Equals(right);
-		}
+	/// <summary>Equality operator.</summary>
+	/// <param name="left">The left side of the operation.</param>
+	/// <param name="right">The right side of the operation.</param>
+	/// <returns>true if equal, otherwise false.</returns>
+	public static bool operator ==(EnumerableCollection<T> left, EnumerableCollection<T> right)
+	{
+		return left.Equals(right);
+	}
 
-		/// <inheritdoc/>
-		public bool Equals(EnumerableCollection<T> other)
-		{
-			return this.collection == other.collection;
-		}
+	/// <summary>Inequality operator.</summary>
+	/// <param name="left">The left side of the operation.</param>
+	/// <param name="right">The right side of the operation.</param>
+	/// <returns>true if not equal, otherwise false.</returns>
+	public static bool operator !=(EnumerableCollection<T> left, EnumerableCollection<T> right)
+	{
+		return !left.Equals(right);
+	}
 
-		/// <inheritdoc/>
-		public override bool Equals(object? obj)
-		{
-			return obj is EnumerableCollection<T> other && this.Equals(other);
-		}
+	/// <inheritdoc/>
+	public bool Equals(EnumerableCollection<T> other)
+	{
+		return this.collection == other.collection;
+	}
 
-		/// <summary>Returns an enumerator that iterates through the collection.</summary>
-		/// <returns>An enumerator that can be used to iterate through the collection.</returns>
-		public List<T>.Enumerator GetEnumerator()
-		{
-			return this.collection.GetEnumerator();
-		}
+	/// <inheritdoc/>
+	public override bool Equals(object? obj)
+	{
+		return obj is EnumerableCollection<T> other && this.Equals(other);
+	}
 
-		/// <inheritdoc/>
-		IEnumerator<T> IEnumerable<T>.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+	/// <summary>Returns an enumerator that iterates through the collection.</summary>
+	/// <returns>An enumerator that can be used to iterate through the collection.</returns>
+	public List<T>.Enumerator GetEnumerator()
+	{
+		return this.collection.GetEnumerator();
+	}
 
-		/// <inheritdoc/>
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+	/// <inheritdoc/>
+	IEnumerator<T> IEnumerable<T>.GetEnumerator()
+	{
+		return this.GetEnumerator();
+	}
 
-		/// <inheritdoc/>
-		public override int GetHashCode()
-		{
-			return this.collection.GetHashCode();
-		}
+	/// <inheritdoc/>
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return this.GetEnumerator();
+	}
+
+	/// <inheritdoc/>
+	public override int GetHashCode()
+	{
+		return this.collection.GetHashCode();
 	}
 }

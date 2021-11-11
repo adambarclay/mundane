@@ -3,34 +3,33 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
-namespace Mundane.Tests.Tests_RequestEndpoint
+namespace Mundane.Tests.Tests_RequestEndpoint;
+
+[ExcludeFromCodeCoverage]
+public static class RouteParameters_Returns_A_Value
 {
-	[ExcludeFromCodeCoverage]
-	public static class RouteParameters_Returns_A_Value
+	[Fact]
+	public static void Which_Was_Passed_To_The_Constructor()
 	{
-		[Fact]
-		public static void Which_Was_Passed_To_The_Constructor()
+		var p = new[]
 		{
-			var p = new[]
+			new KeyValuePair<string, string>(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()),
+			new KeyValuePair<string, string>(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())
+		};
+
+		var routing = new Routing(o => o.Get("/{" + p[0].Key + "}/{" + p[1].Key + "}", Response.Ok));
+
+		var requestEndpoint = routing.FindEndpoint(HttpMethod.Get, "/" + p[0].Value + "/" + p[1].Value);
+
+		foreach ((var key, var value) in p)
+		{
+			if (requestEndpoint.RouteParameters.TryGetValue(key, out var actualValue))
 			{
-				new KeyValuePair<string, string>(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()),
-				new KeyValuePair<string, string>(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())
-			};
-
-			var routing = new Routing(o => o.Get("/{" + p[0].Key + "}/{" + p[1].Key + "}", Response.Ok));
-
-			var requestEndpoint = routing.FindEndpoint(HttpMethod.Get, "/" + p[0].Value + "/" + p[1].Value);
-
-			foreach ((var key, var value) in p)
+				Assert.Equal(value, actualValue);
+			}
+			else
 			{
-				if (requestEndpoint.RouteParameters.TryGetValue(key, out var actualValue))
-				{
-					Assert.Equal(value, actualValue);
-				}
-				else
-				{
-					Assert.True(false);
-				}
+				Assert.True(false);
 			}
 		}
 	}

@@ -3,28 +3,26 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_Validator
+namespace Mundane.Tests.Tests_Validator;
+
+[ExcludeFromCodeCoverage]
+public static class Validate_Throws_ArgumentNullException
 {
-	[ExcludeFromCodeCoverage]
-	public static class Validate_Throws_ArgumentNullException
+	[Fact]
+	public static void When_The_Action_Parameter_Is_Null()
 	{
-		[Fact]
-		public static void When_The_Action_Parameter_Is_Null()
-		{
-			var exception =
-				Assert.ThrowsAny<ArgumentNullException>(
-					() => Validator.Validate((null as ValidationOperation<object>)!));
+		var exception =
+			Assert.ThrowsAny<ArgumentNullException>(() => Validator.Validate((null as ValidationOperation<object>)!));
 
-			Assert.Equal("validationOperation", exception.ParamName!);
-		}
+		Assert.Equal("validationOperation", exception.ParamName!);
+	}
 
-		[Fact]
-		public static async Task When_The_Async_Action_Parameter_Is_Null()
-		{
-			var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
-				async () => await Validator.Validate((null as ValidationOperation<ValueTask<object>>)!));
+	[Fact]
+	public static async Task When_The_Async_Action_Parameter_Is_Null()
+	{
+		var exception = await Assert.ThrowsAnyAsync<ArgumentNullException>(
+			async () => await Validator.Validate((null as ValidationOperation<ValueTask<object>>)!));
 
-			Assert.Equal("validationOperation", exception.ParamName!);
-		}
+		Assert.Equal("validationOperation", exception.ParamName!);
 	}
 }

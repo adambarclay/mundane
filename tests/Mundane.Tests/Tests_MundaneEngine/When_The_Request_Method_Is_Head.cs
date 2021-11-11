@@ -3,40 +3,39 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Mundane.Tests.Tests_MundaneEngine
+namespace Mundane.Tests.Tests_MundaneEngine;
+
+[ExcludeFromCodeCoverage]
+public static class When_The_Request_Method_Is_Head
 {
-	[ExcludeFromCodeCoverage]
-	public static class When_The_Request_Method_Is_Head
+	[Fact]
+	public static async Task The_Response_Body_Generation_Process_Is_Not_Invoked()
 	{
-		[Fact]
-		public static async Task The_Response_Body_Generation_Process_Is_Not_Invoked()
-		{
-			var bodyGenerationHasRun = false;
+		var bodyGenerationHasRun = false;
 
-			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpointFactory.Create(
-					() => Response.Ok(
-						_ =>
-						{
-							bodyGenerationHasRun = true;
+		var response = await MundaneEngine.ExecuteRequest(
+			MundaneEndpointFactory.Create(
+				() => Response.Ok(
+					_ =>
+					{
+						bodyGenerationHasRun = true;
 
-							return ValueTask.CompletedTask;
-						})),
-				RequestHelper.Request(HttpMethod.Head, "/"));
+						return ValueTask.CompletedTask;
+					})),
+			RequestHelper.Request(HttpMethod.Head, "/"));
 
-			await ResponseHelper.Body(response);
+		await ResponseHelper.Body(response);
 
-			Assert.False(bodyGenerationHasRun);
-		}
+		Assert.False(bodyGenerationHasRun);
+	}
 
-		[Fact]
-		public static async Task The_Response_Body_Is_Empty()
-		{
-			var response = await MundaneEngine.ExecuteRequest(
-				MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write(Guid.NewGuid().ToString()))),
-				RequestHelper.Request(HttpMethod.Head, "/"));
+	[Fact]
+	public static async Task The_Response_Body_Is_Empty()
+	{
+		var response = await MundaneEngine.ExecuteRequest(
+			MundaneEndpointFactory.Create(() => Response.Ok(o => o.Write(Guid.NewGuid().ToString()))),
+			RequestHelper.Request(HttpMethod.Head, "/"));
 
-			Assert.Equal(string.Empty, await ResponseHelper.Body(response));
-		}
+		Assert.Equal(string.Empty, await ResponseHelper.Body(response));
 	}
 }

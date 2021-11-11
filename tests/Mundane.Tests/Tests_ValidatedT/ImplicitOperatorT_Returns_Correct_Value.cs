@@ -2,34 +2,33 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
-namespace Mundane.Tests.Tests_ValidatedT
+namespace Mundane.Tests.Tests_ValidatedT;
+
+[ExcludeFromCodeCoverage]
+public static class ImplicitOperatorT_Returns_Correct_Value
 {
-	[ExcludeFromCodeCoverage]
-	public static class ImplicitOperatorT_Returns_Correct_Value
+	[Fact]
+	public static void When_Value_Is_Null()
 	{
-		[Fact]
-		public static void When_Value_Is_Null()
-		{
-			var value = ImplicitOperatorT_Returns_Correct_Value.CreateNull();
+		var value = ImplicitOperatorT_Returns_Correct_Value.CreateNull();
 
-			string implicitString = value;
+		string implicitString = value;
 
-			Assert.Null(implicitString);
-		}
+		Assert.Null(implicitString);
+	}
 
-		[Fact]
-		public static void When_Value_Is_Valid()
-		{
-			var value = Guid.NewGuid().ToString();
+	[Fact]
+	public static void When_Value_Is_Valid()
+	{
+		var value = Guid.NewGuid().ToString();
 
-			string implicitString = Validator.Validate(validator => validator.Value(value)).Model;
+		string implicitString = Validator.Validate(validator => validator.Value(value)).Model;
 
-			Assert.Equal(value, implicitString);
-		}
+		Assert.Equal(value, implicitString);
+	}
 
-		private static Validated<string> CreateNull()
-		{
-			return null!;
-		}
+	private static Validated<string> CreateNull()
+	{
+		return null!;
 	}
 }

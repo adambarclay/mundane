@@ -4,30 +4,27 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Xunit;
 
-namespace Mundane.Tests.Tests_HeaderValue
+namespace Mundane.Tests.Tests_HeaderValue;
+
+[ExcludeFromCodeCoverage]
+public static class IfModifiedSince_Returns_The_Correct_DateTime
 {
-	[ExcludeFromCodeCoverage]
-	public static class IfModifiedSince_Returns_The_Correct_DateTime
+	[Fact]
+	public static void When_The_Header_Contains_A_Valid_Value()
 	{
-		[Fact]
-		public static void When_The_Header_Contains_A_Valid_Value()
+		var date = DateTime.UtcNow;
+
+		date = new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, date.Kind);
+
+		var headers = new Dictionary<string, string>
 		{
-			var date = DateTime.UtcNow;
+			{ "if-modified-since", date.ToString("ddd, dd MM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture) }
+		};
 
-			date = new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, date.Kind);
+		var request = RequestHelper.Request(HttpMethod.Get, "/", new Dictionary<string, string>(0), headers);
 
-			var headers = new Dictionary<string, string>
-			{
-				{
-					"if-modified-since", date.ToString("ddd, dd MM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture)
-				}
-			};
+		var value = HeaderValue.IfModifiedSince(request);
 
-			var request = RequestHelper.Request(HttpMethod.Get, "/", new Dictionary<string, string>(0), headers);
-
-			var value = HeaderValue.IfModifiedSince(request);
-
-			Assert.Equal(date, value);
-		}
+		Assert.Equal(date, value);
 	}
 }

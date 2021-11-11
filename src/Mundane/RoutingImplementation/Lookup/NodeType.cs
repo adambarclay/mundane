@@ -1,9 +1,8 @@
-namespace Mundane.RoutingImplementation.Lookup
+namespace Mundane.RoutingImplementation.Lookup;
+
+internal enum NodeType
 {
-	internal enum NodeType
-	{
-		Literal,
-		Capture,
-		Greedy
-	}
+	Literal,
+	Capture,
+	Greedy
 }

@@ -1,63 +1,62 @@
 using System;
 
-namespace Mundane.RoutingImplementation.Lookup
+namespace Mundane.RoutingImplementation.Lookup;
+
+internal ref struct PathSegments
 {
-	internal ref struct PathSegments
+	private readonly ReadOnlySpan<char> route;
+	private int startIndex;
+
+	internal PathSegments(ReadOnlySpan<char> route)
 	{
-		private readonly ReadOnlySpan<char> route;
-		private int startIndex;
+		this.route = route;
+		this.startIndex = 0;
+	}
 
-		internal PathSegments(ReadOnlySpan<char> route)
+	internal readonly bool MoreSegments
+	{
+		get
 		{
-			this.route = route;
-			this.startIndex = 0;
+			return this.startIndex < this.route.Length;
 		}
+	}
 
-		internal readonly bool MoreSegments
+	internal readonly int NumberOfSegments
+	{
+		get
 		{
-			get
-			{
-				return this.startIndex < this.route.Length;
-			}
-		}
+			var count = 0;
 
-		internal readonly int NumberOfSegments
-		{
-			get
+			foreach (var character in this.route)
 			{
-				var count = 0;
-
-				foreach (var character in this.route)
+				if (character == '/')
 				{
-					if (character == '/')
-					{
-						++count;
-					}
+					++count;
 				}
-
-				return count;
-			}
-		}
-
-		internal readonly ReadOnlySpan<char> AllRemaining(bool captureTrailingSlash)
-		{
-			return captureTrailingSlash ? this.route[(this.startIndex + 1)..] : this.route[(this.startIndex + 1)..^1];
-		}
-
-		internal ReadOnlySpan<char> Next()
-		{
-			var routeSegment = this.route[(this.startIndex + 1)..];
-
-			var endIndex = routeSegment.IndexOf('/');
-
-			if (endIndex >= 0)
-			{
-				routeSegment = routeSegment[..endIndex];
 			}
 
-			this.startIndex += routeSegment.Length + 1;
-
-			return routeSegment;
+			return count;
 		}
+	}
+
+	internal readonly ReadOnlySpan<char> AllRemaining(bool captureTrailingSlash)
+	{
+		return captureTrailingSlash ? this.route[(this.startIndex + 1)..] : this.route[(this.startIndex + 1)..^1];
+	}
+
+	internal ReadOnlySpan<char> Next()
+	{
+		var routeSegment = this.route[(this.startIndex + 1)..];
+
+		var endIndex = routeSegment.IndexOf('/');
+
+		if (endIndex >= 0)
+		{
+			routeSegment = routeSegment[..endIndex];
+		}
+
+		this.startIndex += routeSegment.Length + 1;
+
+		return routeSegment;
 	}
 }

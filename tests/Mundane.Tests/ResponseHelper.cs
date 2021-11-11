@@ -3,23 +3,22 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mundane.Tests
+namespace Mundane.Tests;
+
+[ExcludeFromCodeCoverage]
+internal static class ResponseHelper
 {
-	[ExcludeFromCodeCoverage]
-	internal static class ResponseHelper
+	internal static async ValueTask<string> Body(MundaneEngineResponse response)
 	{
-		internal static async ValueTask<string> Body(MundaneEngineResponse response)
+		await using (var memoryStream = new MemoryStream())
 		{
-			await using (var memoryStream = new MemoryStream())
+			await response.WriteBodyToStream(memoryStream);
+
+			memoryStream.Position = 0;
+
+			using (var streamReader = new StreamReader(memoryStream, Encoding.UTF8))
 			{
-				await response.WriteBodyToStream(memoryStream);
-
-				memoryStream.Position = 0;
-
-				using (var streamReader = new StreamReader(memoryStream, Encoding.UTF8))
-				{
-					return await streamReader.ReadToEndAsync();
-				}
+				return await streamReader.ReadToEndAsync();
 			}
 		}
 	}

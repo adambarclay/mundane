@@ -2,7 +2,7 @@
 
 # Mundane
 
-[![License: MIT](https://img.shields.io/github/license/adambarclay/mundane?color=blue)](https://github.com/adambarclay/mundane/blob/main/LICENSE) [![nuget](https://img.shields.io/nuget/v/Mundane)](https://www.nuget.org/packages/Mundane/) [![build](https://img.shields.io/github/workflow/status/adambarclay/mundane/Build/main)](https://github.com/adambarclay/mundane/actions?query=workflow%3ABuild+branch%3Amain) [![coverage](https://img.shields.io/codecov/c/github/adambarclay/mundane/main)](https://codecov.io/gh/adambarclay/mundane/branch/main)
+[![License: MIT](https://img.shields.io/github/license/adambarclay/mundane?color=blue)](https://github.com/adambarclay/mundane/blob/main/LICENSE) [![nuget](https://img.shields.io/nuget/v/Mundane)](https://www.nuget.org/packages/Mundane/) [![build](https://img.shields.io/github/actions/workflow/status/adambarclay/mundane/build.yml?branch=main)](https://github.com/adambarclay/mundane/actions?query=workflow%3ABuild+branch%3Amain) [![coverage](https://img.shields.io/codecov/c/github/adambarclay/mundane/main)](https://codecov.io/gh/adambarclay/mundane/branch/main)
 
 Mundane is a lightweight "no magic" web framework for .NET.
 

@@ -14,10 +14,7 @@ public sealed class DependencyNotFound : Exception
 
 	private static string CreateMessage(Type dependencyType)
 	{
-		if (dependencyType is null)
-		{
-			throw new ArgumentNullException(nameof(dependencyType));
-		}
+		ArgumentNullException.ThrowIfNull(dependencyType);
 
 		return $"No concrete type has been registered for \"{dependencyType.Name}\".";
 	}

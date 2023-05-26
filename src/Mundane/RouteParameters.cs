@@ -15,10 +15,7 @@ public sealed class RouteParameters : IEnumerable<KeyValuePair<string, string>>
 	/// <exception cref="ArgumentNullException"><paramref name="routeParameters"/> is <see langword="null"/>.</exception>
 	public RouteParameters(Dictionary<string, string> routeParameters)
 	{
-		if (routeParameters is null)
-		{
-			throw new ArgumentNullException(nameof(routeParameters));
-		}
+		ArgumentNullException.ThrowIfNull(routeParameters);
 
 		this.routeParameters = routeParameters;
 	}

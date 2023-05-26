@@ -14,10 +14,7 @@ public sealed class DuplicateDependencyRegistered : Exception
 
 	private static string CreateMessage(Type dependencyType)
 	{
-		if (dependencyType is null)
-		{
-			throw new ArgumentNullException(nameof(dependencyType));
-		}
+		ArgumentNullException.ThrowIfNull(dependencyType);
 
 		return $"The type \"{dependencyType.Name}\" has been registered more than once.";
 	}

@@ -20,15 +20,8 @@ public static class ValidatedAsyncExtensions
 		string errorMessage)
 		where T : notnull
 	{
-		if (predicate is null)
-		{
-			throw new ArgumentNullException(nameof(predicate));
-		}
-
-		if (errorMessage is null)
-		{
-			throw new ArgumentNullException(nameof(errorMessage));
-		}
+		ArgumentNullException.ThrowIfNull(predicate);
+		ArgumentNullException.ThrowIfNull(errorMessage);
 
 		var model = await task;
 
@@ -54,15 +47,8 @@ public static class ValidatedAsyncExtensions
 		string errorMessage)
 		where T : notnull
 	{
-		if (predicate is null)
-		{
-			throw new ArgumentNullException(nameof(predicate));
-		}
-
-		if (errorMessage is null)
-		{
-			throw new ArgumentNullException(nameof(errorMessage));
-		}
+		ArgumentNullException.ThrowIfNull(predicate);
+		ArgumentNullException.ThrowIfNull(errorMessage);
 
 		var model = await task;
 

@@ -24,10 +24,7 @@ public sealed class Validator
 	public static ValidationResult<T> Validate<T>(ValidationOperation<T> validationOperation)
 		where T : notnull
 	{
-		if (validationOperation is null)
-		{
-			throw new ArgumentNullException(nameof(validationOperation));
-		}
+		ArgumentNullException.ThrowIfNull(validationOperation);
 
 		var validator = new Validator();
 
@@ -51,10 +48,7 @@ public sealed class Validator
 		ValidationOperation<ValueTask<T>> validationOperation)
 		where T : notnull
 	{
-		if (validationOperation is null)
-		{
-			throw new ArgumentNullException(nameof(validationOperation));
-		}
+		ArgumentNullException.ThrowIfNull(validationOperation);
 
 		var validation = new Validator();
 
@@ -76,10 +70,7 @@ public sealed class Validator
 	public Validated<T> Value<T>(T value)
 		where T : notnull
 	{
-		if (value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
+		ArgumentNullException.ThrowIfNull(value);
 
 		var validatedValue = new Validated<T>(value, value.ToString() ?? string.Empty);
 
@@ -99,15 +90,8 @@ public sealed class Validator
 	public Validated<T> Value<T>(string value, ValidateConvertReturn<T> convert, T fallbackValue, string errorMessage)
 		where T : notnull
 	{
-		if (value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		if (convert is null)
-		{
-			throw new ArgumentNullException(nameof(convert));
-		}
+		ArgumentNullException.ThrowIfNull(value);
+		ArgumentNullException.ThrowIfNull(convert);
 
 		Validated<T> validatedValue;
 
@@ -137,15 +121,8 @@ public sealed class Validator
 	public Validated<T> Value<T>(string value, ValidateConvertOut<T> convert, T fallbackValue, string errorMessage)
 		where T : notnull
 	{
-		if (value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		if (convert is null)
-		{
-			throw new ArgumentNullException(nameof(convert));
-		}
+		ArgumentNullException.ThrowIfNull(value);
+		ArgumentNullException.ThrowIfNull(convert);
 
 		Validated<T> validatedValue;
 

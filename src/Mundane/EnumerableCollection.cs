@@ -16,10 +16,7 @@ public readonly struct EnumerableCollection<T> : IEnumerable<T>, IEquatable<Enum
 	/// <exception cref="ArgumentNullException"><paramref name="collection"/> is <see langword="null"/>.</exception>
 	public EnumerableCollection(List<T> collection)
 	{
-		if (collection is null)
-		{
-			throw new ArgumentNullException(nameof(collection));
-		}
+		ArgumentNullException.ThrowIfNull(collection);
 
 		this.collection = collection;
 	}

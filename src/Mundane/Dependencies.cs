@@ -20,19 +20,13 @@ public sealed class Dependencies : DependencyFinder
 	/// <exception cref="DuplicateDependencyRegistered">A dependency type appears in <paramref name="dependencies"/> more than once.</exception>
 	public Dependencies(params Dependency[] dependencies)
 	{
-		if (dependencies is null)
-		{
-			throw new ArgumentNullException(nameof(dependencies));
-		}
+		ArgumentNullException.ThrowIfNull(dependencies);
 
 		this.dependencyLookup = new Dictionary<Type, Dependency>(dependencies.Length);
 
 		foreach (var dependency in dependencies)
 		{
-			if (dependency is null)
-			{
-				throw new ArgumentNullException(nameof(dependencies));
-			}
+			ArgumentNullException.ThrowIfNull(dependency, nameof(dependencies));
 
 			if (this.dependencyLookup.ContainsKey(dependency.DependencyType))
 			{
@@ -47,10 +41,7 @@ public sealed class Dependencies : DependencyFinder
 	public T Find<T>(Request request)
 		where T : notnull
 	{
-		if (request is null)
-		{
-			throw new ArgumentNullException(nameof(request));
-		}
+		ArgumentNullException.ThrowIfNull(request);
 
 		if (!this.dependencyLookup.TryGetValue(typeof(T), out var dependency))
 		{

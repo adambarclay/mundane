@@ -18,15 +18,8 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 	/// <exception cref="ArgumentException"><paramref name="name"/> does not have a value.</exception>
 	public HeaderValue(string name, string value)
 	{
-		if (name is null)
-		{
-			throw new ArgumentNullException(nameof(name));
-		}
-
-		if (value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
+		ArgumentNullException.ThrowIfNull(name);
+		ArgumentNullException.ThrowIfNull(value);
 
 		if (name.AsSpan().Trim().IsEmpty)
 		{
@@ -67,10 +60,7 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 	/// <exception cref="ArgumentNullException"><paramref name="allowedMethods"/> is <see langword="null"/>.</exception>
 	public static HeaderValue Allow(IEnumerable<string> allowedMethods)
 	{
-		if (allowedMethods is null)
-		{
-			throw new ArgumentNullException(nameof(allowedMethods));
-		}
+		ArgumentNullException.ThrowIfNull(allowedMethods);
 
 		return new HeaderValue("allow", string.Join(",", allowedMethods));
 	}
@@ -81,10 +71,7 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 	/// <exception cref="ArgumentNullException"><paramref name="directives"/> is <see langword="null"/>.</exception>
 	public static HeaderValue CacheControl(string directives)
 	{
-		if (directives is null)
-		{
-			throw new ArgumentNullException(nameof(directives));
-		}
+		ArgumentNullException.ThrowIfNull(directives);
 
 		return new HeaderValue("cache-control", directives);
 	}
@@ -95,10 +82,7 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 	/// <exception cref="ArgumentNullException"><paramref name="fileName"/> is <see langword="null"/>.</exception>
 	public static HeaderValue ContentDisposition(string fileName)
 	{
-		if (fileName is null)
-		{
-			throw new ArgumentNullException(nameof(fileName));
-		}
+		ArgumentNullException.ThrowIfNull(fileName);
 
 		return new HeaderValue("content-disposition", $"attachment;filename=\"{fileName}\"");
 	}
@@ -109,10 +93,7 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 	/// <exception cref="ArgumentNullException"><paramref name="contentType"/> is <see langword="null"/>.</exception>
 	public static HeaderValue ContentType(string contentType)
 	{
-		if (contentType is null)
-		{
-			throw new ArgumentNullException(nameof(contentType));
-		}
+		ArgumentNullException.ThrowIfNull(contentType);
 
 		return new HeaderValue("content-type", contentType);
 	}
@@ -162,10 +143,7 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 	/// <exception cref="ArgumentNullException"><paramref name="request"/> is <see langword="null"/>.</exception>
 	public static DateTimeOffset IfModifiedSince(Request request)
 	{
-		if (request is null)
-		{
-			throw new ArgumentNullException(nameof(request));
-		}
+		ArgumentNullException.ThrowIfNull(request);
 
 		return DateTimeOffset.TryParseExact(
 			request.Header("if-modified-since"),
@@ -193,10 +171,7 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 	/// <exception cref="ArgumentNullException"><paramref name="location"/> is <see langword="null"/>.</exception>
 	public static HeaderValue Location(string location)
 	{
-		if (location is null)
-		{
-			throw new ArgumentNullException(nameof(location));
-		}
+		ArgumentNullException.ThrowIfNull(location);
 
 		return new HeaderValue("location", location);
 	}
@@ -404,34 +379,19 @@ public readonly struct HeaderValue : IEquatable<HeaderValue>
 		bool httpOnly,
 		bool secure)
 	{
-		if (name is null)
-		{
-			throw new ArgumentNullException(nameof(name));
-		}
+		ArgumentNullException.ThrowIfNull(name);
+		ArgumentNullException.ThrowIfNull(value);
+		ArgumentNullException.ThrowIfNull(path);
+		ArgumentNullException.ThrowIfNull(domain);
 
 		if (name.AsSpan().Trim().IsEmpty)
 		{
 			throw new ArgumentException("The cookie name must not be empty.", nameof(name));
 		}
 
-		if (value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		if (path is null)
-		{
-			throw new ArgumentNullException(nameof(path));
-		}
-
 		if (path.AsSpan().Trim().IsEmpty || path[0] != '/')
 		{
 			throw new ArgumentException("The cookie path must begin with a \"/\".", nameof(path));
-		}
-
-		if (domain is null)
-		{
-			throw new ArgumentNullException(nameof(domain));
 		}
 
 		var stringBuilder = new StringBuilder(256);

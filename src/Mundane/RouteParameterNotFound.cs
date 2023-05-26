@@ -14,10 +14,7 @@ public sealed class RouteParameterNotFound : Exception
 
 	private static string CreateMessage(string parameterName)
 	{
-		if (parameterName is null)
-		{
-			throw new ArgumentNullException(nameof(parameterName));
-		}
+		ArgumentNullException.ThrowIfNull(parameterName);
 
 		return $"The route configuration does not contain a parameter called \"{parameterName}\".";
 	}

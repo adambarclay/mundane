@@ -14,15 +14,8 @@ public static class MundaneEngine
 	/// <exception cref="EndpointReturnedNull">The endpoint returns a <see langword="null"/> <see cref="Response"/>.</exception>
 	public static async ValueTask<MundaneEngineResponse> ExecuteRequest(MundaneEndpoint endpoint, Request request)
 	{
-		if (endpoint is null)
-		{
-			throw new ArgumentNullException(nameof(endpoint));
-		}
-
-		if (request is null)
-		{
-			throw new ArgumentNullException(nameof(request));
-		}
+		ArgumentNullException.ThrowIfNull(endpoint);
+		ArgumentNullException.ThrowIfNull(request);
 
 		Response response;
 

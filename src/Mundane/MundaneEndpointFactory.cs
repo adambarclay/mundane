@@ -12,10 +12,7 @@ public static class MundaneEndpointFactory
 	/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 	public static MundaneEndpoint Create(MundaneEndpointNoParametersSync endpoint)
 	{
-		if (endpoint is null)
-		{
-			throw new ArgumentNullException(nameof(endpoint));
-		}
+		ArgumentNullException.ThrowIfNull(endpoint);
 
 		return _ =>
 		{
@@ -36,10 +33,7 @@ public static class MundaneEndpointFactory
 	/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 	public static MundaneEndpoint Create(MundaneEndpointSync endpoint)
 	{
-		if (endpoint is null)
-		{
-			throw new ArgumentNullException(nameof(endpoint));
-		}
+		ArgumentNullException.ThrowIfNull(endpoint);
 
 		return request =>
 		{
@@ -60,10 +54,7 @@ public static class MundaneEndpointFactory
 	/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 	public static MundaneEndpoint Create(MundaneEndpointNoParameters endpoint)
 	{
-		if (endpoint is null)
-		{
-			throw new ArgumentNullException(nameof(endpoint));
-		}
+		ArgumentNullException.ThrowIfNull(endpoint);
 
 		return _ => endpoint();
 	}
@@ -74,10 +65,7 @@ public static class MundaneEndpointFactory
 	/// <exception cref="ArgumentNullException"><paramref name="endpoint"/> is <see langword="null"/>.</exception>
 	public static MundaneEndpoint Create(MundaneEndpoint endpoint)
 	{
-		if (endpoint is null)
-		{
-			throw new ArgumentNullException(nameof(endpoint));
-		}
+		ArgumentNullException.ThrowIfNull(endpoint);
 
 		return endpoint;
 	}

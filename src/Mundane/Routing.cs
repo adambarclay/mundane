@@ -20,10 +20,7 @@ public sealed class Routing
 	/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> is <see langword="null"/>.</exception>
 	public Routing(RouteConfigurationBuilder routeConfigurationBuilder)
 	{
-		if (routeConfigurationBuilder is null)
-		{
-			throw new ArgumentNullException(nameof(routeConfigurationBuilder));
-		}
+		ArgumentNullException.ThrowIfNull(routeConfigurationBuilder);
 
 		(this.lookup, this.endpoints) = Routing.Build(
 			routeConfigurationBuilder,
@@ -36,15 +33,8 @@ public sealed class Routing
 	/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
 	public Routing(RouteConfigurationBuilder routeConfigurationBuilder, MundaneEndpointSync notFoundEndpoint)
 	{
-		if (routeConfigurationBuilder is null)
-		{
-			throw new ArgumentNullException(nameof(routeConfigurationBuilder));
-		}
-
-		if (notFoundEndpoint is null)
-		{
-			throw new ArgumentNullException(nameof(notFoundEndpoint));
-		}
+		ArgumentNullException.ThrowIfNull(routeConfigurationBuilder);
+		ArgumentNullException.ThrowIfNull(notFoundEndpoint);
 
 		(this.lookup, this.endpoints) = Routing.Build(
 			routeConfigurationBuilder,
@@ -59,15 +49,8 @@ public sealed class Routing
 		RouteConfigurationBuilder routeConfigurationBuilder,
 		MundaneEndpointNoParametersSync notFoundEndpoint)
 	{
-		if (routeConfigurationBuilder is null)
-		{
-			throw new ArgumentNullException(nameof(routeConfigurationBuilder));
-		}
-
-		if (notFoundEndpoint is null)
-		{
-			throw new ArgumentNullException(nameof(notFoundEndpoint));
-		}
+		ArgumentNullException.ThrowIfNull(routeConfigurationBuilder);
+		ArgumentNullException.ThrowIfNull(notFoundEndpoint);
 
 		(this.lookup, this.endpoints) = Routing.Build(
 			routeConfigurationBuilder,
@@ -80,15 +63,8 @@ public sealed class Routing
 	/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
 	public Routing(RouteConfigurationBuilder routeConfigurationBuilder, MundaneEndpointNoParameters notFoundEndpoint)
 	{
-		if (routeConfigurationBuilder is null)
-		{
-			throw new ArgumentNullException(nameof(routeConfigurationBuilder));
-		}
-
-		if (notFoundEndpoint is null)
-		{
-			throw new ArgumentNullException(nameof(notFoundEndpoint));
-		}
+		ArgumentNullException.ThrowIfNull(routeConfigurationBuilder);
+		ArgumentNullException.ThrowIfNull(notFoundEndpoint);
 
 		(this.lookup, this.endpoints) = Routing.Build(
 			routeConfigurationBuilder,
@@ -101,15 +77,8 @@ public sealed class Routing
 	/// <exception cref="ArgumentNullException"><paramref name="routeConfigurationBuilder"/> or <paramref name="notFoundEndpoint"/> is <see langword="null"/>.</exception>
 	public Routing(RouteConfigurationBuilder routeConfigurationBuilder, MundaneEndpoint notFoundEndpoint)
 	{
-		if (routeConfigurationBuilder is null)
-		{
-			throw new ArgumentNullException(nameof(routeConfigurationBuilder));
-		}
-
-		if (notFoundEndpoint is null)
-		{
-			throw new ArgumentNullException(nameof(notFoundEndpoint));
-		}
+		ArgumentNullException.ThrowIfNull(routeConfigurationBuilder);
+		ArgumentNullException.ThrowIfNull(notFoundEndpoint);
 
 		(this.lookup, this.endpoints) = Routing.Build(routeConfigurationBuilder, notFoundEndpoint);
 	}
@@ -120,10 +89,7 @@ public sealed class Routing
 	/// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
 	public string[] AllowedMethodsForPath(string path)
 	{
-		if (path is null)
-		{
-			throw new ArgumentNullException(nameof(path));
-		}
+		ArgumentNullException.ThrowIfNull(path);
 
 		var foundGet = false;
 		var foundHead = false;
@@ -179,10 +145,7 @@ public sealed class Routing
 	/// <returns>405 Method Not Allowed if the route is registered to a different method, otherwise 404 Not Found.</returns>
 	public Response DefaultNotFoundResponse(Request request)
 	{
-		if (request is null)
-		{
-			throw new ArgumentNullException(nameof(request));
-		}
+		ArgumentNullException.ThrowIfNull(request);
 
 		var allowedMethods = this.AllowedMethodsForPath(request.Path);
 
@@ -196,15 +159,8 @@ public sealed class Routing
 	/// <exception cref="ArgumentNullException"><paramref name="method"/> or <paramref name="path"/> is <see langword="null"/>.</exception>
 	public RequestEndpoint FindEndpoint(string method, string path)
 	{
-		if (method is null)
-		{
-			throw new ArgumentNullException(nameof(method));
-		}
-
-		if (path is null)
-		{
-			throw new ArgumentNullException(nameof(path));
-		}
+		ArgumentNullException.ThrowIfNull(method);
+		ArgumentNullException.ThrowIfNull(path);
 
 		if (path.Length == 0 || path[0] != '/')
 		{

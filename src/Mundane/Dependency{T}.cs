@@ -13,10 +13,7 @@ public sealed class Dependency<T> : Dependency
 	public Dependency(T dependency)
 		: base(typeof(T))
 	{
-		if (dependency is null)
-		{
-			throw new ArgumentNullException(nameof(dependency));
-		}
+		ArgumentNullException.ThrowIfNull(dependency);
 
 		this.CreateDependency = _ => dependency;
 	}
@@ -27,10 +24,7 @@ public sealed class Dependency<T> : Dependency
 	public Dependency(CreateDependencyNoParameters<T> createDependency)
 		: base(typeof(T))
 	{
-		if (createDependency is null)
-		{
-			throw new ArgumentNullException(nameof(createDependency));
-		}
+		ArgumentNullException.ThrowIfNull(createDependency);
 
 		this.CreateDependency = _ => createDependency();
 	}
@@ -41,10 +35,7 @@ public sealed class Dependency<T> : Dependency
 	public Dependency(CreateDependency<T> createDependency)
 		: base(typeof(T))
 	{
-		if (createDependency is null)
-		{
-			throw new ArgumentNullException(nameof(createDependency));
-		}
+		ArgumentNullException.ThrowIfNull(createDependency);
 
 		this.CreateDependency = createDependency;
 	}

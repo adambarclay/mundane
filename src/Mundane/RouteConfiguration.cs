@@ -414,15 +414,8 @@ public sealed class RouteConfiguration
 	private RouteConfiguration AddEndpoint<T>(string method, string route, T endpoint, CreateEndpoint<T> createEndpoint)
 		where T : Delegate
 	{
-		if (route is null)
-		{
-			throw new ArgumentNullException(nameof(route));
-		}
-
-		if (endpoint is null)
-		{
-			throw new ArgumentNullException(nameof(endpoint));
-		}
+		ArgumentNullException.ThrowIfNull(route);
+		ArgumentNullException.ThrowIfNull(endpoint);
 
 		if (route.AsSpan().Trim().IsEmpty || route[0] != '/')
 		{
@@ -446,10 +439,7 @@ public sealed class RouteConfiguration
 		CreateEndpoint<T> createEndpoint)
 		where T : Delegate
 	{
-		if (method is null)
-		{
-			throw new ArgumentNullException(nameof(method));
-		}
+		ArgumentNullException.ThrowIfNull(method);
 
 		if (method.AsSpan().Trim().IsEmpty)
 		{

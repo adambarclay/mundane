@@ -14,15 +14,8 @@ public sealed class Validated<T> : Validated, IEquatable<Validated<T>>
 
 	internal Validated(T value, string displayString)
 	{
-		if (value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		if (displayString is null)
-		{
-			throw new ArgumentNullException(nameof(displayString));
-		}
+		ArgumentNullException.ThrowIfNull(value);
+		ArgumentNullException.ThrowIfNull(displayString);
 
 		this.value = value;
 		this.displayString = displayString;
@@ -113,15 +106,8 @@ public sealed class Validated<T> : Validated, IEquatable<Validated<T>>
 	/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 	public Validated<T> Validate(ValidationPredicate<T> predicate, string errorMessage)
 	{
-		if (predicate is null)
-		{
-			throw new ArgumentNullException(nameof(predicate));
-		}
-
-		if (errorMessage is null)
-		{
-			throw new ArgumentNullException(nameof(errorMessage));
-		}
+		ArgumentNullException.ThrowIfNull(predicate);
+		ArgumentNullException.ThrowIfNull(errorMessage);
 
 		if (!predicate.Invoke(this.value))
 		{
@@ -138,15 +124,8 @@ public sealed class Validated<T> : Validated, IEquatable<Validated<T>>
 	/// <exception cref="ArgumentNullException"><paramref name="predicate"/> or <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
 	public async ValueTask<Validated<T>> Validate(ValidationPredicateAsync<T> predicate, string errorMessage)
 	{
-		if (predicate is null)
-		{
-			throw new ArgumentNullException(nameof(predicate));
-		}
-
-		if (errorMessage is null)
-		{
-			throw new ArgumentNullException(nameof(errorMessage));
-		}
+		ArgumentNullException.ThrowIfNull(predicate);
+		ArgumentNullException.ThrowIfNull(errorMessage);
 
 		if (!await predicate.Invoke(this.value))
 		{
